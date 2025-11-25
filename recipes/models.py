@@ -63,7 +63,7 @@ class Instruction(models.Model):
 # Recipe Ingredients model
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
-    quantity = models.CharField(max_lenght=50)
+    quantity = models.CharField(max_length=50)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     class Meta:
         db_table = "ingredients"
@@ -73,7 +73,7 @@ class Ingredient(models.Model):
     
 # Recipe Comments model
 class Comment(models.Model):
-    content = models.CharField(max_lenght=200)
+    content = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
