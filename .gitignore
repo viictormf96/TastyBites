@@ -1,0 +1,22 @@
+# Archivos de cache de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Directorios de entornos virtuales (Python Virtual Environments)
+venv/
+env/
+.venv/
+.env/
+
+# Directorios específicos de Django
+/media/   # Si almacenas archivos cargados por el usuario
+/static/  # Si almacenas archivos estáticos generados (collectstatic)
+
+# Archivos de base de datos SQLite locales
+db.sqlite3
+*.sqlite3
+
+# Archivos de configuracion local sensibles o temporales
+settings_local.py
+
