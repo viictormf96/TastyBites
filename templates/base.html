@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tasty Bites</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'static/css/styles.css'%}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@vercel/geist-font/dist/geist-sans.css" />
+</head>
+
+<body>
+    <!-- HEADER-->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-chef-hat text-orange-600">
+                    <path
+                        d="M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z">
+                    </path>
+                    <path d="M6 17h12"></path>
+                </svg>
+                <h1>Tasty Bites</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Inicio</a></li>
+                    <li><a href="#">Recetas</a></li>
+                    <li><a href="#">Categorías</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <a href="#" class="btn-secondary">Iniciar Sesión</a>
+                <a href="#" class="btn-primary">Registrarse</a>
+            </div>
+        </div>
+    </header>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Descubre, Comparte, Cocina</h1>
+        <p>La mejor plataforma para encontrar y compartir recetas deliciosas</p>
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar recetas, ingredientes..." />
+            <button><i class="fas fa-search"></i></button>
+        </div>
+        <div class="popular-tags">
+            <a href="">🍝 Pasta</a>
+            <a href="">🥗 Ensaladas</a>
+            <a href="">🍰 Postres</a>
+            <a href="">🍲 Sopas</a>
+            <a href="">🥘 Principales</a>
+        </div>
+    </section>
+
+    <main class="main-container">
+        <section class="featured-recipes">
+            <div class="section-header">
+                <h2>Recetas Destacadas</h2>
+                <a href="#" class="view-all">Ver todas <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="recipe-grid">
+                <article class="recipe-card">
+                    <div class="recipe-image">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=2680&auto=format&fit=crop"  alt="Ensalada Mediterránea Fresca" class="recipe-image-large">
+                        <div class="recipe-tag">Intermedio</div>
+                        <div class="recipe-actions">
+                            <button class="action-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <h3>Pasta al Pesto</h3>
+                        <div class="recipe-author">
+                            <img src="https://placehold.co/40x40/333/ffffff?text=LM" alt="Foto de perfil de Laura Martínez" class="creator-photo">
+                            <span>Chef Carlos Rodríguez</span>
+                        </div>
+                        <p class="recipe-description">
+                            Una auténtica carbonara italiana con guanciale, huevos, pecorino
+                            romano y pimienta negra. Cremosa y deliciosa.
+                        </p>
+
+                        <div class="recipe-meta">
+                            <div class="meta-item">
+                                <span class="meta-label"><i class="fas fa-clock"  style="color: #fe6a08"></i><span>45 min</span></span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label"><i class="fas fa-fire" style="color: #fe6a08"></i><span>450</span></span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label"><i class="fas fa-star" style="color: #fe6a08"></i><span>520</span></span>
+                            </div>
+                        </div>
+                        <div class="view-recipe">
+                            <a href="">Ver Receta</i></a>
+                        </div>
+                    </div>
+                </article>
+                <article class="recipe-card">
+                    <div class="recipe-image">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=2680&auto=format&fit=crop"  alt="Ensalada Mediterránea Fresca" class="recipe-image-large">
+                        <div class="recipe-tag">Facil</div>
+                        <div class="recipe-actions">
+                            <button class="action-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <h3>Pasta al Pesto</h3>
+                        <div class="recipe-author">
+                            <img src="https://placehold.co/40x40/333/ffffff?text=LM" alt="Foto de perfil de Laura Martínez" class="creator-photo">
+                            <span>Chef Carlos Rodríguez</span>
+                        </div>
+                        <p class="recipe-description">
+                            Una auténtica carbonara italiana con guanciale, huevos, pecorino
+                            romano y pimienta negra. Cremosa y deliciosa.
+                        </p>
+
+                        <div class="recipe-meta">
+                            <div class="meta-item">
+                                <span class="meta-label"><i class="fas fa-clock"  style="color: #fe6a08"></i><span>45 min</span></span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label"><i class="fas fa-fire" style="color: #fe6a08"></i><span>450</span></span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label"><i class="fas fa-star" style="color: #fe6a08"></i><span>520</span></span>
+                            </div>
+                        </div>
+                        <div class="view-recipe">
+                            <a href="">Ver Receta</i></a>
+                        </div>
+                    </div>
+                </article>
+                <article class="recipe-card">
+                    <div class="recipe-image">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=2680&auto=format&fit=crop"  alt="Ensalada Mediterránea Fresca" class="recipe-image-large">
+                        <div class="recipe-tag">Dificil</div>
+                        <div class="recipe-actions">
+                            <button class="action-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <h3>Pasta al Pesto</h3>
+                        <div class="recipe-author">
+                            <img src="https://placehold.co/40x40/333/ffffff?text=LM" alt="Foto de perfil de Laura Martínez" class="creator-photo">
+                            <span>Chef Carlos Rodríguez</span>
+                        </div>
+                        <p class="recipe-description">
+                            Una auténtica carbonara italiana con guanciale, huevos, pecorino
+                            romano y pimienta negra. Cremosa y deliciosa.
+                        </p>
+
+                        <div class="recipe-meta">
+                            <div class="meta-item">
+                                <span class="meta-label"><i class="fas fa-clock"  style="color: #fe6a08"></i><span>45 min</span></span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label"><i class="fas fa-fire" style="color: #fe6a08"></i><span>450</span></span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label"><i class="fas fa-star" style="color: #fe6a08"></i><span>520</span></span>
+                            </div>
+                        </div>
+                        <div class="view-recipe">
+                            <a href="">Ver Receta</i></a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="categories">
+            <div class="section-header">
+                <h2>Explorar Categorías</h2>
+                <a href="#" class="view-all">Ver todas <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="category-grid">
+                <article class="category-card">
+                    <a href="http://">
+                        <div class="category-content">
+                            <h2>Carnes</h2>
+                            <div class="category-recipies">
+                                <span>1,234 recetas</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                <article class="category-card">
+                    <a href="http://">
+                        <div class="category-content">
+                            <h2>Carnes</h2>
+                            <div class="category-recipies">
+                                <span>1,234 recetas</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                <article class="category-card">
+                    <a href="http://">
+                        <div class="category-content">
+                            <h2>Carnes</h2>
+                            <div class="category-recipies">
+                                <span>1,234 recetas</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                <article class="category-card">
+                    <a href="http://">
+                        <div class="category-content">
+                            <h2>Carnes</h2>
+                            <div class="category-recipies">
+                                <span>1,234 recetas</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                <article class="category-card">
+                    <a href="http://">
+                        <div class="category-content">
+                            <h2>Carnes</h2>
+                            <div class="category-recipies">
+                                <span>1,234 recetas</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                <article class="category-card">
+                    <a href="http://">
+                        <div class="category-content">
+                            <h2>Carnes</h2>
+                            <div class="category-recipies">
+                                <span>1,234 recetas</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+            </div>
+        </section>
+        <section class="stats">
+            <h2>Nuestra Comunidad en Números</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">25,000+</span>
+                    <span class="stat-label">Recetas</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50,000+</span>
+                    <span class="stat-label">Usuarios Activos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1,000+</span>
+                    <span class="stat-label">Chefs</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100,000+</span>
+                    <span class="stat-label">Reseñas</span>
+                </div>
+            </div>
+        </section>
+
+        {% block content %}
+            {% endblock content %}
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Tasty Bites</h3>
+                    <p>
+                        La mejor plataforma para descubrir, compartir y disfrutar de
+                        recetas deliciosas.
+                    </p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces</h3>
+                    <ul>
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#">Recetas</a></li>
+                        <li><a href="#">Categorías</a></li>
+                        <li><a href="#">Comunidad</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Categorías</h3>
+                    <ul>
+                        <li><a href="#">Vegetariano</a></li>
+                        <li><a href="#">Carnes</a></li>
+                        <li><a href="#">Pescados</a></li>
+                        <li><a href="#">Postres</a></li>
+                        <li><a href="#">Panadería</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> info@tastybites.com</li>
+                        <li><i class="fas fa-phone"></i> +34 123 456 789</li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i> Calle Principal 123,
+                            Barcelona
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Tasty Bites. Todos los derechos reservados.</p>
+                <div class="footer-links">
+                    <a href="#">Términos y condiciones</a>
+                    <a href="#">Política de privacidad</a>
+                    <a href="#">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

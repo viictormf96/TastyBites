@@ -12,7 +12,7 @@ class RecipeListBaseView(ListView):
 
 #INDEX / MAIN CLASS (URL: /)
 class IndexDashboardView(RecipeListBaseView):
-    template_name = ""
+    template_name = "recipes/index.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -21,10 +21,12 @@ class IndexDashboardView(RecipeListBaseView):
         context["featured_recipes"] = Recipe.objects.all().order_by("?")[:3]
 
         #Categories with Recipies count
-        context["categories"] = Category.objects.annotate(
+        """  context["categories"] = Category.objects.annotate(
             recipe_count = Count("recipes")
         ).order_by(
             "-recipe_count",
             "name"
         )
+
+        """
         return context

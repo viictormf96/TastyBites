@@ -57,7 +57,7 @@ ROOT_URLCONF = "TastyBites.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR/"templates"], #Add templates url
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
