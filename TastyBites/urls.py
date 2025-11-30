@@ -27,7 +27,7 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),
 
     # Recipes (recipes, categories)
-    path("recipes/", include("recipes.urls")),
+    path("", include("recipes.urls")),
 
     # Core (static pages)
     path("core/", include("core.urls")),
