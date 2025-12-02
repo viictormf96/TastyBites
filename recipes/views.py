@@ -12,7 +12,7 @@ class RecipeListBaseView(ListView):
 
 #INDEX / MAIN CLASS (URL: /)
 class IndexDashboardView(RecipeListBaseView):
-    template_name = "recipes/index.html"
+    template_name = "recipes/recipe_list_index.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
