@@ -1,35 +1,53 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from django.apps import apps # <-- Importación necesaria
-from .models import CustomUser 
+from .models import CustomUser
 
-# 1. Definimos la clase de administración personalizada
 class CustomUserAdmin(UserAdmin):
-    # Campos a mostrar en la lista del panel de administración
-    list_display = UserAdmin.list_display + ('bio', 'profile_picture')
+    """
+    Administrador personalizado para CustomUser.
+    """
+    # Campos a mostrar en la lista
+    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff')
+    
+    # Campos de búsqueda
+    search_fields = ('username', 'email', 'first_name', 'last_name')
+    
+    # Filtros laterales
+    list_filter = ('is_staff', 'is_superuser', 'is_active')
 
-    # Campos a mostrar en el formulario de edición de usuario
-    fieldsets = UserAdmin.fieldsets + (
-        ('Información Personal Adicional', {
-            'fields': ('bio', 'profile_picture'),
+    # Vista de EDICIÓN de usuario
+    fieldsets = (
+        ('Credenciales', {
+            'fields': ('username', 'password')
+        }),
+        ('Información Personal', {
+            'fields': ('first_name', 'last_name', 'email', 'bio', 'profile_picture')
+        }),
+        ('Permisos', {
+            'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
+        }),
+        ('Fechas Importantes', {
+            'fields': ('last_login', 'date_joined')
         }),
     )
 
-    # Campos a mostrar en el formulario de creación de un nuevo usuario
-    add_fieldsets = UserAdmin.add_fieldsets + (
-        ('Información Personal Adicional', {
-            'fields': ('bio', 'profile_picture'),
+    # Vista de CREACIÓN de usuario
+    add_fieldsets = (
+        ('Credenciales', {
+            'classes': ('wide',),
+            'fields': ('username', 'password1', 'password2')
+        }),
+        ('Información Personal', {
+            'fields': ('first_name', 'last_name', 'email', 'bio', 'profile_picture')
+        }),
+        ('Permisos', {
+            'fields': ('is_active', 'is_staff', 'is_superuser')
         }),
     )
 
-# 2. Desregistrar el modelo User predeterminado
-# Usamos apps.get_model() en lugar de admin.site.get_model()
-try:
-    admin.site.unregister(apps.get_model('auth', 'User')) 
-except admin.sites.NotRegistered:
-    # Esto maneja el caso donde 'auth.User' ya no estaba registrado,
-    # lo cual puede ocurrir si AUTH_USER_MODEL ya apunta a tu CustomUser.
-    pass
+    # Campos de solo lectura
+    readonly_fields = ('last_login', 'date_joined')
 
-# 3. Registrar el modelo CustomUser con nuestra clase de administración personalizada
+
+# Registrar el modelo
 admin.site.register(CustomUser, CustomUserAdmin)
