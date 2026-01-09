@@ -4,125 +4,41 @@
         <a href="#" class="view-all">Ver todas <i class="fas fa-arrow-right"></i></a>
     </div>
     <div class="recipe-grid">
-        <article class="recipe-card">
-            <div class="recipe-image">
-                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=2680&auto=format&fit=crop"
-                    alt="Ensalada Mediterránea Fresca" class="recipe-image-large">
-                <div class="recipe-tag">Intermedio</div>
-                <div class="recipe-actions">
-                    <button class="action-btn"><i class="far fa-heart"></i></button>
+        {% for recipe in featured_recipes  %}
+            <article class="recipe-card">
+                <div class="recipe-image">
+                    <img src="{{recipe.image.url}}" class="recipe-image-large">
+                    <div class="recipe-tag">{{recipe.difficulty}}</div>
+                    <div class="recipe-actions">
+                        <button class="action-btn"><i class="far fa-heart"></i></button>
+                    </div>
                 </div>
-            </div>
-            <div class="recipe-content">
-                <h3>Pasta al Pesto</h3>
-                <div class="recipe-author">
-                    <img src="https://placehold.co/40x40/333/ffffff?text=LM" alt="Foto de perfil de Laura Martínez"
-                        class="creator-photo">
-                    <span>Chef Carlos Rodríguez</span>
-                </div>
-                <p class="recipe-description">
-                    Una auténtica carbonara italiana con guanciale, huevos, pecorino
-                    romano y pimienta negra. Cremosa y deliciosa.
-                </p>
+                <div class="recipe-content">
+                    <h3>{{recipe.name}}</h3>
+                    <div class="recipe-author">
+                        <img src="https://placehold.co/40x40/333/ffffff?text=LM" class="creator-photo">
+                        <span>Chef {{recipe.user.first_name}} {{recipe.user.last_name}}</span>
+                    </div>
+                    <p class="recipe-description">
+                        {{recipe.description}}
+                    </p>
 
-                <div class="recipe-meta">
-                    <div class="meta-item">
-                        <span class="meta-label"><i class="fas fa-clock" style="color: #fe6a08"></i><span>45
-                                min</span></span>
+                    <div class="recipe-meta">
+                        <div class="meta-item">
+                            <span class="meta-label"><i class="fas fa-clock" style="color: #fe6a08"></i><span>{{recipe.cooking_time}} min</span></span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label"><i class="fas fa-fire" style="color: #fe6a08"></i><span>{{recipe.calories}}</span></span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label"><i class="fas fa-star" style="color: #fe6a08"></i><span></span>{{recipe.likes_count}}</span>
+                        </div>
                     </div>
-                    <div class="meta-item">
-                        <span class="meta-label"><i class="fas fa-fire"
-                                style="color: #fe6a08"></i><span>450</span></span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label"><i class="fas fa-star"
-                                style="color: #fe6a08"></i><span>520</span></span>
-                    </div>
-                </div>
-                <div class="view-recipe">
-                    <a href="">Ver Receta</i></a>
-                </div>
-            </div>
-        </article>
-        <article class="recipe-card">
-            <div class="recipe-image">
-                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=2680&auto=format&fit=crop"
-                    alt="Ensalada Mediterránea Fresca" class="recipe-image-large">
-                <div class="recipe-tag">Facil</div>
-                <div class="recipe-actions">
-                    <button class="action-btn"><i class="far fa-heart"></i></button>
-                </div>
-            </div>
-            <div class="recipe-content">
-                <h3>Pasta al Pesto</h3>
-                <div class="recipe-author">
-                    <img src="https://placehold.co/40x40/333/ffffff?text=LM" alt="Foto de perfil de Laura Martínez"
-                        class="creator-photo">
-                    <span>Chef Carlos Rodríguez</span>
-                </div>
-                <p class="recipe-description">
-                    Una auténtica carbonara italiana con guanciale, huevos, pecorino
-                    romano y pimienta negra. Cremosa y deliciosa.
-                </p>
-
-                <div class="recipe-meta">
-                    <div class="meta-item">
-                        <span class="meta-label"><i class="fas fa-clock" style="color: #fe6a08"></i><span>45
-                                min</span></span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label"><i class="fas fa-fire"
-                                style="color: #fe6a08"></i><span>450</span></span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label"><i class="fas fa-star"
-                                style="color: #fe6a08"></i><span>520</span></span>
+                    <div class="view-recipe">
+                        <a href="">Ver Receta</i></a>
                     </div>
                 </div>
-                <div class="view-recipe">
-                    <a href="">Ver Receta</i></a>
-                </div>
-            </div>
-        </article>
-        <article class="recipe-card">
-            <div class="recipe-image">
-                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=2680&auto=format&fit=crop"
-                    alt="Ensalada Mediterránea Fresca" class="recipe-image-large">
-                <div class="recipe-tag">Dificil</div>
-                <div class="recipe-actions">
-                    <button class="action-btn"><i class="far fa-heart"></i></button>
-                </div>
-            </div>
-            <div class="recipe-content">
-                <h3>Pasta al Pesto</h3>
-                <div class="recipe-author">
-                    <img src="https://placehold.co/40x40/333/ffffff?text=LM" alt="Foto de perfil de Laura Martínez"
-                        class="creator-photo">
-                    <span>Chef Carlos Rodríguez</span>
-                </div>
-                <p class="recipe-description">
-                    Una auténtica carbonara italiana con guanciale, huevos, pecorino
-                    romano y pimienta negra. Cremosa y deliciosa.
-                </p>
-
-                <div class="recipe-meta">
-                    <div class="meta-item">
-                        <span class="meta-label"><i class="fas fa-clock" style="color: #fe6a08"></i><span>45
-                                min</span></span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label"><i class="fas fa-fire"
-                                style="color: #fe6a08"></i><span>450</span></span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label"><i class="fas fa-star"
-                                style="color: #fe6a08"></i><span>520</span></span>
-                    </div>
-                </div>
-                <div class="view-recipe">
-                    <a href="">Ver Receta</i></a>
-                </div>
-            </div>
-        </article>
+            </article>
+        {% endfor %}  
     </div>
 </section>

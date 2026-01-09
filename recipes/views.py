@@ -18,7 +18,7 @@ class IndexDashboardView(RecipeListBaseView):
         context = super().get_context_data(**kwargs)
 
         #highlighted recipies (3 random)
-        context["featured_recipes"] = Recipe.objects.all().order_by("?")[:3]
+        context["featured_recipes"] = Recipe.objects.annotate(likes_count = Count("favorites")).order_by("?")[:3]
 
         #Categories with Recipies count
         """  context["categories"] = Category.objects.annotate(

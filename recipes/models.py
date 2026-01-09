@@ -34,7 +34,6 @@ class Recipe(models.Model):
     cooking_time = models.IntegerField()
     image = models.ImageField(upload_to="recipes/")
     difficulty = models.CharField(max_length=50)
-    followers = models.IntegerField(default=0)
     servings = models.IntegerField(blank=True, null=True)
     calories = models.IntegerField(blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -89,7 +88,7 @@ class Comment(models.Model):
 # Favorite Recipes model
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, related_name="favorites", on_delete=models.CASCADE)
     class Meta:
         db_table = "favorites"
         unique_together = ("user", "recipe")
