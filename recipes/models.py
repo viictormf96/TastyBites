@@ -55,6 +55,7 @@ class Instruction(models.Model):
     description = models.TextField()
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     class Meta:
+        unique_together = ('recipe', 'step_number')
         db_table = "instructions"
     
     def __str__(self):
