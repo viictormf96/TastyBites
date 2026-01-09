@@ -1,0 +1,9 @@
+/* BASE */
+@import url("base.css");
+@import url("layout.css");
+
+/* COMPONENTS */
+@import url("components/hero.css");
+
+/* PAGES */
+@import url("pages/index_main_content.css");

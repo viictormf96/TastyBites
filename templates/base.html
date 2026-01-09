@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tasty Bites</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@vercel/geist-font/dist/geist-sans.css" />
+</head>
+
+<body>
+    <!-- HEADER-->
+    {% include "includes/header.html" %}
+
+    <main class="main-container">
+
+        {% block content %}
+            {% endblock content %}
+    
+    </main>
+    
+    <!-- FOOTER-->
+    {% include "includes/footer.html" %}
+</body>
+
+</html>
