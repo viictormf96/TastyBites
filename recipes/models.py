@@ -26,6 +26,13 @@ class Subcategory(models.Model):
     
     def __str__(self):
         return self.name
+
+# Difficulty model
+class Difficulty(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
     
 # Recipe model 
 class Recipe(models.Model):
@@ -33,7 +40,7 @@ class Recipe(models.Model):
     description = models.CharField(max_length=300)
     cooking_time = models.IntegerField()
     image = models.ImageField(upload_to="recipes/")
-    difficulty = models.CharField(max_length=50)
+    difficulty = models.ForeignKey(Difficulty, on_delete=models.SET_NULL, null=True)
     servings = models.IntegerField(blank=True, null=True)
     calories = models.IntegerField(blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
