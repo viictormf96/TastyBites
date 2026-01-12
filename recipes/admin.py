@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Subcategory, Recipe, Instruction, Ingredient,Comment,Favorite,Follower
+from .models import Category, Subcategory, Recipe, Difficulty, Instruction, Ingredient,Comment,Favorite,Follower
 
 
 @admin.register(Category)
@@ -18,6 +18,11 @@ class RecipeAdmin(admin.ModelAdmin):
     readonly_fields = ("created_at",)
     list_display = ("name", "user", "created_at")
     search_fields = ("name", "user", "description")
+
+@admin.register(Difficulty)
+class DifficultyAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+    search_fields = ("name",)
 
 @admin.register(Instruction)
 class InstructionAdmin(admin.ModelAdmin):
