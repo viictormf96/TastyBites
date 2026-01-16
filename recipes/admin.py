@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Subcategory, Recipe, Difficulty, Instruction, Ingredient,Comment,Favorite,Follower
+from .models import Category, Subcategory, Recipe, Difficulty, Instruction, Ingredient
 
 
 @admin.register(Category)

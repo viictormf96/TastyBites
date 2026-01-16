@@ -6,4 +6,4 @@ class RecipesConfig(AppConfig):
     name = "recipes"
     
     def ready(self):
-        import recipes.signals  #
+        import recipes.signals  #Esto activa la limpieza de fotos
