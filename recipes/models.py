@@ -1,3 +1,6 @@
+from django.db.models.signals import post_delete, pre_save
+from django.dispatch import receiver
+import os
 from django.db import models
 from accounts.models import CustomUser as User
 
@@ -78,29 +81,30 @@ class Ingredient(models.Model):
     def __str__(self):
         return f"{self.quantity} de {self.name}"
     
-# Recipe Comments model
-class Comment(models.Model):
-    content = models.CharField(max_length=200)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    class Meta:
-        db_table = "comments"
-    
-    def __str__(self):
-        return f"Comentario de {self.user.username} en {self.recipe.name}"
+@receiver(post_delete, sender=Recipe)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+    """
+    Borra el archivo del sistema cuando se elimina el objeto de la base de datos.
+    """
+    if instance.image:
+        if os.path.isfile(instance.image.path):
+            os.remove(instance.image.path)
 
-# Favorite Recipes model
-class Favorite(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    recipe = models.ForeignKey(Recipe, related_name="favorites", on_delete=models.CASCADE)
-    class Meta:
-        db_table = "favorites"
-        unique_together = ("user", "recipe")
-    def __str__(self):
-        return f"{self.user.username} le gusta {self.recipe.name}"
+@receiver(pre_save, sender=Recipe)
+def auto_delete_file_on_change(sender, instance, **kwargs):
+    """
+    Borra el archivo antiguo cuando se sube uno nuevo.
+    """
+    if not instance.pk:
+        return False
 
-    
+    try:
+        old_file = sender.objects.get(pk=instance.pk).image
+    except sender.DoesNotExist:
+        return False
 
+    new_file = instance.image
+    if not old_file == new_file:
+        if os.path.isfile(old_file.path):
+            os.remove(old_file.path)
