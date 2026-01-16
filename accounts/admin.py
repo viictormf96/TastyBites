@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser
+from .models import CustomUser, Follower
 
 class CustomUserAdmin(UserAdmin):
     """
@@ -51,3 +51,8 @@ class CustomUserAdmin(UserAdmin):
 
 # Registrar el modelo
 admin.site.register(CustomUser, CustomUserAdmin)
+
+@admin.register(Follower)
+class FollowerAdmin(admin.ModelAdmin):
+    list_display = ("follower", "followee")
+    search_fields = ("follower", "followee")
