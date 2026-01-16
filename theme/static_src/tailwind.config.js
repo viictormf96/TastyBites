@@ -1,7 +1,12 @@
-/** @type {import('tailwindcss').Config} */
+/**
+ * This is a minimal config.
+ *
+ * If you need the full config, get it from here:
+ * https://unpkg.com/browse/tailwindcss@latest/stubs/defaultConfig.stub.js
+ */
+
 module.exports = {
     content: [
-        // Rutas para que Tailwind encuentre tus clases en los archivos de Django
         '../templates/**/*.html',
         '../../templates/**/*.html',
         '../../**/templates/**/*.html',

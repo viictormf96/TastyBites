@@ -1,11 +1,70 @@
-@import "tailwindcss";
-@plugin "daisyui";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/**
-  * A catch-all path to Django template files, JavaScript, and Python files
-  * that contain Tailwind CSS classes and will be scanned by Tailwind to generate the final CSS file.
-  *
-  * If your final CSS file is not being updated after code changes, you may want to broaden or narrow
-  * the scope of this path.
-  */
-@source "../../../**/*.{html,py,js}";
+@layer base {
+    body {
+        @apply font-display;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-serif;
+    }
+}
+
+.nav-link {
+    @apply relative text-sm font-medium text-text-main dark:text-gray-300 transition-colors duration-300 hover:text-primary dark:hover:text-primary;
+}
+
+.nav-link::after {
+    content: '';
+    @apply absolute left-0 bottom-[-4px] w-0 h-[1.5px] bg-primary transition-all duration-300;
+}
+
+.nav-link:hover::after {
+    @apply w-full;
+}
+
+.login-link {
+    @apply relative px-2 py-2 text-sm font-bold text-text-main dark:text-gray-100 hover:text-primary transition-all duration-300;
+}
+
+.login-link::after {
+    content: '';
+    @apply absolute left-1/2 -bottom-1 w-0 h-[1.5px] bg-primary transition-all duration-300 -translate-x-1/2;
+}
+
+.login-link:hover::after {
+    @apply w-[80%];
+}
+
+.hero-tag {
+    @apply px-5 py-2 bg-white dark:bg-dark-card border border-transparent dark:border-white/10 hover:border-primary/40 dark:hover:border-primary/60 hover:shadow-orange-glow rounded-full text-sm font-medium text-text-main dark:text-gray-200 transition-all duration-300 flex items-center gap-2 hover:scale-105;
+}
+
+.recipe-card {
+    overflow: hidden !important;
+    @apply rounded-lg;
+}
+
+.bento-item {
+    overflow: hidden !important;
+    @apply rounded-lg;
+}
+
+.recipe-card-btn {
+    @apply rounded-full px-4 py-2 bg-charcoal text-white text-sm font-bold transition-all duration-300 hover:bg-primary;
+}
+
+.dark .recipe-card-btn {
+    @apply bg-transparent border border-primary text-primary hover:bg-primary hover:text-white;
+}
+
+.glass-header {
+    @apply bg-white/70 dark:bg-dark-bg/70 backdrop-blur-md border-b border-white/20 dark:border-white/5;
+}

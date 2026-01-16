@@ -1,26 +1,630 @@
 {% load static tailwind_tags %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Django Tailwind</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<html class="scroll-smooth" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Tasty Bites - Descubre el Chef que llevas dentro</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&amp;family=Playfair+Display:wght@700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
     {% tailwind_css %}
-</head>
+  </head>
 
-<body class="bg-gray-50 text-black font-serif leading-normal tracking-normal">
-
-    <div class="toast toast-top toast-end">
-        <div class="alert alert-info">
-            <span>Hello from daisyUi 👋</span>
+  <body
+    class="bg-background-light dark:bg-dark-bg text-text-main dark:text-gray-100 antialiased selection:bg-primary/20 selection:text-primary transition-colors duration-300"
+  >
+    <nav class="sticky top-0 z-50 w-full glass-header">
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <a class="flex items-center gap-3 group" href="#">
+            <div
+              class="bg-primary/10 p-2 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:rotate-12"
+            >
+              <span class="material-symbols-outlined text-2xl"
+                >restaurant_menu</span
+              >
+            </div>
+            <span
+              class="text-2xl font-bold tracking-tight text-charcoal dark:text-white font-logo"
+              >Tasty Bites</span
+            >
+          </a>
+          <div class="hidden md:flex items-center gap-12">
+            <a class="nav-link" href="#">Inicio</a>
+            <a class="nav-link" href="#">Recetas</a>
+            <a class="nav-link" href="#">Blog</a>
+            <a class="nav-link" href="#">Nosotros</a>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="flex items-center gap-4">
+              <button
+                class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-charcoal dark:text-white flex items-center justify-center"
+                onclick="document.documentElement.classList.toggle('dark')"
+                title="Cambiar modo"
+              >
+                <span class="material-symbols-outlined dark:hidden text-[22px]"
+                  >dark_mode</span
+                >
+                <span
+                  class="material-symbols-outlined hidden dark:block text-[22px]"
+                  >light_mode</span
+                >
+              </button>
+              <button class="hidden lg:block login-link">Inicia Sesión</button>
+            </div>
+            <button
+              class="px-8 py-2.5 bg-primary hover:bg-primary-hover text-white text-sm font-bold rounded-full shadow-lg shadow-primary/20 transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-button-lift dark:shadow-orange-900/20"
+            >
+              Regístrate
+            </button>
+          </div>
         </div>
-    </div>
-
-<div class="container mx-auto">
-    <section class="flex items-center justify-center h-screen">
-        <h1 class="text-5xl">Django + Tailwind = ❤️</h1>
+      </div>
+    </nav>
+    <section
+      class="relative w-full bg-warm-cream dark:bg-dark-bg/50 py-16 md:py-24 overflow-hidden"
+    >
+      <div
+        class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
+      ></div>
+      <div
+        class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-orange-200/20 dark:bg-orange-900/10 rounded-full blur-3xl"
+      ></div>
+      <div
+        class="max-w-5xl mx-auto px-6 relative z-10 text-center animate-fade-in-up"
+      >
+        <h1
+          class="text-5xl md:text-7xl font-bold text-charcoal dark:text-white mb-6 leading-tight tracking-tight"
+        >
+          Descubre el Chef <br class="hidden md:block" />
+          <span class="italic text-primary">que llevas dentro.</span>
+        </h1>
+        <p
+          class="text-lg md:text-xl text-text-sub dark:text-gray-400 max-w-2xl mx-auto mb-10 font-display font-light"
+        >
+          Inspiración culinaria con ingredientes frescos y sabores auténticos
+          para transformar tu cocina diaria.
+        </p>
+        <div class="max-w-xl mx-auto mb-8">
+          <div
+            class="bg-white dark:bg-dark-card p-2 rounded-full shadow-lift flex items-center border border-gray-100 dark:border-white/10 focus-within:border-primary/50 transition-colors"
+          >
+            <div class="pl-4 text-text-sub dark:text-gray-400">
+              <span class="material-symbols-outlined">search</span>
+            </div>
+            <input
+              class="w-full border-none bg-transparent focus:ring-0 text-text-main dark:text-white placeholder:text-gray-400 font-medium px-4 h-12"
+              placeholder="Busca recetas (ej. Pasta, Ensalada)..."
+              type="text"
+            />
+            <button
+              class="bg-primary hover:bg-primary-hover text-white rounded-full p-3 md:px-8 md:py-3 font-bold text-sm transition-all flex items-center gap-2 shadow-lg shadow-primary/10"
+            >
+              <span class="hidden md:inline">Buscar</span>
+              <span class="material-symbols-outlined text-lg md:hidden"
+                >arrow_forward</span
+              >
+            </button>
+          </div>
+        </div>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a class="hero-tag" href="#">
+            <span class="material-symbols-outlined text-primary text-lg"
+              >bakery_dining</span
+            >
+            Desayuno
+          </a>
+          <a class="hero-tag" href="#">
+            <span class="material-symbols-outlined text-green-600 text-lg"
+              >eco</span
+            >
+            Vegano
+          </a>
+          <a class="hero-tag" href="#">
+            <span class="material-symbols-outlined text-blue-500 text-lg"
+              >timer</span
+            >
+            Rápido
+          </a>
+          <a class="hero-tag" href="#">
+            <span class="material-symbols-outlined text-red-500 text-lg"
+              >local_fire_department</span
+            >
+            Picante
+          </a>
+        </div>
+      </div>
     </section>
-</div>
-</body>
+    <section
+      class="py-20 px-6 max-w-7xl mx-auto bg-background-light dark:bg-dark-bg animate-fade-in-up"
+      style="animation-delay: 0.2s"
+    >
+      <div class="text-center mb-12">
+        <span
+          class="text-primary font-bold uppercase tracking-wider text-xs mb-2 block"
+          >Selección del Editor</span
+        >
+        <h2
+          class="text-3xl md:text-4xl font-bold text-charcoal dark:text-white mb-4"
+        >
+          Recetas Destacadas
+        </h2>
+        <a
+          class="inline-flex items-center gap-1 text-primary font-bold hover:gap-2 transition-all hover:text-primary-hover"
+          href="#"
+        >
+          Ver todas
+          <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <article
+          class="recipe-card bg-white dark:bg-dark-card shadow-soft group border border-gray-50 dark:border-white/5 h-full flex flex-col transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl"
+        >
+          <div class="relative h-64 overflow-hidden rounded-t-lg">
+            <div
+              class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 transform-gpu"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDkB11HoXS6YqlT87a4JQyl2At2AFXZqXqWGZso0s4VSi4dMsRF_UxT5ydsZs2yNQl_D6m8Dy4UMEt_Jtsx-u7xrmBx3jGltzXWz8QBPhu4iEXU5cik9PEjxiPoyJ8pAzBF6rUIvXpLLuleBp7OW1fW8LBEOJQhLa30jnubDUn5KINpiqHL4uSOrnoFhdo-GyM8TuSK6UA4f831n5LE6lmaqCdPldQcDw6GGsibgSXfBXUwfTfdGl57tlYUqW1WYPXBorpmypeEyJ8');
+              "
+            ></div>
+            <button
+              class="absolute top-4 right-4 bg-white/90 dark:bg-dark-bg/80 p-2 rounded-full text-gray-400 hover:text-red-500 transition-colors shadow-sm"
+            >
+              <span class="material-symbols-outlined block">favorite</span>
+            </button>
+            <div
+              class="absolute bottom-4 left-4 bg-white/90 dark:bg-dark-bg/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-text-main dark:text-white flex items-center gap-1"
+            >
+              <span class="material-symbols-outlined text-sm">schedule</span> 20
+              min
+            </div>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <div class="flex items-center gap-1 text-primary text-sm mb-2">
+              <span class="material-symbols-outlined text-lg fill-current"
+                >favorite</span
+              >
+              <span class="font-bold text-charcoal dark:text-gray-100"
+                >4.9</span
+              >
+              <span class="text-gray-400 font-normal ml-1">(128 reseñas)</span>
+            </div>
+            <h3
+              class="text-xl font-bold text-charcoal dark:text-white mb-2 font-serif group-hover:text-primary transition-colors"
+            >
+              Avocado Toast Gourmet
+            </h3>
+            <p
+              class="text-text-sub dark:text-gray-400 text-sm line-clamp-2 mb-4 flex-grow"
+            >
+              Pan de masa madre tostado con aguacate cremoso, huevo pochado
+              perfecto y un toque de chile.
+            </p>
+            <div
+              class="pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between mt-auto"
+            >
+              <div class="flex items-center gap-2">
+                <img
+                  alt="Chef avatar"
+                  class="w-8 h-8 rounded-full object-cover border border-white dark:border-white/10 shadow-sm"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtQI33eY9JTna42KWCn8lcR9U_kQhonQoAEFbGGdH43Z30v0ZKKqRLk7zIPSHZnmktHPeCQDyGwLf7-ODsccaI-IbKTfH3s1gJRFua4RQucm_3pj7o9UgJ_1hVVYmt1E9xT_xclXIunr0X-xBZ5D45zktLSD4z-C7vGplJjrxrYCsLa5PU5U-taX0KpK2EG3h0FgO7bTsz_ElHwD5LOVnr9EmbUpCA9hWADfLBLVL6T3-Oa0Ixxouhz3FhAMZ9Kow9wsJaEK285jA"
+                />
+                <span
+                  class="text-xs font-medium text-text-sub dark:text-gray-500"
+                  >Por Ana G.</span
+                >
+              </div>
+              <a class="recipe-card-btn" href="#">Ver receta</a>
+            </div>
+          </div>
+        </article>
+        <article
+          class="recipe-card bg-white dark:bg-dark-card shadow-soft group border border-gray-50 dark:border-white/5 h-full flex flex-col transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl"
+        >
+          <div class="relative h-64 overflow-hidden rounded-t-lg">
+            <div
+              class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 transform-gpu"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDwpUNGASjcb7FGfvxMh_rlHYsxqWC1YfusHFoYagJvN6N7DUto6oav_O9gRgt4DWhpUpPMyl38qJ4G0RFYtewXb5_svmDm9AqriCMwOKrn5ziEGwgVuwP6DfLh-_3CZKa-t2qaDzGS7wLHOXtXchE0D0brzjcWl3C4TwQdGQXc-kioNA_wnkBpSNiY8FqHdyByWp3otFxQNPIZPZTultH1i1dAG9EZIfDeft4aFKP5WxZcupxuTYERJUFO2v-WaYlRW129q0d_B_0');
+              "
+            ></div>
+            <button
+              class="absolute top-4 right-4 bg-white/90 dark:bg-dark-bg/80 p-2 rounded-full text-gray-400 hover:text-red-500 transition-colors shadow-sm"
+            >
+              <span class="material-symbols-outlined block">favorite</span>
+            </button>
+            <div
+              class="absolute bottom-4 left-4 bg-white/90 dark:bg-dark-bg/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-text-main dark:text-white flex items-center gap-1"
+            >
+              <span class="material-symbols-outlined text-sm">schedule</span> 45
+              min
+            </div>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <div class="flex items-center gap-1 text-primary text-sm mb-2">
+              <span class="material-symbols-outlined text-lg fill-current"
+                >favorite</span
+              >
+              <span class="font-bold text-charcoal dark:text-gray-100"
+                >4.8</span
+              >
+              <span class="text-gray-400 font-normal ml-1">(85 reseñas)</span>
+            </div>
+            <h3
+              class="text-xl font-bold text-charcoal dark:text-white mb-2 font-serif group-hover:text-primary transition-colors"
+            >
+              Salmón al Grill con Espárragos
+            </h3>
+            <p
+              class="text-text-sub dark:text-gray-400 text-sm line-clamp-2 mb-4 flex-grow"
+            >
+              Un plato saludable y elegante con filete de salmón fresco,
+              espárragos crujientes y salsa de limón.
+            </p>
+            <div
+              class="pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between mt-auto"
+            >
+              <div class="flex items-center gap-2">
+                <img
+                  alt="Chef avatar"
+                  class="w-8 h-8 rounded-full object-cover border border-white dark:border-white/10 shadow-sm"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGJV5CVHEjplGC5AI6QSJKEuwi5a4d9IDOojLm7L99WyIa35jANEcIHbaZwTqIeydGrm3hSkZTPGYJbQx5QIXM4b-qfmXpYX4tl4z08H1SLuB9agTXnUcTLZi0h-bXGF3TMdv_eBaeYF8_5HJg4Y7O_972iZS3uq7IkwcN8sOkUrW6X1oZmdm4S0MPsbdxHXapHMDSzcBA5ZvXLwItrlS4MMdlLvegoYkgfkEMNGKA6ToDbHQuJ55C2YId3D92tyx85ziCTLIBeQQ"
+                />
+                <span
+                  class="text-xs font-medium text-text-sub dark:text-gray-500"
+                  >Por Carlos M.</span
+                >
+              </div>
+              <a class="recipe-card-btn" href="#">Ver receta</a>
+            </div>
+          </div>
+        </article>
+        <article
+          class="recipe-card bg-white dark:bg-dark-card shadow-soft group border border-gray-50 dark:border-white/5 h-full flex flex-col transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl"
+        >
+          <div class="relative h-64 overflow-hidden rounded-t-lg">
+            <div
+              class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 transform-gpu"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAwtmZA_qMtGLFJWMy3K9kNBtYc3cSHd0QNx2-ANk-cfqj2gRRIx68nHup0PzwBmnho2G2Zwkqxk3QHByRO3Da2-IjwYKmypG70sO6ZupAKYYgzeDFHA0o5NucaD_6JBTlnc2NUWCWE5hdP4NWBCuWOk7aMxiC1HHmc5mYqFh6e4ZlW9pm4l550aq72XgDoXSWSf3YR3zm5cPA2vzj3gWzI4agORu25SfBrzJM3Whwqtc_Y5LFlP4zBnl3ATAvLGNUoMkVTOkAzxLY');
+              "
+            ></div>
+            <button
+              class="absolute top-4 right-4 bg-white/90 dark:bg-dark-bg/80 p-2 rounded-full text-gray-400 hover:text-red-500 transition-colors shadow-sm"
+            >
+              <span class="material-symbols-outlined block">favorite</span>
+            </button>
+            <div
+              class="absolute bottom-4 left-4 bg-white/90 dark:bg-dark-bg/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-text-main dark:text-white flex items-center gap-1"
+            >
+              <span class="material-symbols-outlined text-sm">schedule</span> 30
+              min
+            </div>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <div class="flex items-center gap-1 text-primary text-sm mb-2">
+              <span class="material-symbols-outlined text-lg fill-current"
+                >favorite</span
+              >
+              <span class="font-bold text-charcoal dark:text-gray-100"
+                >4.7</span
+              >
+              <span class="text-gray-400 font-normal ml-1">(210 reseñas)</span>
+            </div>
+            <h3
+              class="text-xl font-bold text-charcoal dark:text-white mb-2 font-serif group-hover:text-primary transition-colors"
+            >
+              Pasta Fresca Artesanal
+            </h3>
+            <p
+              class="text-text-sub dark:text-gray-400 text-sm line-clamp-2 mb-4 flex-grow"
+            >
+              Aprende a hacer pasta desde cero con solo 3 ingredientes.
+              Sencillo, delicioso y auténtico.
+            </p>
+            <div
+              class="pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between mt-auto"
+            >
+              <div class="flex items-center gap-2">
+                <img
+                  alt="Chef avatar"
+                  class="w-8 h-8 rounded-full object-cover border border-white dark:border-white/10 shadow-sm"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOB337wsk-5hfZAfAP1XPIGY9v4bdkP8xkr6JhurMOraK5tWiwolWpiK3JOOIj1D8aFcjCFCdk7KfTcP5hAHXteS6lLsdyYtpy8Dpy3mBwi0puEfmvubKOo89ryEFoiSKwlnbLC478ehzXeqUVyf8MwKlAlwV3MWfWR9KltrxEKfVhrjTjvwaWAKMvCTmlVKjYDu_W4YGTt_WA_k77rJ9kecxTJmrCjzJfEp62gdHm1d5JwSf3oMgyDVdleTVyJ1k-X0JF-oYFPD8"
+                />
+                <span
+                  class="text-xs font-medium text-text-sub dark:text-gray-500"
+                  >Por Sofia R.</span
+                >
+              </div>
+              <a class="recipe-card-btn" href="#">Ver receta</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section
+      class="py-20 px-6 max-w-7xl mx-auto animate-fade-in-up"
+      style="animation-delay: 0.4s"
+    >
+      <h2
+        class="text-3xl md:text-4xl font-bold text-charcoal dark:text-white mb-10 text-center"
+      >
+        Explorar Categorías
+      </h2>
+      <div
+        class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 md:h-[500px]"
+      >
+        <div
+          class="bento-item md:col-span-2 md:row-span-2 relative group cursor-pointer transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl transform-gpu"
+        >
+          <div
+            class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 transform-gpu"
+            style="
+              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCB4cXOMIXXCL9auRb8roSoVMtcK3IVuPEoKEAyhdITEbTDZh_TqXtwpbz3StD04RMf-71UDiXMlncdEX9-m-0pbmUbJlL-syRDkspDumjmAjKnKYsh4HX1F01kqLwtah1ioAsi_BG_YOp10c85NiQ-1nma6i_DoGhJE6vB433KSsJa2autXslhvk2tTlJ6_qYrCm67SgBfdnzvhnum0Sm-J_ONSAqW83J1hwzBZARevD-9cRvyCICJVvJb34MtWskaEYhWpnMpVkQ');
+            "
+          ></div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
+          ></div>
+          <div class="absolute bottom-6 left-6 text-white">
+            <span
+              class="text-sm font-bold bg-primary px-3 py-1 rounded-full mb-3 inline-block"
+              >Popular</span
+            >
+            <h3 class="text-3xl font-bold font-serif">Cenas del Mundo</h3>
+            <p class="text-gray-200 mt-2 text-sm">
+              Viaja sin salir de tu cocina
+            </p>
+          </div>
+        </div>
+        <div
+          class="bento-item md:col-span-1 md:row-span-2 relative group cursor-pointer h-64 md:h-auto transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl transform-gpu"
+        >
+          <div
+            class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 transform-gpu"
+            style="
+              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCxNbXTzB0HCIzI7SPuuiPg8c74IE_p0RFJA8MxSQQ2wegTCKzLNST_UjRT6GLAjyeaBTTn614bWBU4YykvsNPDxRMrrOHYMXqO4pavrYntXg2rkAOi0M7An0XvBQTUBqKnb68RKoYjK7t7LRomRadDB2MxfS17egnEEhY4a-4XfWGpJR4U8CCI4kZ_lKfyBz0wyB4dko491SSLpiTbgL-e7OkqsPIzg1fhIuLDOpcqV2ZMIyYK2Lm85psbqC6cp93HEXFd690-tCg');
+            "
+          ></div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"
+          ></div>
+          <div class="absolute bottom-6 left-6 text-white">
+            <h3 class="text-xl font-bold font-serif">Saludable</h3>
+            <p class="text-gray-200 mt-1 text-xs">Nutrición &amp; sabor</p>
+          </div>
+        </div>
+        <div
+          class="bento-item md:col-span-1 relative group cursor-pointer h-48 md:h-auto transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl transform-gpu"
+        >
+          <div
+            class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 transform-gpu"
+            style="
+              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAhnbWXvxE2Vhz7GzOOAw347vLqMqZeO5mGy98js_TVL-m0XblfcpSyeLQNXapyN5H2vwmSX1nf7v6uTaqCC2FXEL5aS8xr-rPy6EDm1UMC_na1ezVh4W4i7swQuDNjXbIEFGJBJ0PVwcEjdkmbS22mErjk30nYMNnBN2nNFaur_6F4gNfOy9Dq4_CgHPrqXZRFG9vo2CKQGVD8SESzm6gaEJd__ekGKfA4rG4awkxTc4cTU1kLMOcUsMxffxz_iEge608q2AVkh40');
+            "
+          ></div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"
+          ></div>
+          <div class="absolute bottom-4 left-4 text-white">
+            <h3 class="text-lg font-bold font-serif">Postres</h3>
+          </div>
+        </div>
+        <div
+          class="bento-item md:col-span-1 relative group cursor-pointer h-48 md:h-auto transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl transform-gpu"
+        >
+          <div
+            class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 transform-gpu"
+            style="
+              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBrMSoWuCTKrWDzJfWkzD0Hyi2AVVWJCKO_CnqQ19O5KC-1VaIEtAMJ3QJ624j6YMNIWUucNkinfQU6vbkzYlB-29-3t47JmXL1mRWkG57fqnk2ESKdpP-foVCQ7qxKCVxuwAxz4qnBL8DhdwsFqXUx9D3qM8cwrXttNhPN8Se6pJB1MEA2u0B5nMG8UKypi_iiGEcHTCRr97FE5LQOBqQAhL7qNm-M2GYHHe3_bYRFv81IUgLWeyHmWL-4fixx_X-ITJK8BaXKZUY');
+            "
+          ></div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"
+          ></div>
+          <div class="absolute bottom-4 left-4 text-white">
+            <h3 class="text-lg font-bold font-serif">Desayunos</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="max-w-7xl mx-auto px-6 pb-24">
+      <div
+        class="bg-charcoal dark:bg-dark-card rounded-xl overflow-hidden shadow-2xl relative"
+      >
+        <div
+          class="absolute top-0 right-0 w-full h-full opacity-10"
+          style="
+            background-image: radial-gradient(#e67e22 1px, transparent 1px);
+            background-size: 20px 20px;
+          "
+        ></div>
+        <div class="grid md:grid-cols-2 items-center relative z-10">
+          <div class="p-10 md:p-16 text-center md:text-left">
+            <div
+              class="flex items-center justify-center md:justify-start gap-2 text-primary font-bold mb-4"
+            >
+              <span class="material-symbols-outlined">groups</span>
+              <span class="uppercase tracking-widest text-xs">Comunidad</span>
+            </div>
+            <h2
+              class="text-4xl md:text-5xl font-bold text-white font-serif mb-6"
+            >
+              Únete a los amantes del buen comer
+            </h2>
+            <p class="text-gray-400 mb-8 max-w-md mx-auto md:mx-0">
+              Comparte tus creaciones, guarda tus recetas favoritas y conecta
+              con chefs caseros de todo el mundo.
+            </p>
+            <div
+              class="flex flex-wrap justify-center md:justify-start gap-8 mb-8"
+            >
+              <div>
+                <p class="text-3xl md:text-4xl font-bold text-primary">50k+</p>
+                <p class="text-gray-500 text-sm mt-1">Usuarios Activos</p>
+              </div>
+              <div>
+                <p class="text-3xl md:text-4xl font-bold text-primary">1.2k+</p>
+                <p class="text-gray-500 text-sm mt-1">Recetas Nuevas</p>
+              </div>
+              <div>
+                <div class="flex items-center gap-1">
+                  <p class="text-3xl md:text-4xl font-bold text-primary">4.9</p>
+                  <span
+                    class="material-symbols-outlined text-primary text-2xl fill-current"
+                    >favorite</span
+                  >
+                </div>
+                <p class="text-gray-500 text-sm mt-1">Valoración App</p>
+              </div>
+            </div>
+            <button
+              class="px-8 py-3 bg-primary hover:bg-primary-hover text-white font-bold rounded-full shadow-lg shadow-primary/20 transition-all transform hover:-translate-y-1 dark:shadow-orange-900/20"
+            >
+              Unirme Ahora
+            </button>
+          </div>
+          <div
+            class="h-64 md:h-full min-h-[400px] relative bg-cover bg-center"
+            style="
+              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCKoBqxu_9xjYtPWCpiysLzAzcc2z4ysc8-EVATkV6mMhMii75F1pr9NLLidvZkXyM-ac53iZPExP0GfCXa747D-3eiNiP8dbVIDcz2aZ0fTNzdn5xUgA-OBG2Ixm4CYNzQm6fQ4tXND-R0y8cFXeVcHN9RcyoyYKzGwuVbhoHBt6E5Ts8XMduKdnWk7CsKjLNTsqwPN-IWNnG8QNBrlUKmYSgoKl5kL_USzDjFn_weUfsyF7COhofFZPBp8brozNIZGBk_CO2k7L4');
+            "
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-l from-charcoal via-transparent to-transparent md:bg-gradient-to-r md:from-charcoal md:via-charcoal/20 md:to-transparent dark:md:from-dark-card"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer
+      class="bg-charcoal dark:bg-black text-white pt-16 pb-8 border-t border-gray-800"
+    >
+      <div class="max-w-7xl mx-auto px-6">
+        <div
+          class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12 text-center md:text-left"
+        >
+          <div
+            class="col-span-1 md:col-span-1 flex flex-col items-center md:items-start"
+          >
+            <a class="flex items-center gap-2 mb-6" href="#">
+              <span class="material-symbols-outlined text-primary text-3xl"
+                >restaurant_menu</span
+              >
+              <span class="text-2xl font-bold font-logo">Tasty Bites</span>
+            </a>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              Tu destino diario para inspiración culinaria. Recetas probadas,
+              ingredientes frescos y una comunidad apasionada.
+            </p>
+          </div>
+          <div>
+            <h4 class="text-lg font-bold mb-6 font-serif">Explorar</h4>
+            <ul class="space-y-3 text-gray-400 text-sm">
+              <li>
+                <a
+                  class="hover:text-primary transition-colors duration-300"
+                  href="#"
+                  >Recetas Populares</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors duration-300"
+                  href="#"
+                  >Nuevos Lanzamientos</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors duration-300"
+                  href="#"
+                  >Blog Culinario</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors duration-300"
+                  href="#"
+                  >Guías de Cocina</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-bold mb-6 font-serif">Compañía</h4>
+            <ul class="space-y-3 text-gray-400 text-sm">
+              <li>
+                <a
+                  class="hover:text-primary transition-colors duration-300"
+                  href="#"
+                  >Sobre Nosotros</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors duration-300"
+                  href="#"
+                  >Carreras</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors duration-300"
+                  href="#"
+                  >Prensa</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors duration-300"
+                  href="#"
+                  >Contacto</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="flex flex-col items-center md:items-start">
+            <h4 class="text-lg font-bold mb-6 font-serif">Boletín</h4>
+            <p class="text-gray-400 text-sm mb-4">
+              Recibe las mejores recetas cada semana.
+            </p>
+            <form class="flex flex-col gap-2 w-full max-w-xs md:max-w-none">
+              <input
+                class="bg-gray-800 dark:bg-white/5 border-none rounded-lg px-4 py-2 text-white placeholder:text-gray-500 focus:ring-1 focus:ring-primary transition-all"
+                placeholder="Tu correo electrónico"
+                type="email"
+              />
+              <button
+                class="bg-primary hover:bg-primary-hover text-white font-bold py-2 rounded-lg transition-colors text-sm"
+                type="submit"
+              >
+                Suscribirse
+              </button>
+            </form>
+          </div>
+        </div>
+        <div
+          class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500"
+        >
+          <p>© 2023 Tasty Bites Inc. Todos los derechos reservados.</p>
+          <div class="flex gap-6 mt-4 md:mt-0">
+            <a class="hover:text-white transition-colors" href="#"
+              >Privacidad</a
+            >
+            <a class="hover:text-white transition-colors" href="#">Términos</a>
+            <a class="hover:text-white transition-colors" href="#">Cookies</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
