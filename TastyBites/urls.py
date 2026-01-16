@@ -31,6 +31,7 @@ urlpatterns = [
 
     # Core (static pages)
     path("core/", include("core.urls")),
+    
 ]
 
 # For MEDIA in development

@@ -37,10 +37,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "tailwind",
+    "theme",
+    "django_browser_reload",
     "core",
     "accounts",
     "recipes",
 ]
+
+TAILWIND_APP_NAME = "theme"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -125,6 +130,8 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+NPM_BIN_PATH = "/opt/homebrew/bin/npm"
 
 #MEDIA
 MEDIA_URL = "/media/"
