@@ -1,3 +1,6 @@
+from django.db.models.signals import post_delete, pre_save
+from django.dispatch import receiver
+import os
 from django.db import models
 from accounts.models import CustomUser as User
 
@@ -26,6 +29,13 @@ class Subcategory(models.Model):
     
     def __str__(self):
         return self.name
+
+# Difficulty model
+class Difficulty(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
     
 # Recipe model 
 class Recipe(models.Model):
@@ -33,8 +43,7 @@ class Recipe(models.Model):
     description = models.CharField(max_length=300)
     cooking_time = models.IntegerField()
     image = models.ImageField(upload_to="recipes/")
-    difficulty = models.CharField(max_length=50)
-    followers = models.IntegerField(default=0)
+    difficulty = models.ForeignKey(Difficulty, on_delete=models.SET_NULL, null=True)
     servings = models.IntegerField(blank=True, null=True)
     calories = models.IntegerField(blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -55,6 +64,7 @@ class Instruction(models.Model):
     description = models.TextField()
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     class Meta:
+        unique_together = ('recipe', 'step_number')
         db_table = "instructions"
     
     def __str__(self):
@@ -71,38 +81,30 @@ class Ingredient(models.Model):
     def __str__(self):
         return f"{self.quantity} de {self.name}"
     
-# Recipe Comments model
-class Comment(models.Model):
-    content = models.CharField(max_length=200)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    class Meta:
-        db_table = "comments"
-    
-    def __str__(self):
-        return f"Comentario de {self.user.username} en {self.recipe.name}"
+@receiver(post_delete, sender=Recipe)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+    """
+    Borra el archivo del sistema cuando se elimina el objeto de la base de datos.
+    """
+    if instance.image:
+        if os.path.isfile(instance.image.path):
+            os.remove(instance.image.path)
 
-# Favorite Recipes model
-class Favorite(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    class Meta:
-        db_table = "favorites"
-        unique_together = ("user", "recipe")
-    def __str__(self):
-        return f"{self.user.username} le gusta {self.recipe.name}"
+@receiver(pre_save, sender=Recipe)
+def auto_delete_file_on_change(sender, instance, **kwargs):
+    """
+    Borra el archivo antiguo cuando se sube uno nuevo.
+    """
+    if not instance.pk:
+        return False
 
-# Followers model
-class Follower(models.Model):
-    follower = models.ForeignKey(User, related_name="following", on_delete=models.CASCADE)
-    followee = models.ForeignKey(User, related_name="followers", on_delete=models.CASCADE)
-    class Meta:
-        db_table = "followers"
-        unique_together = ("follower", "followee")
-    def __str__(self):
-        return f"{self.follower.username} sigue {self.followee.username}"
-    
+    try:
+        old_file = sender.objects.get(pk=instance.pk).image
+    except sender.DoesNotExist:
+        return False
 
+    new_file = instance.image
+    if not old_file == new_file:
+        if os.path.isfile(old_file.path):
+            os.remove(old_file.path)
