@@ -1,0 +1,36 @@
+{% load static tailwind_tags %}
+<html class="scroll-smooth" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>{% block title%} {% endblock %}</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&amp;family=Playfair+Display:wght@700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    {% tailwind_css %}
+  </head>
+
+  <body class="bg-background-light dark:bg-dark-bg text-text-main dark:text-gray-100 antialiased selection:bg-primary/20 selection:text-primary transition-colors duration-300">
+    
+    <!-- NAV BAR-->
+    {% include "includes/navbar.html" %}
+
+    <main>
+
+        {% block content %}
+            {% endblock content %}
+    
+    </main>
+    
+    <!-- FOOTER-->
+    {% include "includes/footer.html" %}
+    </body>
+
+</html>
