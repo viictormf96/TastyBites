@@ -27,10 +27,10 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),
 
     # Recipes (recipes, categories)
-    path("", include("recipes.urls")),
+    path("recipes/", include("recipes.urls")),
 
     # Core (static pages)
-    path("core/", include("core.urls")),
+    path("", include("core.urls")),
     
 ]
 

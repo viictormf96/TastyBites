@@ -1,0 +1,52 @@
+<section class="py-20 px-6 max-w-7xl mx-auto animate-fade-in-up" style="animation-delay: 0.4s">
+    <h2 class="text-3xl md:text-4xl font-bold text-charcoal dark:text-white mb-10 text-center">
+        Explorar Categorías
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 md:h-[500px]">
+        {% for category in categories %}
+            <div class="bento-item relative group cursor-pointer transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl transform-gpu overflow-hidden rounded-2xl
+                {% if forloop.counter == 1 %}
+                    md:col-span-2 md:row-span-2 h-80 md:h-auto
+                {% elif forloop.counter == 2 %}
+                    md:col-span-1 md:row-span-2 h-64 md:h-auto
+                {% else %}
+                    md:col-span-1 md:row-span-1 h-48 md:h-auto
+                {% endif %}">
+                
+                <!-- Background IMG-->
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 transform-gpu" 
+                    style="background-image: url('{{category.image.url}}');">
+                </div>
+                
+                <!--Overlay Gradient-->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                
+                <!-- Content-->
+                <div class="absolute bottom-6 left-6 text-white">
+                    {% if forloop.counter == 1 %}
+                        <span class="text-sm font-bold bg-primary px-3 py-1 rounded-full mb-3 inline-block">Popular</span>
+                    {% endif %}
+                    
+                    <h3 class="font-bold font-serif leading-tight break-words overflow-hidden text-ellipsis
+                        {% if forloop.counter == 1 %}
+                            text-2xl md:text-4xl
+                        {% elif forloop.counter == 2 %}
+                            text-xl md:text-2xl
+                        {% else %}
+                            text-lg md:text-xl
+                        {% endif %}">
+                        {{ category.name }}
+                    </h3>
+
+                    <p class="text-gray-200 mt-2 text-sm">
+                        {% if category.recipe_count == 1 %}
+                            {{category.recipe_count}} Receta
+                            {% else %}
+                            {{category.recipe_count}} Recetas
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>

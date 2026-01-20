@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tasty Bites - Nuestra Comunidad</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#E67E22",
+                        "primary-hover": "#D35400",
+                        "warm-cream": "#FDF5E6",
+                        "charcoal": "#1A1A1A",
+                        "background-light": "#FFFFFF",
+                        "background-dark": "#121212",
+                        "soft-gray": "#F4F2F0",
+                        "text-main": "#181411",
+                        "text-sub": "#887463",
+                        "dark-card": "#1E1E1E",
+                        "dark-border": "#2A2A2A"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "serif": ["Noto Serif", "serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1.25rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        "soft": "0 10px 30px rgba(0,0,0,0.05)",
+                        "lift": "0 15px 35px rgba(0,0,0,0.1)"
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'slide-up-delayed': 'fadeInUp 0.8s ease-out 0.2s forwards',
+                        'slide-up-more-delayed': 'fadeInUp 0.8s ease-out 0.4s forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply font-display;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                @apply font-serif;
+            }
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-gray-200 antialiased selection:bg-primary/20 selection:text-primary transition-colors duration-300">
+<nav class="sticky top-0 z-50 w-full bg-white/90 dark:bg-background-dark/80 backdrop-blur-md border-b border-soft-gray dark:border-dark-border transition-colors duration-300">
+<div class="max-w-7xl mx-auto px-6 py-4">
+<div class="flex items-center justify-between">
+<a class="flex items-center gap-3 group" href="#">
+<div class="bg-primary/10 p-2 rounded-lg text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl">restaurant_menu</span>
+</div>
+<span class="text-xl font-bold tracking-tight text-charcoal dark:text-white font-serif">Tasty Bites</span>
+</a>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-text-main dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors" href="#">Inicio</a>
+<a class="text-text-main dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors" href="#">Recetas</a>
+<a class="text-text-main dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors" href="#">Blog</a>
+<a class="text-text-main dark:text-white text-sm font-bold text-primary transition-colors" href="#">Nosotros</a>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2.5 rounded-full hover:bg-soft-gray dark:hover:bg-dark-border transition-colors group" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-symbols-outlined block dark:hidden text-charcoal">dark_mode</span>
+<span class="material-symbols-outlined hidden dark:block text-yellow-400">light_mode</span>
+</button>
+<button class="hidden md:block px-5 py-2.5 text-sm font-bold text-text-main dark:text-white hover:text-primary transition-colors rounded-full">
+                    Inicia Sesión
+                </button>
+<button class="px-6 py-2.5 bg-primary hover:bg-primary-hover text-white text-sm font-bold rounded-full shadow-lg shadow-primary/30 transition-all transform hover:scale-105">
+                    Regístrate
+                </button>
+</div>
+</div>
+</div>
+</nav>
+<section class="relative w-full bg-warm-cream dark:bg-[#1A1815] py-20 md:py-32 overflow-hidden transition-colors duration-300" id="history">
+<div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+<div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-orange-200/20 rounded-full blur-3xl"></div>
+<div class="max-w-7xl mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+<div class="order-2 md:order-1 animate-fade-in-up">
+<div class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-bold mb-6">
+<span class="material-symbols-outlined text-sm">favorite</span>
+                Comunidad Global
+            </div>
+<h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-charcoal dark:text-white mb-6 leading-tight">
+                Nuestra <span class="italic text-primary">Historia</span>
+</h1>
+<p class="text-lg text-text-sub dark:text-gray-400 leading-relaxed mb-8 max-w-xl">
+                Nacimos de una idea rebelde: la cocina no debe tener reglas estrictas. Tasty Bites es el espacio donde los amantes del buen comer comparten sus secretos, experimentos y alegrías.
+            </p>
+<div class="flex gap-4">
+<button class="px-8 py-3 bg-charcoal dark:bg-primary hover:bg-black dark:hover:bg-primary-hover text-white font-bold rounded-full shadow-lg transition-all transform hover:-translate-y-1">
+                    Ver Video
+                </button>
+</div>
+</div>
+<div class="order-1 md:order-2 relative animate-slide-up-delayed opacity-0" style="animation-fill-mode: forwards;">
+<div class="relative rounded-2xl overflow-hidden shadow-lift rotate-2 hover:rotate-0 transition-transform duration-500">
+<img alt="Group of friends cooking together" class="w-full h-[500px] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKoBqxu_9xjYtPWCpiysLzAzcc2z4ysc8-EVATkV6mMhMii75F1pr9NLLidvZkXyM-ac53iZPExP0GfCXa747D-3eiNiP8dbVIDcz2aZ0fTNzdn5xUgA-OBG2Ixm4CYNzQm6fQ4tXND-R0y8cFXeVcHN9RcyoyYKzGwuVbhoHBt6E5Ts8XMduKdnWk7CsKjLNTsqwPN-IWNnG8QNBrlUKmYSgoKl5kL_USzDjFn_weUfsyF7COhofFZPBp8brozNIZGBk_CO2k7L4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+</div>
+<div class="absolute -bottom-6 -left-6 bg-white dark:bg-dark-card p-4 rounded-xl shadow-lg flex items-center gap-3 z-20 animate-bounce" style="animation-duration: 3s;">
+<div class="bg-orange-100 dark:bg-primary/20 p-2 rounded-full text-orange-600 dark:text-primary">
+<span class="material-symbols-outlined">sentiment_very_satisfied</span>
+</div>
+<div>
+<p class="text-xs text-gray-500 dark:text-gray-400 font-bold uppercase">Filosofía</p>
+<p class="text-sm font-bold text-charcoal dark:text-white">100% Placer</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="reveal py-20 px-6 max-w-7xl mx-auto bg-background-light dark:bg-background-dark transition-colors duration-300" id="mission">
+<div class="grid md:grid-cols-2 gap-16 items-center">
+<div class="relative">
+<div class="rounded-2xl overflow-hidden shadow-soft">
+<img alt="Fresh ingredients on a table" class="w-full h-[600px] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwtmZA_qMtGLFJWMy3K9kNBtYc3cSHd0QNx2-ANk-cfqj2gRRIx68nHup0PzwBmnho2G2Zwkqxk3QHByRO3Da2-IjwYKmypG70sO6ZupAKYYgzeDFHA0o5NucaD_6JBTlnc2NUWCWE5hdP4NWBCuWOk7aMxiC1HHmc5mYqFh6e4ZlW9pm4l550aq72XgDoXSWSf3YR3zm5cPA2vzj3gWzI4agORu25SfBrzJM3Whwqtc_Y5LFlP4zBnl3ATAvLGNUoMkVTOkAzxLY"/>
+</div>
+<div class="absolute -top-10 -right-10 w-40 h-40 bg-soft-gray dark:bg-dark-border rounded-full -z-10"></div>
+<div class="absolute -bottom-10 -left-10 w-32 h-32 bg-primary/10 rounded-full -z-10"></div>
+</div>
+<div>
+<span class="text-primary font-bold uppercase tracking-wider text-xs mb-2 block">Nuestra Misión</span>
+<h2 class="text-3xl md:text-4xl font-bold text-charcoal dark:text-white mb-6 leading-snug">Conectando a través del sabor y la creatividad</h2>
+<div class="space-y-6 text-text-sub dark:text-gray-400 text-lg leading-relaxed">
+<p>
+                    En Tasty Bites, creemos que las recetas son excusas deliciosas para conectar. Nuestra misión es crear la mesa digital más grande del mundo, donde compartir un plato significa compartir cultura, amor y creatividad.
+                </p>
+<p>
+                    Aquí no contamos calorías, contamos historias. Queremos inspirarte a mancharte las manos, a improvisar con lo que tienes en la nevera y a descubrir que el ingrediente más importante siempre es la pasión con la que cocinas.
+                </p>
+<blockquote class="border-l-4 border-primary pl-6 py-2 italic text-charcoal dark:text-white font-serif text-xl my-8">
+                    "No comemos para sobrevivir, comemos para ser felices."
+                </blockquote>
+<p>
+                    Fomentamos el uso de ingredientes frescos y locales porque simplemente saben mejor. Buscamos el placer auténtico de la comida real, preparada con cariño por personas reales como tú.
+                </p>
+</div>
+</div>
+</div>
+</section>
+<section class="reveal py-24 bg-soft-gray/50 dark:bg-dark-card/30 relative overflow-hidden transition-colors duration-300" id="values">
+<div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-700 to-transparent"></div>
+<div class="max-w-7xl mx-auto px-6 relative z-10">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<span class="text-primary font-bold uppercase tracking-wider text-xs mb-2 block">Manifiesto</span>
+<h2 class="text-3xl md:text-4xl font-bold text-charcoal dark:text-white mb-4">Lo que nos mueve</h2>
+<p class="text-text-sub dark:text-gray-400">Los principios que guían a nuestra comunidad de creadores.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<div class="bg-white dark:bg-dark-card p-8 rounded-xl shadow-sm border border-gray-100 dark:border-dark-border hover:shadow-lg hover:border-primary/20 transition-all duration-300 group">
+<div class="w-14 h-14 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center text-red-500 mb-6 group-hover:bg-red-500 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl">local_fire_department</span>
+</div>
+<h3 class="text-xl font-bold text-charcoal dark:text-white mb-3 font-serif">Sabor Explosivo</h3>
+<p class="text-text-sub dark:text-gray-400 leading-relaxed">
+                    Buscamos lo extraordinario en cada bocado. Si no te hace cerrar los ojos de placer, no está en nuestra lista de favoritos.
+                </p>
+</div>
+<div class="bg-white dark:bg-dark-card p-8 rounded-xl shadow-sm border border-gray-100 dark:border-dark-border hover:shadow-lg hover:border-primary/20 transition-all duration-300 group">
+<div class="w-14 h-14 bg-yellow-100 dark:bg-yellow-900/30 rounded-full flex items-center justify-center text-yellow-600 mb-6 group-hover:bg-yellow-600 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl">palette</span>
+</div>
+<h3 class="text-xl font-bold text-charcoal dark:text-white mb-3 font-serif">Creatividad Total</h3>
+<p class="text-text-sub dark:text-gray-400 leading-relaxed">
+                    La cocina es un laboratorio de ideas. Celebramos la improvisación, los toques personales y la valentía de probar cosas nuevas.
+                </p>
+</div>
+<div class="bg-white dark:bg-dark-card p-8 rounded-xl shadow-sm border border-gray-100 dark:border-dark-border hover:shadow-lg hover:border-primary/20 transition-all duration-300 group">
+<div class="w-14 h-14 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center text-green-600 mb-6 group-hover:bg-green-600 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl">public</span>
+</div>
+<h3 class="text-xl font-bold text-charcoal dark:text-white mb-3 font-serif">Comunidad Global</h3>
+<p class="text-text-sub dark:text-gray-400 leading-relaxed">
+                    Somos una familia unida por la mesa. Tu receta de domingo puede ser la inspiración para la cena de alguien al otro lado del mundo.
+                </p>
+</div>
+</div>
+</div>
+</section>
+<section class="reveal py-24 px-6 max-w-7xl mx-auto" id="founder">
+<div class="text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-bold text-charcoal dark:text-white mb-4">El Corazón de Tasty Bites</h2>
+<p class="text-text-sub dark:text-gray-400 max-w-2xl mx-auto">Comenzó con una visión, pero crece cada día gracias a ti.</p>
+</div>
+<div class="max-w-5xl mx-auto mb-20">
+<div class="bg-white dark:bg-dark-card rounded-2xl shadow-lift overflow-hidden border border-gray-100 dark:border-dark-border flex flex-col md:flex-row items-center">
+<div class="w-full md:w-2/5 h-80 md:h-[400px] relative overflow-hidden group">
+<img alt="Ana García" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtQI33eY9JTna42KWCn8lcR9U_kQhonQoAEFbGGdH43Z30v0ZKKqRLk7zIPSHZnmktHPeCQDyGwLf7-ODsccaI-IbKTfH3s1gJRFua4RQucm_3pj7o9UgJ_1hVVYmt1E9xT_xclXIunr0X-xBZ5D45zktLSD4z-C7vGplJjrxrYCsLa5PU5U-taX0KpK2EG3h0FgO7bTsz_ElHwD5LOVnr9EmbUpCA9hWADfLBLVL6T3-Oa0Ixxouhz3FhAMZ9Kow9wsJaEK285jA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+</div>
+<div class="w-full md:w-3/5 p-8 md:p-12 text-left">
+<span class="text-primary font-bold uppercase tracking-widest text-xs mb-2 block">El Origen</span>
+<h3 class="text-3xl font-bold text-charcoal dark:text-white font-serif mb-2">Ana García</h3>
+<p class="text-text-main dark:text-primary font-medium text-lg mb-6">Fundadora &amp; Visionaria</p>
+<p class="text-text-sub dark:text-gray-400 leading-relaxed text-lg mb-6">
+                    "Creé Tasty Bites porque estaba cansada de las dietas restrictivas y la comida aburrida. Quería un refugio digital donde lo único que importara fuera el sabor, la diversión y la comunidad. Mi sueño no era construir una empresa, sino organizar la cena compartida más grande del mundo."
+                </p>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-3xl">format_quote</span>
+<p class="text-sm font-bold text-charcoal dark:text-gray-200 italic">Hagamos del mundo un lugar más delicioso.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="reveal py-24 px-6 max-w-7xl mx-auto bg-warm-cream/30 dark:bg-white/5 rounded-3xl mb-24 transition-colors duration-300" id="heroes">
+<div class="text-center mb-12">
+<span class="bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-bold">
+            Nuestros Héroes
+        </span>
+<h3 class="text-2xl md:text-3xl font-bold text-charcoal dark:text-white mt-6 mb-4 font-serif">El verdadero equipo eres tú</h3>
+<p class="text-text-sub dark:text-gray-400 max-w-2xl mx-auto">
+            No tenemos chefs de élite ni directores corporativos. Nuestra plataforma vive gracias a apasionados cocineros caseros, exploradores de sabores y abuelas que comparten sus secretos.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+<div class="flex flex-col items-center text-center group">
+<div class="relative mb-6">
+<div class="w-40 h-40 rounded-full overflow-hidden shadow-soft border-4 border-white dark:border-dark-border group-hover:border-primary/20 transition-all duration-300">
+<img alt="Carlos Martínez" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGJV5CVHEjplGC5AI6QSJKEuwi5a4d9IDOojLm7L99WyIa35jANEcIHbaZwTqIeydGrm3hSkZTPGYJbQx5QIXM4b-qfmXpYX4tl4z08H1SLuB9agTXnUcTLZi0h-bXGF3TMdv_eBaeYF8_5HJg4Y7O_972iZS3uq7IkwcN8sOkUrW6X1oZmdm4S0MPsbdxHXapHMDSzcBA5ZvXLwItrlS4MMdlLvegoYkgfkEMNGKA6ToDbHQuJ55C2YId3D92tyx85ziCTLIBeQQ"/>
+</div>
+<div class="absolute bottom-1 right-1 bg-white dark:bg-dark-card p-1.5 rounded-full shadow-md text-primary">
+<span class="material-symbols-outlined text-sm">outdoor_grill</span>
+</div>
+</div>
+<h3 class="text-lg font-bold text-charcoal dark:text-white font-serif">Carlos M.</h3>
+<p class="text-primary font-medium text-xs mb-2 uppercase tracking-wide">Entusiasta del Fuego</p>
+<p class="text-text-sub dark:text-gray-400 text-sm px-4">"Compartiendo los secretos del asado perfecto desde mi jardín."</p>
+</div>
+<div class="flex flex-col items-center text-center group">
+<div class="relative mb-6">
+<div class="w-40 h-40 rounded-full overflow-hidden shadow-soft border-4 border-white dark:border-dark-border group-hover:border-primary/20 transition-all duration-300">
+<img alt="Sofía Rodríguez" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOB337wsk-5hfZAfAP1XPIGY9v4bdkP8xkr6JhurMOraK5tWiwolWpiK3JOOIj1D8aFcjCFCdk7KfTcP5hAHXteS6lLsdyYtpy8Dpy3mBwi0puEfmvubKOo89ryEFoiSKwlnbLC478ehzXeqUVyf8MwKlAlwV3MWfWR9KltrxEKfVhrjTjvwaWAKMvCTmlVKjYDu_W4YGTt_WA_k77rJ9kecxTJmrCjzJfEp62gdHm1d5JwSf3oMgyDVdleTVyJ1k-X0JF-oYFPD8"/>
+</div>
+<div class="absolute bottom-1 right-1 bg-white dark:bg-dark-card p-1.5 rounded-full shadow-md text-primary">
+<span class="material-symbols-outlined text-sm">cookie</span>
+</div>
+</div>
+<h3 class="text-lg font-bold text-charcoal dark:text-white font-serif">Sofía R.</h3>
+<p class="text-primary font-medium text-xs mb-2 uppercase tracking-wide">Amante de lo Dulce</p>
+<p class="text-text-sub dark:text-gray-400 text-sm px-4">"Mis domingos son de harina y azúcar. ¡Prueba mi tarta de manzana!"</p>
+</div>
+<div class="flex flex-col items-center text-center group">
+<div class="relative mb-6">
+<div class="w-40 h-40 rounded-full overflow-hidden shadow-soft border-4 border-white dark:border-dark-border group-hover:border-primary/20 transition-all duration-300">
+<img alt="David Chen" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxNbXTzB0HCIzI7SPuuiPg8c74IE_p0RFJA8MxSQQ2wegTCKzLNST_UjRT6GLAjyeaBTTn614bWBU4YykvsNPDxRMrrOHYMXqO4pavrYntXg2rkAOi0M7An0XvBQTUBqKnb68RKoYjK7t7LRomRadDB2MxfS17egnEEhY4a-4XfWGpJR4U8CCI4kZ_lKfyBz0wyB4dko491SSLpiTbgL-e7OkqsPIzg1fhIuLDOpcqV2ZMIyYK2Lm85psbqC6cp93HEXFd690-tCg"/>
+</div>
+<div class="absolute bottom-1 right-1 bg-white dark:bg-dark-card p-1.5 rounded-full shadow-md text-primary">
+<span class="material-symbols-outlined text-sm">flight</span>
+</div>
+</div>
+<h3 class="text-lg font-bold text-charcoal dark:text-white font-serif">David C.</h3>
+<p class="text-primary font-medium text-xs mb-2 uppercase tracking-wide">Explorador de Sabores</p>
+<p class="text-text-sub dark:text-gray-400 text-sm px-4">"Viajo por el mundo buscando el mejor street food para recrearlo en casa."</p>
+</div>
+</div>
+</section>
+<footer class="bg-charcoal dark:bg-[#0A0A0A] text-white pt-16 pb-8 border-t border-gray-800 dark:border-dark-border transition-colors duration-300">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+<div class="col-span-1 md:col-span-1">
+<a class="flex items-center gap-2 mb-6" href="#">
+<span class="material-symbols-outlined text-primary text-3xl">restaurant_menu</span>
+<span class="text-2xl font-bold font-serif">Tasty Bites</span>
+</a>
+<p class="text-gray-400 text-sm leading-relaxed mb-6">
+                    Tu destino diario para inspiración culinaria. Recetas probadas, ingredientes frescos y una comunidad apasionada.
+                </p>
+<div class="flex gap-4">
+<a class="text-gray-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">photo_camera</span></a>
+<a class="text-gray-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+<a class="text-gray-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+</div>
+</div>
+<div>
+<h4 class="text-lg font-bold mb-6 font-serif">Explorar</h4>
+<ul class="space-y-3 text-gray-400 text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">Recetas Populares</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Nuevos Lanzamientos</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Blog Culinario</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Guías de Cocina</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-lg font-bold mb-6 font-serif">Compañía</h4>
+<ul class="space-y-3 text-gray-400 text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">Sobre Nosotros</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Carreras</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Prensa</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contacto</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-lg font-bold mb-6 font-serif">Boletín</h4>
+<p class="text-gray-400 text-sm mb-4">Recibe las mejores recetas cada semana.</p>
+<form class="flex flex-col gap-2">
+<input class="bg-gray-800 dark:bg-dark-border border-none rounded-lg px-4 py-2 text-white placeholder:text-gray-500 focus:ring-1 focus:ring-primary" placeholder="Tu correo electrónico" type="email"/>
+<button class="bg-primary hover:bg-primary-hover text-white font-bold py-2 rounded-lg transition-colors text-sm" type="submit">
+                        Suscribirse
+                    </button>
+</form>
+</div>
+</div>
+<div class="border-t border-gray-800 dark:border-dark-border pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+<p>© 2023 Tasty Bites Inc. Todos los derechos reservados.</p>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a class="hover:text-white transition-colors" href="#">Privacidad</a>
+<a class="hover:text-white transition-colors" href="#">Términos</a>
+<a class="hover:text-white transition-colors" href="#">Cookies</a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+        for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            var elementVisible = 150;
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add("active");
+            }
+        }
+    }
+    window.addEventListener("scroll", reveal);
+    window.addEventListener("load", reveal);
+</script>
+
+</body></html>

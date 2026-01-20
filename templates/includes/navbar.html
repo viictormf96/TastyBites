@@ -1,7 +1,7 @@
 <nav class="sticky top-0 z-50 w-full glass-header">
   <div class="max-w-7xl mx-auto px-6 py-4">
     <div class="flex items-center justify-between">
-      <a class="flex items-center gap-3 group" href="#">
+      <a class="flex items-center gap-3 group" href="{% url "core:index" %}">
         <div
           class="bg-primary/10 p-2 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:rotate-12"
         >
@@ -15,10 +15,10 @@
         >
       </a>
       <div class="hidden md:flex items-center gap-12">
-        <a class="nav-link" href="#">Inicio</a>
+        <a class="nav-link" href="{% url "core:index" %}">Inicio</a>
         <a class="nav-link" href="#">Recetas</a>
         <a class="nav-link" href="#">Categorias</a>
-        <a class="nav-link" href="#">Nosotros</a>
+        <a class="nav-link" href="{% url "core:about" %}">Nosotros</a>
       </div>
       <div class="flex items-center gap-2">
         <div class="flex items-center gap-4">
