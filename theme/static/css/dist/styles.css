@@ -1116,6 +1116,10 @@ h1,
   border-radius: 1.5rem;
 }
 
+.rounded {
+  border-radius: 0.5rem;
+}
+
 .rounded-t-lg {
   border-top-left-radius: 1.25rem;
   border-top-right-radius: 1.25rem;
@@ -1325,6 +1329,11 @@ h1,
   padding-bottom: 1rem;
 }
 
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
 .pb-24 {
   padding-bottom: 6rem;
 }
@@ -1451,6 +1460,10 @@ h1,
 
 .tracking-widest {
   letter-spacing: 0.1em;
+}
+
+.tracking-wide {
+  letter-spacing: 0.025em;
 }
 
 .text-blue-500 {
