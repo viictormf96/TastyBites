@@ -24,7 +24,8 @@ module.exports = {
                 "background-light": "#FFFFFF",
                 "soft-gray": "#F4F2F0",
                 "text-main": "#181411",
-                "text-sub": "#887463"
+                "text-sub": "#887463",
+                "dark-border": "#2A2A2A"
             },
             fontFamily: {
                 "display": ["Inter", "sans-serif"],
@@ -51,6 +52,8 @@ module.exports = {
             },
             animation: {
                 'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                'slide-up-delayed': 'fadeInUp 0.8s ease-out 0.2s forwards',
+                'slide-up-more-delayed': 'fadeInUp 0.8s ease-out 0.4s forwards',
             }
         },
     },

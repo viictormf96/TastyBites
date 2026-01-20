@@ -68,3 +68,14 @@
 .glass-header {
     @apply bg-white/70 dark:bg-dark-bg/70 backdrop-blur-md border-b border-white/20 dark:border-white/5;
 }
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
