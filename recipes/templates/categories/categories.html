@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Tasty Bites - Categorias{% endblock%}
+{% block content %}
+
+    {% include "categories/includes/header_categories.html" %}
+    {% include "categories/includes/categories_cards.html" %}
+
+{% endblock content %}
+
+{% block extra_js %}
+    <script src="{% static 'recipes/js/categories.js' %}"></script>
+{% endblock extra_js %}
+

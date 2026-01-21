@@ -83,3 +83,59 @@
     opacity: 1;
     transform: translateY(0);
 }
+
+.card-recipe {
+    @apply relative overflow-hidden isolate bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-500 hover:shadow-2xl flex flex-col h-full;backface-visibility: hidden;
+                transform: translateZ(0);
+                will-change: transform, opacity;
+                opacity: 1;
+}
+
+.btn-action {
+    @apply rounded-full bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-6 py-2.5 font-bold text-sm transition-all hover:bg-[#E67E22] dark:hover:bg-[#E67E22] dark:hover:text-white;
+}
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: reveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes reveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.list-view {
+    @apply grid-cols-1 !important;
+}
+
+.list-view .card-recipe {
+    @apply flex-row items-stretch min-h-[240px];
+}
+
+.list-view .card-recipe .card-img-container {
+    @apply w-1/3 h-auto min-h-full;
+}
+
+.list-view .card-recipe .card-content {
+    @apply w-2/3 text-left p-8 flex flex-col justify-between items-start;
+}
+
+.list-view .card-recipe .card-content h3 {
+    @apply text-2xl text-left;
+}
+
+.list-view .card-recipe .card-content p {
+    @apply line-clamp-3 text-base text-left mb-4;
+}
+
+.list-view .card-recipe .card-stats {
+    @apply w-full;
+}
+
+.active-view-btn {
+    @apply bg-[#E67E22] text-white !important;
+}
