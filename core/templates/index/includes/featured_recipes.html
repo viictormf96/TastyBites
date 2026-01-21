@@ -38,7 +38,7 @@
           <div class="pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between mt-auto">
             <div class="flex items-center gap-2">
               <img alt="Chef avatar" class="w-8 h-8 rounded-full object-cover border border-white dark:border-white/10 shadow-sm" src="{{recipe.user.profile_picture.url}}" />
-              <span class="text-xs font-medium text-text-sub dark:text-gray-500">Chef {{recipe.user.first_name}} {{recipe.user.last_name}}</span>
+              <span class="text-xs font-medium text-text-sub dark:text-gray-500">Chef {{recipe.user.first_name}} {{recipe.user.last_name|slice:":1"}}.</span>
             </div>
             <a class="recipe-card-btn" href="#">Ver receta</a>
           </div>
