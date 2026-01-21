@@ -15,10 +15,19 @@
         >
       </a>
       <div class="hidden md:flex items-center gap-12">
-        <a class="nav-link" href="{% url "core:index" %}">Inicio</a>
+        <a href="{% url "core:index" %}"
+          class="nav-link {% if request.resolver_match.url_name == "index" %}active{% endif %}">
+          Inicio
+        </a>
         <a class="nav-link" href="#">Recetas</a>
-        <a class="nav-link" href="#">Categorias</a>
-        <a class="nav-link" href="{% url "core:about" %}">Nosotros</a>
+        <a href="{% url "recipes:categories" %}"
+          class="nav-link {% if request.resolver_match.url_name == "categories" %}active{% endif %}">
+        Categorías
+        </a>
+        <a href="{% url "core:about" %}"
+          class="nav-link {% if request.resolver_match.url_name == "about" %}active{% endif %}">
+          Nosotros
+        </a>
       </div>
       <div class="flex items-center gap-2">
         <div class="flex items-center gap-4">

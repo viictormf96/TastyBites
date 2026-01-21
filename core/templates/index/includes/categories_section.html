@@ -1,7 +1,14 @@
 <section class="py-20 px-6 max-w-7xl mx-auto animate-fade-in-up" style="animation-delay: 0.4s">
-    <h2 class="text-3xl md:text-4xl font-bold text-charcoal dark:text-white mb-10 text-center">
-        Explorar Categorías
-    </h2>
+    <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-charcoal dark:text-white mb-4">
+            Explorar Categorías
+        </h2>
+        <a class="inline-flex items-center gap-1 text-primary font-bold hover:gap-2 transition-all hover:text-primary-hover"
+        href="#">
+        Ver todas
+        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </a>
+    </div>
     <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 md:h-[500px]">
         {% for category in categories %}
             <div class="bento-item relative group cursor-pointer transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl transform-gpu overflow-hidden rounded-2xl

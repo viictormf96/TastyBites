@@ -23,14 +23,14 @@ from django.conf.urls.static import static
 urlpatterns = [
     path("admin/", admin.site.urls),
 
-    # Accounts (login, logout, register, passwords reset)
-    path("accounts/", include("accounts.urls")),
-
-    # Recipes (recipes, categories)
-    path("recipes/", include("recipes.urls")),
-
     # Core (static pages)
     path("", include("core.urls")),
+
+    # Recipes (recipes, categories)
+    path("", include("recipes.urls")),
+
+    # Accounts (login, logout, register, passwords reset)
+    path("accounts/", include("accounts.urls")),
     
 ]
 

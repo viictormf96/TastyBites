@@ -1,20 +1,13 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView
 from django.contrib.auth import get_user_model
 from django.db.models import Count
 from recipes.models import Recipe, Category
 
 User = get_user_model()
 
-#BASE CLASS
-class RecipeListBaseView(ListView):
-    #List and paginator functionality. All the views inheritance form this one to reuse the config.
-    model = Recipe
-    context_object_name = "recipes" #Object name in the template
-    paginate_by = 10
-
 #INDEX / MAIN CLASS (URL: /)
-class IndexDashboardView(RecipeListBaseView):
+class IndexDashboardView(TemplateView):
     template_name = "index/index.html"
 
     def get_context_data(self, **kwargs):
@@ -32,7 +25,7 @@ class IndexDashboardView(RecipeListBaseView):
         ).order_by(
             "-recipe_count",
             "name"
-        )
+        )[:4]
 
         return context
 
