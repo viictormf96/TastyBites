@@ -30,6 +30,10 @@
     @apply w-full;
 }
 
+.nav-link.active {
+    @apply text-primary dark:text-primary;
+}
+
 .login-link {
     @apply relative px-2 py-2 text-sm font-bold text-text-main dark:text-gray-100 hover:text-primary transition-all duration-300;
 }
