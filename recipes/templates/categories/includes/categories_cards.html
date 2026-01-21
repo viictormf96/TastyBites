@@ -2,7 +2,7 @@
     <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
         <div>
             <h2 class="text-3xl font-bold font-serif mb-2 text-center md:text-left">Explorar por Tipo</h2>
-            <p class="text-zinc-500 dark:text-zinc-400">Mostrando 8 categorías populares</p>
+            <p class="text-zinc-500 dark:text-zinc-400">Mostrando <strong>{{categories_list.count}}</strong> categorías populares</p>
         </div>
         <div
             class="flex gap-2 bg-zinc-100 dark:bg-zinc-900 p-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800">
@@ -19,189 +19,32 @@
         </div>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 transition-all duration-500" id="recipe-container">
-        <article class="card-recipe scroll-reveal group" style="animation-delay: 0.1s">
-            <div class="relative h-64 overflow-hidden card-img-container transition-all duration-500 shrink-0">
-                <img alt="Entrantes"
-                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpaVV2QsiJu90BnfiDtNCLNUatVXCp1qQhfE8k59QXk6dE3fnrfaBUFx2W59ed94B6Wad6MCCVl_Rj3Q2idXei3C0Obamr8r8ij4pU-RWLCdEc9uyb1ejqfpujzx0ZpovsU5sgJTRGc_noWU6H5jWxrhckcfeqK7pEs9qe9A1jDlqtVxLCZvW4cY6yC9bOayCSylZFbz50SgL7LxuxUGFgitsRDrxIFhZIADSHOYUUIBXlQoESuucO5lYntWh_CtoYBeoCsKlfo5k" />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                <div
-                    class="absolute top-4 right-4 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm z-10">
-                    <span class="material-symbols-outlined text-orange-500 text-sm fill-1">favorite</span>
-                    <span class="text-xs font-bold dark:text-white">98%</span>
+        {% for category in categories_list  %}
+            <article class="card-recipe scroll-reveal group" style="animation-delay: 0.1s">
+                <div class="relative h-64 overflow-hidden card-img-container transition-all duration-500 shrink-0">
+                    <img alt="Entrantes"
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        src="{{category.image.url}}" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div
+                        class="absolute top-4 right-4 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm z-10">
+                        <span class="material-symbols-outlined text-orange-500 text-sm fill-1">favorite</span>
+                        <span class="text-xs font-bold dark:text-white">{{category.total_favorites}}405</span>
+                    </div>
                 </div>
-            </div>
-            <div class="p-6 text-center card-content transition-all duration-500 flex flex-col flex-grow">
-                <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-primary transition-colors line-clamp-1">
-                    Entrantes</h3>
-                <p class="text-zinc-500 dark:text-zinc-400 text-sm mb-6 line-clamp-2">Bocados perfectos para abrir el
-                    apetito: desde elegantes bruschettas hasta tapas gourmet.</p>
-                <div class="flex items-center justify-between card-stats w-full mt-auto">
-                    <span class="text-xs font-bold text-zinc-400 uppercase tracking-widest">45 RECETAS</span>
-                    <button class="btn-action">Explorar</button>
+                <div class="p-6 text-center card-content transition-all duration-500 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-primary transition-colors">
+                        {{category.name}}
+                    </h3>
+                    <p class="text-zinc-500 dark:text-zinc-400 text-sm mb-6 line-clamp-2">
+                        {{category.description }}
+                    </p>
+                    <div class="flex items-center justify-between card-stats w-full mt-auto">
+                        <span class="text-xs font-bold text-zinc-400 uppercase tracking-widest">{{category.total_recipes}} {% if category.total_recipes == 1 %}RECETA{% else %}RECETAS{% endif %}</span>
+                        <button class="btn-action">Explorar</button>
+                    </div>
                 </div>
-            </div>
-        </article>
-        <article class="card-recipe scroll-reveal group" style="animation-delay: 0.2s">
-            <div class="relative h-64 overflow-hidden card-img-container transition-all duration-500 shrink-0">
-                <img alt="Desayunos"
-                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUDJv3qd3cBTP_hO8TtFRl4mPg-IIcLyzzq_YBUNHd9bS6RF5FgTpGKXp8VH91Pu4JfxcKA8lnxjYbipMCV2tVYxFuG8wiABvzLbdHCcdjphM_koKXHdNgbMdtILJ6jgp1SUg4VUEjm9ZicjQJcO-ieNsEc0jso6-0pqmXixRIkC8yOAUs6Z50EXOmSJrw4VRlXffn_hsYRuG_nlSIIF9YwAlgNRkKmb7musf4hsoKg9f28cQowfWG3rHhRg5VBc-4eiQMnskUyH0" />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                <div
-                    class="absolute top-4 right-4 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm z-10">
-                    <span class="material-symbols-outlined text-orange-500 text-sm fill-1">favorite</span>
-                    <span class="text-xs font-bold dark:text-white">95%</span>
-                </div>
-            </div>
-            <div class="p-6 text-center card-content transition-all duration-500 flex flex-col flex-grow">
-                <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-primary transition-colors line-clamp-1">
-                    Desayunos</h3>
-                <p class="text-zinc-500 dark:text-zinc-400 text-sm mb-6 line-clamp-2">Energía pura para empezar el día.
-                    Fluffy pancakes con frutos frescos y miel.</p>
-                <div class="flex items-center justify-between card-stats w-full mt-auto">
-                    <span class="text-xs font-bold text-zinc-400 uppercase tracking-widest">120 RECETAS</span>
-                    <button class="btn-action">Explorar</button>
-                </div>
-            </div>
-        </article>
-        <article class="card-recipe scroll-reveal group" style="animation-delay: 0.3s">
-            <div class="relative h-64 overflow-hidden card-img-container transition-all duration-500 shrink-0">
-                <img alt="Platos principales"
-                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsSfB5NbUZKpFShNCFdrD1o3rMJnJuRgCIpLiaxYEjbiMEIaegCPwbs9qmAnwvYifzNmFGbmaXae5L2LL-ysO9uBWGKpK4akNUdo0tNFcFYmFOZRxFEbo30N0xXzd6yoxCIxZ7crCLZQa8bPnE2A8KpAhVkOKlFqFj1h1qiv6MsrItE5WKxt-YTeWbQU_7XJrpAPoMmNloM4kPMjBcLPeLaBDGLT3SKFuMDfr7eLzFJnm3RRhGPKfTsqJcJQLoG3Jd7sHtfaQ_IRs" />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                <div
-                    class="absolute top-4 right-4 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm z-10">
-                    <span class="material-symbols-outlined text-orange-500 text-sm fill-1">favorite</span>
-                    <span class="text-xs font-bold dark:text-white">99%</span>
-                </div>
-            </div>
-            <div class="p-6 text-center card-content transition-all duration-500 flex flex-col flex-grow">
-                <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-primary transition-colors line-clamp-1">
-                    Platos principales</h3>
-                <p class="text-zinc-500 dark:text-zinc-400 text-sm mb-6 line-clamp-2">El corazón de tu mesa. Pastas
-                    mediterráneas vibrantes y carnes asadas tradicionales.</p>
-                <div class="flex items-center justify-between card-stats w-full mt-auto">
-                    <span class="text-xs font-bold text-zinc-400 uppercase tracking-widest">230 RECETAS</span>
-                    <button class="btn-action">Explorar</button>
-                </div>
-            </div>
-        </article>
-        <article class="card-recipe scroll-reveal group" style="animation-delay: 0.4s">
-            <div class="relative h-64 overflow-hidden card-img-container transition-all duration-500 shrink-0">
-                <img alt="Postres"
-                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCePgI93DNGMYdT7icuPIgerxq_MFgs9U3OKw_5sEdcU8HuoHX9TEdJypGdNpBzR0HtlFM-zzbKIYRJvAcUzq2qyaBmyqeB2_huE8DjiAXK99AaUKeBz3_XebQfiab2JDRirlj6AI4PzP3dVBZtleWew-LtJ1raX-TcttxCgs4-jnBGkhNAi-3ToYmDtJuDzksUkmAuekhBVMnuz7i6kOb3ZFx2tytPCi19CM1Nm6v5FSU-DDvXXBAaOcvNIGL5ieA9qEQy_QgHupo" />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                <div
-                    class="absolute top-4 right-4 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm z-10">
-                    <span class="material-symbols-outlined text-orange-500 text-sm fill-1">favorite</span>
-                    <span class="text-xs font-bold dark:text-white">100%</span>
-                </div>
-            </div>
-            <div class="p-6 text-center card-content transition-all duration-500 flex flex-col flex-grow">
-                <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-primary transition-colors line-clamp-1">
-                    Postres</h3>
-                <p class="text-zinc-500 dark:text-zinc-400 text-sm mb-6 line-clamp-2">La nota dulce final. Decadentes
-                    lava cakes y tartas de frutas de estación.</p>
-                <div class="flex items-center justify-between card-stats w-full mt-auto">
-                    <span class="text-xs font-bold text-zinc-400 uppercase tracking-widest">85 RECETAS</span>
-                    <button class="btn-action">Explorar</button>
-                </div>
-            </div>
-        </article>
-        <article class="card-recipe scroll-reveal group" style="animation-delay: 0.5s">
-            <div class="relative h-64 overflow-hidden card-img-container transition-all duration-500 shrink-0">
-                <img alt="Bebidas"
-                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCn_T2kxt-pVCcs4mkAw4J67fHQVh0IzhJmR0nxA7Skn1XiOnh2ujzei9uROa6sq56y1IPu3T_CUi81yKA_UrAkdf594OhlsuTb9UDu0xJz-JlPxYC850xedLbdJg0OHjtk84VwSQIT4QBTmslF22oI26bUlhcX9slRLLArE4eTmwT8CFGWdj2pSpTvy90XltoTNwQBPhGKCyFbeEhUqv-RH07m7f-V6HtYEhAFtWSIKmyOLgZLfEwXVZK1D1DeNubtRv4C8mEEcfg" />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                <div
-                    class="absolute top-4 right-4 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm z-10">
-                    <span class="material-symbols-outlined text-orange-500 text-sm fill-1">favorite</span>
-                    <span class="text-xs font-bold dark:text-white">92%</span>
-                </div>
-            </div>
-            <div class="p-6 text-center card-content transition-all duration-500 flex flex-col flex-grow">
-                <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-primary transition-colors line-clamp-1">
-                    Bebidas</h3>
-                <p class="text-zinc-500 dark:text-zinc-400 text-sm mb-6 line-clamp-2">Cócteles brillantes y aguas
-                    infusionadas refrescantes con luz natural.</p>
-                <div class="flex items-center justify-between card-stats w-full mt-auto">
-                    <span class="text-xs font-bold text-zinc-400 uppercase tracking-widest">62 RECETAS</span>
-                    <button class="btn-action">Explorar</button>
-                </div>
-            </div>
-        </article>
-        <article class="card-recipe scroll-reveal group" style="animation-delay: 0.6s">
-            <div class="relative h-64 overflow-hidden card-img-container transition-all duration-500 shrink-0">
-                <img alt="Panes y masa"
-                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6Y0cM-o-RxQfJxkQ0wtcAtPbrzvne74BTG-2dtkXxQ6efmzUKQRlOZCT2uCKWfQkOxs6i5u4Z3zWJZ5nuQzScO0DD2Z7xrVxymvN104nC7_Z7ZP40RwMojkvjlpdYZhLjtDPDiCZ4oo0hiPDVbzvhrvH91cTClIgr_ctzGLQbNZyZSfNkVDFN-3vm2mQHhlHAoXMfIYjx2R6gaGFE8276lFlNIGLpnHBVVzBQhVPa6qvz_-AG2HxhUmTfA_MG7AinB24c-Ukl2Ds" />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                <div
-                    class="absolute top-4 right-4 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm z-10">
-                    <span class="material-symbols-outlined text-orange-500 text-sm fill-1">favorite</span>
-                    <span class="text-xs font-bold dark:text-white">96%</span>
-                </div>
-            </div>
-            <div class="p-6 text-center card-content transition-all duration-500 flex flex-col flex-grow">
-                <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-primary transition-colors line-clamp-1">
-                    Panes y masa</h3>
-                <p class="text-zinc-500 dark:text-zinc-400 text-sm mb-6 line-clamp-2">El arte de la masa madre. Panes
-                    artesanales rústicos y masas crujientes.</p>
-                <div class="flex items-center justify-between card-stats w-full mt-auto">
-                    <span class="text-xs font-bold text-zinc-400 uppercase tracking-widest">54 RECETAS</span>
-                    <button class="btn-action">Explorar</button>
-                </div>
-            </div>
-        </article>
-        <article class="card-recipe scroll-reveal group" style="animation-delay: 0.7s">
-            <div class="relative h-64 overflow-hidden card-img-container transition-all duration-500 shrink-0">
-                <img alt="Salsas y acompañantes"
-                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEAPxGLzSTq4AGzKNu4ZhnJeLFIAAKCdH1pUFE0TJqDtC54g5qOWMzLKZjz6qkVn6e8Tflz7TtIU6mvJHGVMOYsi03MCS3yCkmz8RzwkeYaf_bTlQY54KdIaPV_HcjNVHi9d0bSgD0x1lwVd5Ml7Nk62JdawlMNMP_LK73H9qFqh51ScU__ZjT6r76sq-0-kXH45V6K5N0rHaSbaqOVTKQ2vevAclvx0JA580RT1iAZfqPLhRp00TCcm7eBooN4nPPZcEDjRYHwkU" />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                <div
-                    class="absolute top-4 right-4 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm z-10">
-                    <span class="material-symbols-outlined text-orange-500 text-sm fill-1">favorite</span>
-                    <span class="text-xs font-bold dark:text-white">94%</span>
-                </div>
-            </div>
-            <div class="p-6 text-center card-content transition-all duration-500 flex flex-col flex-grow">
-                <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-primary transition-colors line-clamp-1">
-                    Salsas y acompañantes</h3>
-                <p class="text-zinc-500 dark:text-zinc-400 text-sm mb-6 line-clamp-2">Hummus con toppings vibrantes y
-                    salsas ricas para elevar cualquier plato principal.</p>
-                <div class="flex items-center justify-between card-stats w-full mt-auto">
-                    <span class="text-xs font-bold text-zinc-400 uppercase tracking-widest">78 RECETAS</span>
-                    <button class="btn-action">Explorar</button>
-                </div>
-            </div>
-        </article>
-        <article class="card-recipe scroll-reveal group" style="animation-delay: 0.8s">
-            <div class="relative h-64 overflow-hidden card-img-container transition-all duration-500 shrink-0">
-                <img alt="Guarniciones"
-                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVSYHNnDQout3NE-yVQ3LA7pSjfUYchv24at5mH_QKIj_BmWQIRFceHdbTDwJ8zpKPtzNYryhUhPIXPD_pjdRzEXy6Uoc0GSGmt3UwPzBfTkMIBsjpOKS7GEOCv-a-kJ4zFZc5F8eyTC4j-7K-cggI3KTzeDiD1Xe9gjZbG4_cjVu__zkDTupxGhRxbVoX_ZmwRj5aOiGgHEdzlW1AldfepYozZCEyj2RHCen-ofNLQXD8JnKZnYFkZWuPyQgfmW85d60Thv1Jq9U" />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                <div
-                    class="absolute top-4 right-4 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm z-10">
-                    <span class="material-symbols-outlined text-orange-500 text-sm fill-1">favorite</span>
-                    <span class="text-xs font-bold dark:text-white">93%</span>
-                </div>
-            </div>
-            <div class="p-6 text-center card-content transition-all duration-500 flex flex-col flex-grow">
-                <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-primary transition-colors line-clamp-1">
-                    Guarniciones</h3>
-                <p class="text-zinc-500 dark:text-zinc-400 text-sm mb-6 line-clamp-2">Zanahorias glaseadas con miel y
-                    ensaladas de hierbas frescas y vibrantes.</p>
-                <div class="flex items-center justify-between card-stats w-full mt-auto">
-                    <span class="text-xs font-bold text-zinc-400 uppercase tracking-widest">92 RECETAS</span>
-                    <button class="btn-action">Explorar</button>
-                </div>
-            </div>
-        </article>
+            </article>
+        {% endfor %}
     </div>
 </section>
