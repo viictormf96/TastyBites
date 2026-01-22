@@ -13,20 +13,25 @@
             modernas.
         </p>
         <div class="max-w-xl mx-auto mb-8">
-            <div
+            <form
+                method='GET'
+                action={% url "recipes:search_categories" %}
                 class="bg-white dark:bg-dark-card p-2 rounded-full shadow-lift flex items-center border border-gray-100 dark:border-white/10 focus-within:border-primary/50 transition-colors">
                 <div class="pl-4 text-text-sub dark:text-gray-400">
                     <span class="material-symbols-outlined">search</span>
                 </div>
                 <input
+                    type="text"
+                    name="q"
                     class="w-full border-none bg-transparent focus:ring-0 text-text-main dark:text-white placeholder:text-gray-400 font-medium px-4 h-12"
-                    placeholder="Busca Categorias (ej. Desayunos, Postres)..." type="text" />
+                    value="{{query|default:""}}"
+                    placeholder="Busca Categorias (ej. Desayunos, Postres)..."/>
                 <button
                     class="bg-primary hover:bg-primary-hover text-white rounded-full p-3 md:px-8 md:py-3 font-bold text-sm transition-all flex items-center gap-2 shadow-lg shadow-primary/10">
                     <span class="hidden md:inline">Buscar</span>
                     <span class="material-symbols-outlined text-lg md:hidden">arrow_forward</span>
                 </button>
-            </div>
+            </form>
         </div>
     </div>
 </section>

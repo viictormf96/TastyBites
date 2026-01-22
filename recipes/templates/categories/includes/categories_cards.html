@@ -2,7 +2,9 @@
     <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
         <div>
             <h2 class="text-3xl font-bold font-serif mb-2 text-center md:text-left">Explorar por Tipo</h2>
-            <p class="text-zinc-500 dark:text-zinc-400">Mostrando <strong>{{categories_list.count}}</strong> categorías populares</p>
+            <p class="text-zinc-500 dark:text-zinc-400">
+                Mostrando <strong>{{ categories_list|length }}</strong> {% if categories_list|length == 1 %}Categoría{% else %}categorías{% endif %}
+            </p>
         </div>
         <div
             class="flex gap-2 bg-zinc-100 dark:bg-zinc-900 p-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800">
@@ -45,6 +47,12 @@
                     </div>
                 </div>
             </article>
+        {% empty%}
+             <div class="col-span-full py-20 text-center">
+                <span class="material-symbols-outlined text-6xl text-zinc-300 mb-4">search_off</span>
+                <p class="text-xl text-zinc-500">No encontramos resultados para "{{ query }}"</p>
+                <a href="{% url 'recipes:categories' %}" class="text-primary font-bold mt-4 inline-block">Ver todas las categorías</a>
+            </div>
         {% endfor %}
     </div>
 </section>
