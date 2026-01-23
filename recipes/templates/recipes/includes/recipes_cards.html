@@ -1,0 +1,100 @@
+<section class="flex-grow bg-soft-gray/30 py-12 bg-background-light dark:bg-dark-bg animate-fade-in-up">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500" id="recipe-container">
+      {% for recipe in recipes_list  %}
+      <article
+        class="recipe-card bg-white rounded-lg dark:bg-dark-card shadow-soft group border border-gray-50 dark:border-white/5 h-full flex flex-col transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+          <div class="relative h-64 overflow-hidden rounded-t-lg">
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+              style="background-image: url('{{recipe.image.url}}');"></div>
+            <div
+              class="absolute top-4 left-4 bg-primary text-white px-2 py-1 rounded text-xs font-bold uppercase tracking-wide">
+              {{recipe.difficulty.name}}
+            </div>
+            <button
+              class="absolute top-4 right-4 bg-white/90 dark:bg-dark-bg/80 p-2 rounded-full text-gray-400 hover:text-red-500 transition-colors shadow-sm">
+              <span class="material-symbols-outlined block">favorite</span>
+            </button>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3
+              class="text-xl font-bold text-charcoal dark:text-white mb-2 font-serif group-hover:text-primary transition-colors">
+              {{recipe.name}}
+            </h3>
+            <div class="flex items-center gap-2 mb-3">
+              <div class="flex items-center gap-2">
+                <img
+                  class="w-8 h-8 rounded-full object-cover border border-white dark:border-white/10 shadow-sm"
+                  src="{{recipe.user.profile_picture.url}}" />
+                <span class="text-xs font-medium text-text-sub dark:text-gray-500">Chef {{recipe.user.first_name}}
+                  {{recipe.user.last_name|slice:":1"}}.</span>
+              </div>
+            </div>
+            <p class="text-text-sub dark:text-gray-400 text-sm line-clamp-2 mb-4 flex-grow">
+              {{recipe.description}}
+            </p>
+            <div class="flex items-center justify-between text-xs text-text-sub border-t border-gray-100 pt-4 mb-4">
+              <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-primary text-base">schedule</span>
+                <span class="dark:text-gray-400">{{recipe.cooking_time}} min</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-primary text-base">local_fire_department</span>
+                <span class="dark:text-gray-400">{{recipe.calories}} kcal</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-primary text-base fill-current">star</span>
+                <span class="dark:text-gray-400">{{recipe.total_favorites}}</span>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2 mb-5">
+              <span class="px-2 py-1 bg-gray-100 rounded text-xs text-text-sub">{{recipe.category.name}}</span>
+              {% for subcategory in recipe.subcategories.all|slice:":2"   %}
+                <span class="px-2 py-1 bg-gray-100 rounded text-xs text-text-sub">{{subcategory.name}}</span>
+              {% endfor %}
+              {% with total_subs=recipe.subcategories.count %}
+              {% if total_subs > 3 %}
+                <span class="px-2 py-1 bg-gray-100 rounded text-xs text-text-sub">+{{ total_subs|add:"-2"}}</span>
+              {% endif %}
+              {% endwith %}
+            </div>
+            <a class="recipe-card-btn w-full mt-auto block text-center bg-charcoal hover:bg-primary text-white py-2.5 rounded-lg text-sm font-bold transition-colors"
+              href="#">
+              Ver Receta
+            </a>
+          </div>  
+      </article>
+      {% endfor %}
+    </div>
+    <div class="mt-16 flex justify-center items-center gap-2 reveal-on-scroll">
+      <button
+        class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors disabled:opacity-50">
+        <span class="material-symbols-outlined text-sm">arrow_back_ios_new</span>
+      </button>
+      <button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold shadow-md">
+        1
+      </button>
+      <button
+        class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors">
+        2
+      </button>
+      <button
+        class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors">
+        3
+      </button>
+      <button
+        class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors">
+        4
+      </button>
+      <span class="w-10 h-10 flex items-center justify-center text-text-sub">...</span>
+      <button
+        class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors">
+        33
+      </button>
+      <button
+        class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors">
+        <span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
+      </button>
+    </div>
+  </div>
+</section>

@@ -19,7 +19,10 @@
           class="nav-link {% if request.resolver_match.url_name == "index" %}active{% endif %}">
           Inicio
         </a>
-        <a class="nav-link" href="#">Recetas</a>
+        <a href="{% url "recipes:recipes" %}"
+          class="nav-link {% if request.resolver_match.url_name == "recipes" %}active{% endif %}">
+        Recetas
+        </a>
         <a href="{% url "recipes:categories" %}"
           class="nav-link {% if request.resolver_match.url_name == "categories" %}active{% endif %}">
         Categorías
