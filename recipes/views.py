@@ -31,3 +31,15 @@ class CategoriesDashboardView(ListView):
         ).order_by("-total_recipes")
 
 
+#Recipes list
+class RecipesDashboardView(ListView):
+    model = Recipe
+    context_object_name = "recipes_list"
+    template_name = "recipes/recipes.html"
+
+    def get_queryset(self):
+        return super().get_queryset().annotate(
+            total_favorites = Count("favorites", distinct=True)
+        ).order_by("-total_favorites")
+
+    
