@@ -3,7 +3,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500" id="recipe-container">
       {% for recipe in recipes_list  %}
       <article
-        class="recipe-card bg-white rounded-lg dark:bg-dark-card shadow-soft group border border-gray-50 dark:border-white/5 h-full flex flex-col transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+        class="recipe-card bg-white rounded-lg dark:bg-dark-card shadow-soft group border border-gray-50 dark:border-white/5 h-full flex flex-col transition-transform duration-300  hover:shadow-xl">
           <div class="relative h-64 overflow-hidden rounded-t-lg">
             <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
               style="background-image: url('{{recipe.image.url}}');"></div>
