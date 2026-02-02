@@ -85,14 +85,18 @@
 }
 
 .card-recipe {
-    @apply relative overflow-hidden isolate bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-500 hover:shadow-2xl flex flex-col h-full;backface-visibility: hidden;
+    @apply relative overflow-hidden isolate bg-white rounded-lg dark:bg-dark-card shadow-soft border border-gray-100 dark:border-white/5 h-full flex flex-col transition-transform duration-300  hover:shadow-xl;backface-visibility: hidden;
                 transform: translateZ(0);
                 will-change: transform, opacity;
                 opacity: 1;
 }
 
 .btn-action {
-    @apply rounded-full bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-6 py-2.5 font-bold text-sm transition-all hover:bg-[#E67E22] dark:hover:bg-[#E67E22] dark:hover:text-white;
+    @apply rounded-full bg-zinc-900 text-white  px-6 py-2.5 font-bold text-sm transition-all hover:bg-[#E67E22];
+}
+
+.dark .btn-action{
+    @apply bg-transparent border border-primary text-primary hover:bg-primary hover:text-white;
 }
 
 .scroll-reveal {
@@ -109,33 +113,243 @@
 }
 
 .list-view {
-    @apply grid-cols-1 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
 }
 
 .list-view .card-recipe {
-    @apply flex-row items-stretch min-h-[240px];
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 240px;
 }
 
 .list-view .card-recipe .card-img-container {
-    @apply w-1/3 h-auto min-h-full;
+    width: 33.333333%;
+    height: auto;
+    min-height: 100%;
 }
 
 .list-view .card-recipe .card-content {
-    @apply w-2/3 text-left p-8 flex flex-col justify-between items-start;
+    width: 66.666667%;
+    text-align: left;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .list-view .card-recipe .card-content h3 {
-    @apply text-2xl text-left;
+    font-size: 1.5rem;
+    text-align: left;
 }
 
 .list-view .card-recipe .card-content p {
-    @apply line-clamp-3 text-base text-left mb-4;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 1rem;
+    text-align: left;
+    margin-bottom: 1rem;
 }
 
 .list-view .card-recipe .card-stats {
-    @apply w-full;
+    width: 100%;
 }
 
 .active-view-btn {
-    @apply bg-[#E67E22] text-white !important;
+    background-color: #E67E22 !important;
+    color: white !important;
+}
+
+/* Estilos para vista de lista de recipe-card */
+.list-view .recipe-card {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch;
+    height: auto;
+    min-height: 228px;
+}
+
+/* Imagen a la izquierda */
+.list-view .recipe-card > div:first-child {
+    width: 320px;
+    height: auto;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0 !important;
+}
+
+/* Asegurar que la imagen de fondo se vea bien */
+.list-view .recipe-card > div:first-child > div.absolute.inset-0 {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100%;
+    height: 100%;
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+/* Eliminar border-radius del contenedor de imagen */
+.list-view .recipe-card > div:first-child,
+.list-view .recipe-card > div:first-child > div {
+    border-top-left-radius: 0.5rem !important;
+    border-bottom-left-radius: 0.5rem !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+/* Contenedor de contenido a la derecha */
+.list-view .recipe-card > div:last-child {
+    flex: 1;
+    text-align: left;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Ocultar el botón de favoritos en list view */
+.list-view .recipe-card > div:first-child > button {
+    display: none;
+}
+
+/* Badge de dificultad */
+.list-view .recipe-card > div:first-child > div {
+    background-color: #E67E22 !important;
+    color: white !important;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem !important;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+/* Título - es el elemento h3 */
+.list-view .recipe-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+    font-family: 'Playfair Display', serif;
+    color: #1A1A1A;
+}
+
+.dark .list-view .recipe-card h3 {
+    color: white;
+}
+
+@media (min-width: 768px) {
+    .list-view .recipe-card h3 {
+        font-size: 1.875rem;
+    }
+}
+
+/* Contenedor del perfil del chef - segundo hijo del contenedor de contenido */
+.list-view .recipe-card > div:last-child > div:nth-child(2) {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.list-view .recipe-card > div:last-child > div:nth-child(2) img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    background-color: #f3f4f6;
+    border: 1px solid #f3f4f6;
+    object-fit: cover;
+}
+
+.list-view .recipe-card > div:last-child > div:nth-child(2) span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #887463;
+}
+
+.dark .list-view .recipe-card > div:last-child > div:nth-child(2) span {
+    color: white;
+}
+
+/* Descripción - elemento p */
+.list-view .recipe-card p {
+    font-size: 0.875rem;
+    line-height: 1.625;
+    margin-bottom: 1rem;
+    color: #887463;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-width: 36rem;
+}
+
+.dark .list-view .recipe-card p {
+    color: white;
+}
+
+/* Stats (tiempo, calorías, likes) - cuarto hijo */
+.list-view .recipe-card > div:last-child > div:nth-child(4) {
+    display: flex;
+    justify-content: flex-start;
+    border: 0;
+    padding-top: 0;
+    margin-bottom: 1.5rem;
+    gap: 0;
+}
+
+.list-view .recipe-card > div:last-child > div:nth-child(4) > div {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #887463;
+    padding-right: 3rem;
+}
+
+.list-view .recipe-card > div:last-child > div:nth-child(4) > div > span:first-child {
+    font-size: 1.125rem;
+    color: #E67E22;
+}
+
+.list-view .recipe-card > div:last-child > div:nth-child(4) > div > span:last-child {
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Subcategorías - quinto hijo */
+.list-view .recipe-card > div:last-child > div:nth-child(5) {
+    margin-top: auto;
+    margin-bottom: 0;
+    gap: 0.5rem;
+}
+
+.list-view .recipe-card > div:last-child > div:nth-child(5) span {
+    padding: 0.25rem 0.75rem;
+    background-color: #f3f4f6;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #887463;
+}
+
+/* Botón Ver Receta - elemento a */
+.list-view .recipe-card > div:last-child > a {
+    padding: 0.75rem 2rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    border-radius: 9999px;
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    width: auto;
+    margin: 0;
 }

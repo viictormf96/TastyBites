@@ -41,16 +41,20 @@
         </div>
       </div>
       <div class="flex items-center gap-6">
-        <div class="flex items-center gap-2 bg-soft-gray/50 dark:bg-zinc-800 p-1 rounded">
-          <button class="p-1.5 rounded-md transition-all bg-white dark:bg-zinc-700 shadow-sm text-primary"
-            id="btn-grid">
-            <span class="material-symbols-outlined text-xl block">grid_view</span>
-          </button>
-          <button class="p-1.5 rounded-md hover:text-primary transition-all text-text-sub" id="btn-list">
-            <span class="material-symbols-outlined text-xl block">format_list_bulleted</span>
-          </button>
+        <div
+            class="flex gap-2 bg-zinc-100 dark:bg-zinc-900 p-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800">
+            <button
+                class="p-2.5 rounded-lg text-zinc-400 transition-all duration-300 flex items-center justify-center hover:text-primary active-view-btn"
+                id="btn-grid">
+                <span class="material-symbols-outlined">grid_view</span>
+            </button>
+            <button
+                class="p-2.5 rounded-lg text-zinc-400 transition-all duration-300 flex items-center justify-center hover:text-primary"
+                id="btn-list">
+                <span class="material-symbols-outlined">format_list_bulleted</span>
+            </button>
         </div>
-        <div class="h-7 w-px bg-gray-200 dark:bg-zinc-700"></div>
+        <div class="h-10 w-px bg-gray-200 dark:bg-zinc-700"></div>
         <div class="flex items-center gap-2">
           <span class="text-xs font-medium text-text-sub">Ordenar:</span>
           <select class="border-none bg-transparent font-bold text-slate-900 dark:text-white focus:ring-0 p-0 pr-5 cursor-pointer text-sm appearance-none">
