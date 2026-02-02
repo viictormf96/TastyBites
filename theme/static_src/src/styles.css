@@ -85,14 +85,18 @@
 }
 
 .card-recipe {
-    @apply relative overflow-hidden isolate bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-500 hover:shadow-2xl flex flex-col h-full;backface-visibility: hidden;
+    @apply relative overflow-hidden isolate bg-white rounded-lg dark:bg-dark-card shadow-soft border border-gray-100 dark:border-white/5 h-full flex flex-col transition-transform duration-300  hover:shadow-xl;backface-visibility: hidden;
                 transform: translateZ(0);
                 will-change: transform, opacity;
                 opacity: 1;
 }
 
 .btn-action {
-    @apply rounded-full bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-6 py-2.5 font-bold text-sm transition-all hover:bg-[#E67E22] dark:hover:bg-[#E67E22] dark:hover:text-white;
+    @apply rounded-full bg-zinc-900 text-white  px-6 py-2.5 font-bold text-sm transition-all hover:bg-[#E67E22];
+}
+
+.dark .btn-action{
+    @apply bg-transparent border border-primary text-primary hover:bg-primary hover:text-white;
 }
 
 .scroll-reveal {

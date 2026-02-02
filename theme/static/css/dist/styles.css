@@ -2366,28 +2366,30 @@ h1,
   height: 100%;
   flex-direction: column;
   overflow: hidden;
-  border-radius: 1rem;
+  border-radius: 1.25rem;
   border-width: 1px;
   --tw-border-opacity: 1;
-  border-color: rgb(228 228 231 / var(--tw-border-opacity, 1));
+  border-color: rgb(243 244 246 / var(--tw-border-opacity, 1));
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-  transition-property: all;
+  --tw-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  --tw-shadow-colored: 0 10px 30px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  transition-property: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 500ms;
+  transition-duration: 300ms;
 }
 
 .card-recipe:hover {
-  --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-  --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .card-recipe:is(.dark *) {
-  --tw-border-opacity: 1;
-  border-color: rgb(39 39 42 / var(--tw-border-opacity, 1));
+  border-color: rgb(255 255 255 / 0.05);
   --tw-bg-opacity: 1;
-  background-color: rgb(24 24 27 / var(--tw-bg-opacity, 1));
+  background-color: rgb(30 30 30 / var(--tw-bg-opacity, 1));
 }
 
 .card-recipe {
@@ -2420,14 +2422,16 @@ h1,
   background-color: rgb(230 126 34 / var(--tw-bg-opacity, 1));
 }
 
-.btn-action:is(.dark *) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(244 244 245 / var(--tw-bg-opacity, 1));
+.dark .btn-action {
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(230 126 34 / var(--tw-border-opacity, 1));
+  background-color: transparent;
   --tw-text-opacity: 1;
-  color: rgb(24 24 27 / var(--tw-text-opacity, 1));
+  color: rgb(230 126 34 / var(--tw-text-opacity, 1));
 }
 
-.btn-action:hover:is(.dark *) {
+.dark .btn-action:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(230 126 34 / var(--tw-bg-opacity, 1));
   --tw-text-opacity: 1;
