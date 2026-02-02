@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
-from django.db.models import Count
+from django.db.models import Count, Q
 from .models import Recipe, Category
 
 #Categories seeker
@@ -37,6 +37,45 @@ class CategoriesDashboardView(ListView):
             total_recipes = Count("recipe", distinct=True)
         ).order_by("-total_recipes", "-total_favorites")
 
+#Recipes seeker
+def search_recipes(request):
+    query = request.GET.get('q', '')
+    
+    recipes = Recipe.objects.select_related(
+            "category",
+            "user",
+            "difficulty"
+    ).prefetch_related(
+        "subcategories",
+        "ingredients"
+    )
+    
+    if query:
+        recipes = recipes.filter(
+            Q(name__icontains=query) |
+            Q(subcategories__name__icontains=query) |
+            Q(user__username__icontains=query) |
+            Q(user__first_name__icontains=query) |
+            Q(user__last_name__icontains=query) |
+            Q(category__name__icontains=query) |
+            Q(description__icontains=query) |
+            Q(ingredients__name__icontains=query)
+        ).distinct()
+
+        recipes = recipes.annotate(
+            total_favorites = Count("favorites", distinct=True)
+        ).order_by("-total_favorites")
+        
+    else:
+        recipes = Recipe.objects.annotate(
+            total_favorites = Count("favorites", distinct=True)
+        ).order_by("-total_favorites")
+    
+    context = {
+        'recipes_list' : recipes,
+        'query' : query,
+    }
+    return render(request, "recipes/recipes.html", context)
 
 #Recipes list
 class RecipesDashboardView(ListView):
