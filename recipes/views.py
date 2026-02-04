@@ -41,6 +41,9 @@ class CategoriesDashboardView(ListView):
 def search_recipes(request):
     query = request.GET.get('q', '')
     
+    #Get total recipes
+    total_recipes = Recipe.objects.count()
+
     recipes = Recipe.objects.select_related(
             "category",
             "user",
@@ -49,7 +52,7 @@ def search_recipes(request):
         "subcategories",
         "ingredients"
     )
-    
+
     if query:
         recipes = recipes.filter(
             Q(name__icontains=query) |
@@ -71,9 +74,13 @@ def search_recipes(request):
             total_favorites = Count("favorites", distinct=True)
         ).order_by("-total_favorites")
     
+    #how much recipes we have after filter
+    filtered_recipes = recipes.count()
+
     context = {
         'recipes_list' : recipes,
         'query' : query,
+        'is_filtered': filtered_recipes < total_recipes
     }
     return render(request, "recipes/recipes.html", context)
 
