@@ -14,11 +14,12 @@
         <div class="max-w-xl mx-auto mb-8">
             <form
                 method='GET'
-                action={% url "recipes:search_recipes" %}
+                action={% url "recipes:recipes" %}
                 class="bg-white dark:bg-dark-card p-2 rounded-full shadow-lift flex items-center border border-gray-100 dark:border-white/10 focus-within:border-primary/50 transition-colors">
                 <div class="pl-4 text-text-sub dark:text-gray-400">
                     <span class="material-symbols-outlined">search</span>
                 </div>
+                <input type="hidden" name="view" value="{{ view_mode|default:'grid' }}">
                 <input
                     type="text"
                     name="q"

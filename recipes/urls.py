@@ -10,5 +10,4 @@ urlpatterns = [
     path("categories/", CategoriesDashboardView.as_view(), name="categories"),
     path("categories/search/", views.search_categories, name="search_categories"),
     path("recipes/", RecipesDashboardView.as_view(), name="recipes"),
-    path("recipes/search/", views.search_recipes, name="search_recipes"),
 ]

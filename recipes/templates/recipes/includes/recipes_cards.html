@@ -1,6 +1,6 @@
 <section class="flex-grow bg-soft-gray/30 py-12 bg-background-light dark:bg-dark-bg">
   <div class="max-w-7xl mx-auto px-6">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500" id="recipe-container">
+    <div class="{% if view_mode == 'list' %} list-view {% endif %} grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500">
       {% for recipe in recipes_list %}
       <article
         class="recipe-card animate-fade-in-up bg-white rounded-lg dark:bg-dark-card shadow-soft group border border-gray-10 dark:border-white/5 h-full flex flex-col transition-transform duration-300  hover:shadow-xl">
@@ -63,6 +63,7 @@
           </a>
         </div>
       </article>
+      {{is_filtered}}
       {% empty %}
         <div class="col-span-full py-20 text-center">
           <span class="material-symbols-outlined text-6xl text-zinc-300 mb-4">search_off</span>
@@ -72,42 +73,42 @@
         </div>
       {% endfor %}
     </div>
-    {% if is_filtered and recipes_list|length > 0%}
+    {% if is_filtred and recipes_list|length > 0 and query %}
       <div class="col-span-full py-10 text-center">
           <a href="{% url 'recipes:recipes' %}" class="text-primary font-bold mt-4 inline-block">Ver todas las
             recetas</a>
         </div>
     {% endif %}
-    {% if recipes_list|length > 6 %}
+    {% if is_paginated %}
       <div class="mt-16 flex justify-center items-center gap-2 reveal-on-scroll">
-      <button
-        class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors disabled:opacity-50">
-        <span class="material-symbols-outlined text-sm">arrow_back_ios_new</span>
-      </button>
-      <button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold shadow-md">
-        1
-      </button>
-      <button
-        class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors">
-        2
-      </button>
-      <button
-        class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors">
-        3
-      </button>
-      <button
-        class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors">
-        4
-      </button>
-      <span class="w-10 h-10 flex items-center justify-center text-text-sub">...</span>
-      <button
-        class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors">
-        33
-      </button>
-      <button
-        class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors">
-        <span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
-      </button>
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number}}&view={{view_mode}}&q={{query}}"
+          class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors disabled:opacity-50">
+          <span class="material-symbols-outlined text-sm">arrow_back_ios_new</span>
+        </a> 
+      {% endif %}
+        
+      {% for num in paginator.page_range  %}
+        {% if page_obj.number == num %}
+          <a href="?page={{ num }}&view={{ view_mode }}&q={{ query }}" 
+            class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold shadow-md">
+            {{num}}
+          </a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a href="?page={{ num }}&view={{ view_mode }}&q={{ query }}" 
+            class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors">
+            {{num}}
+          </a>
+        {% endif %}
+      
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number}}&view={{view_mode}}&q={{query}}"
+          class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors">
+          <span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
+        </a>
+      {% endif %}
     </div>
     {% endif %}
   </div>
