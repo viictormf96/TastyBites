@@ -71,7 +71,7 @@ class Instruction(models.Model):
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
     quantity = models.CharField(max_length=50)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, related_name="ingredients", on_delete=models.CASCADE)
     class Meta:
         db_table = "ingredients"
     
