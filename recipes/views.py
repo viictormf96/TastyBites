@@ -38,55 +38,6 @@ class CategoriesDashboardView(ListView):
             total_recipes = Count("recipe", distinct=True)
         ).order_by("-total_recipes", "-total_favorites")
 
-#Recipes seeker
-'''
-def search_recipes(request):
-    query = request.GET.get('q', '')
-    
-    #Get total recipes
-    total_recipes = Recipe.objects.count()
-
-    recipes = Recipe.objects.select_related(
-            "category",
-            "user",
-            "difficulty"
-    ).prefetch_related(
-        "subcategories",
-        "ingredients"
-    )
-
-    if query:
-        recipes = recipes.filter(
-            Q(name__icontains=query) |
-            Q(subcategories__name__icontains=query) |
-            Q(user__username__icontains=query) |
-            Q(user__first_name__icontains=query) |
-            Q(user__last_name__icontains=query) |
-            Q(category__name__icontains=query) |
-            Q(description__icontains=query) |
-            Q(ingredients__name__icontains=query)
-        ).distinct()
-
-        recipes = recipes.annotate(
-            total_favorites = Count("favorites", distinct=True)
-        ).order_by("-total_favorites")
-        
-    else:
-        recipes = Recipe.objects.annotate(
-            total_favorites = Count("favorites", distinct=True)
-        ).order_by("-total_favorites")
-    
-    #how much recipes we have after filter
-    filtered_recipes = recipes.count()
-
-    context = {
-        'recipes_list' : recipes,
-        'query' : query,
-        'is_filtered': filtered_recipes < total_recipes
-    }
-    return render(request, "recipes/recipes.html", context)
-
-'''
 
 #Recipes view
 class RecipesDashboardView(ListView):
@@ -105,7 +56,12 @@ class RecipesDashboardView(ListView):
             "subcategories",
         )
 
+        #Recipes seeker
         search_query = self.request.GET.get('q')
+
+        #Recipes filters
+        sort_by = self.request.GET.get('sort', 'popular')
+
 
         if search_query:
             queryset = queryset.filter(
@@ -121,10 +77,16 @@ class RecipesDashboardView(ListView):
         
         queryset = queryset.annotate(
             total_favorites = Count("favorites", distinct=True)
-        ).order_by("-total_favorites")
+        )
+        
+        if sort_by == "recent":
+            queryset = queryset.order_by("-total_favorites")
+        else:   
+            queryset = queryset.order_by("-created_at") 
 
         return queryset
-    
+
+    #Paginate recipes
     def get_paginate_by(self, queryset):
         view_mode = self.request.GET.get('view', 'grid')
         if view_mode == 'list':
