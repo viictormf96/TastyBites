@@ -82,32 +82,32 @@
     {% if is_paginated %}
       <div class="mt-16 flex justify-center items-center gap-2 reveal-on-scroll">
       {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number}}&view={{view_mode}}&q={{query}}"
+        <button onclick= "changePage({{page_obj.previous_page_number}})"
           class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors disabled:opacity-50">
           <span class="material-symbols-outlined text-sm">arrow_back_ios_new</span>
-        </a> 
+        </button> 
       {% endif %}
         
       {% for num in paginator.page_range  %}
         {% if page_obj.number == num %}
-          <a href="?page={{ num }}&view={{ view_mode }}&q={{ query }}" 
+          <button onclick="changePage({{ num }})" 
             class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold shadow-md">
             {{num}}
-          </a>
+          </button>
         {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-          <a href="?page={{ num }}&view={{ view_mode }}&q={{ query }}" 
+          <button onclick="changePage({{ num }})" 
             class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors">
             {{num}}
-          </a>
+          </button>
         {% endif %}
       
       {% endfor %}
 
       {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number}}&view={{view_mode}}&q={{query}}"
+        <button onclick= "changePage({{page_obj.next_page_number}})"
           class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors">
           <span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
-        </a>
+        </button>
       {% endif %}
     </div>
     {% endif %}

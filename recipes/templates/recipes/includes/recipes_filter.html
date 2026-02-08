@@ -9,7 +9,7 @@
         </button>
 
         <div class="relative group">
-          <select class="px-6 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary rounded-full text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
+          <select class="cursor-pointer px-6 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary rounded-full text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
             <option value="" class="dark:bg-slate-900">Tiempo</option>
             <option value="" class="dark:bg-slate-900"><15 min</option>
             <option value="" class="dark:bg-slate-900">15-30 min</option>
@@ -20,7 +20,7 @@
 
         <div class="relative group">
           <select
-            class="px-7 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary rounded-full text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
+            class="cursor-pointer px-7 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary rounded-full text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
             <option value="" class="dark:bg-slate-900">Dificultad</option>
             <option value="" class="dark:bg-slate-900">Fácil</option>
             <option value="" class="dark:bg-slate-900">Media</option>
@@ -30,7 +30,7 @@
 
         <div class="relative group">
           <select
-            class="px-7 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary rounded-full text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
+            class="cursor-pointer px-7 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary rounded-full text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
             <option value="" class="dark:bg-slate-900">Calorías</option>
             <option value="" class="dark:bg-slate-900"><300 kcal</option>
             <option value="" class="dark:bg-slate-900">300-600 kcal</option>
@@ -41,7 +41,7 @@
 
         <div class="relative group">
           <select
-            class="px-7 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary rounded-full text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
+            class="cursor-pointer px-7 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary rounded-full text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
             <option value="" class="dark:bg-slate-900">Dieta</option>
             <option value="" class="dark:bg-slate-900">Vegano</option>
             <option value="" class="dark:bg-slate-900">Keto</option>
@@ -53,16 +53,16 @@
       <div class="flex items-center gap-6">
         <div
             class="flex gap-2 bg-zinc-100 dark:bg-zinc-900 p-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800">
-            <a href="?view=grid&q={{query}}"
+            <button id="view-grid"
                 class="{% if view_mode == 'grid' %} active-view-btn {% endif %} p-2.5 rounded-lg text-zinc-400 transition-all duration-300 flex items-center justify-center hover:text-primary"
                 >
                 <span class="material-symbols-outlined">grid_view</span>
-            </a>
-            <a href="?view=list&q={{query}}"
+            </button>
+            <button id="view-list"
                 class="{% if view_mode == 'list' %} active-view-btn {% endif %} p-2.5 rounded-lg text-zinc-400 transition-all duration-300 flex items-center justify-center hover:text-primary"
                 >
                 <span class="material-symbols-outlined">format_list_bulleted</span>
-            </a>
+            </button>
         </div>
         <div class="h-10 w-px bg-gray-200 dark:bg-zinc-700"></div>
         <div class="flex items-center gap-2">
