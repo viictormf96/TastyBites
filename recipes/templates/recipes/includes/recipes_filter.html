@@ -3,50 +3,50 @@
   <div class="max-w-7xl mx-auto px-6 py-4">
     <div class="flex flex-col md:flex-row gap-6 items-center justify-between">
       <div class="flex flex-wrap gap-3 w-full md:w-auto">
-        <button
-          class="px-5 py-2 bg-primary text-white rounded-full text-sm font-semibold shadow-lg shadow-primary/20 hover:bg-primary-hover transition-all active:scale-95">
+        <a href="{% url 'recipes:recipes' %}"
+          class="px-5 py-2 flex items-center justify-center bg-primary text-white rounded-full text-sm font-semibold shadow-lg shadow-primary/20  hover:bg-primary-hover transition-all active:scale-95">
           Todas
-        </button>
+        </a>
 
         <div class="relative group">
-          <select class="cursor-pointer px-6 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary rounded-full text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
+          <select id="time-sort" name="time" class="cursor-pointer px-6 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary rounded-full text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
             <option value="" class="dark:bg-slate-900">Tiempo</option>
-            <option value="" class="dark:bg-slate-900"><15 min</option>
-            <option value="" class="dark:bg-slate-900">15-30 min</option>
-            <option value="" class="dark:bg-slate-900">30-60 min</option>
-            <option value="" class="dark:bg-slate-900">+60 min</option>
+            <option value="15" class="dark:bg-slate-900"><15 min</option>
+            <option value="15_30" class="dark:bg-slate-900">15-30 min</option>
+            <option value="30_60" class="dark:bg-slate-900">30-60 min</option>
+            <option value="60" class="dark:bg-slate-900">+60 min</option>
           </select>
         </div>
 
         <div class="relative group">
-          <select
+          <select id="difficulty-sort" name="difficulty"
             class="cursor-pointer px-7 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary rounded-full text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
             <option value="" class="dark:bg-slate-900">Dificultad</option>
-            <option value="" class="dark:bg-slate-900">Fácil</option>
-            <option value="" class="dark:bg-slate-900">Media</option>
-            <option value="" class="dark:bg-slate-900">Difícil</option>
+            <option value="easy" class="dark:bg-slate-900">Fácil</option>
+            <option value="medium" class="dark:bg-slate-900">Media</option>
+            <option value="difficult" class="dark:bg-slate-900">Difícil</option>
           </select>
         </div>
 
         <div class="relative group">
-          <select
+          <select id="calories-sort" name="calories"
             class="cursor-pointer px-7 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary rounded-full text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
             <option value="" class="dark:bg-slate-900">Calorías</option>
-            <option value="" class="dark:bg-slate-900"><300 kcal</option>
-            <option value="" class="dark:bg-slate-900">300-600 kcal</option>
-            <option value="" class="dark:bg-slate-900">600-900 kcal</option>
-            <option value="" class="dark:bg-slate-900">+900 kcal</option>
+            <option value="300" class="dark:bg-slate-900"><300 kcal</option>
+            <option value="300_600" class="dark:bg-slate-900">300-600 kcal</option>
+            <option value="600_900" class="dark:bg-slate-900">600-900 kcal</option>
+            <option value="900" class="dark:bg-slate-900">+900 kcal</option>
           </select>
         </div>
 
         <div class="relative group">
-          <select
+          <select id="diet-sort" name="diet"
             class="cursor-pointer px-7 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary rounded-full text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
             <option value="" class="dark:bg-slate-900">Dieta</option>
-            <option value="" class="dark:bg-slate-900">Vegano</option>
-            <option value="" class="dark:bg-slate-900">Keto</option>
-            <option value="" class="dark:bg-slate-900">Sin Gluten</option>
-            <option value="" class="dark:bg-slate-900">Sin Lactosa</option>
+            <option value="vegan" class="dark:bg-slate-900">Vegano</option>
+            <option value="keto" class="dark:bg-slate-900">Keto</option>
+            <option value="gluten_free" class="dark:bg-slate-900">Sin Gluten</option>
+            <option value="lactos_free" class="dark:bg-slate-900">Sin Lactosa</option>
           </select>
         </div>
       </div>

@@ -73,11 +73,13 @@
         </div>
       {% endfor %}
     </div>
-    {% if is_filtred and recipes_list|length > 0 and query %}
-      <div class="col-span-full py-10 text-center">
+    {% if is_filtred and recipes_list|length > 0 %}
+      {% if query or time_filter or difficulty_filter or calories_filter or diet_filter %}
+        <div class="col-span-full py-10 text-center">
           <a href="{% url 'recipes:recipes' %}" class="text-primary font-bold mt-4 inline-block">Ver todas las
             recetas</a>
         </div>
+      {% endif %}
     {% endif %}
     {% if is_paginated %}
       <div class="mt-16 flex justify-center items-center gap-2 reveal-on-scroll">

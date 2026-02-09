@@ -46,45 +46,76 @@ class RecipesDashboardView(ListView):
     template_name = "recipes/recipes.html"
 
     def get_queryset(self):
-
-         #Se usa select_relatred para ForeignKeys y se usa prefetch_related para ManyToMany
+        # 1. Base optimizada con relaciones
         queryset = super().get_queryset().select_related(
-            "category",
-            "user",
-            "difficulty"
-        ).prefetch_related(
-            "subcategories",
-        )
+            "category", "user", "difficulty"
+        ).prefetch_related("subcategories")
 
-        #Recipes seeker
-        search_query = self.request.GET.get('q')
-
-        #Recipes filters
-        sort_by = self.request.GET.get('sort', 'popular')
-
-
+        # 2. Captura de parámetros
+        params = self.request.GET
+        search_query = params.get('q')
+        
+        # 3. Búsqueda Global (Q Objects)
         if search_query:
             queryset = queryset.filter(
-            Q(name__icontains=search_query) |
-            Q(subcategories__name__icontains=search_query) |
-            Q(user__username__icontains=search_query) |
-            Q(user__first_name__icontains=search_query) |
-            Q(user__last_name__icontains=search_query) |
-            Q(category__name__icontains=search_query) |
-            Q(description__icontains=search_query) |
-            Q(ingredients__name__icontains=search_query)
-            ) .distinct()
-        
-        queryset = queryset.annotate(
-            total_favorites = Count("favorites", distinct=True)
-        )
-        
-        if sort_by == "recent":
-            queryset = queryset.order_by("-total_favorites")
-        else:   
-            queryset = queryset.order_by("-created_at") 
+                Q(name__icontains=search_query) |
+                Q(subcategories__name__icontains=search_query) |
+                Q(user__username__icontains=search_query) |
+                Q(user__first_name__icontains=search_query) |
+                Q(user__last_name__icontains=search_query) |
+                Q(category__name__icontains=search_query) |
+                Q(description__icontains=search_query) |
+                Q(ingredients__name__icontains=search_query)
+            ).distinct()
 
-        return queryset
+        # 4. Mapeo de Filtros (Evita el espagueti de if/elif)
+        time_map = {
+            "15": {"cooking_time__lt": 15},
+            "15_30": {"cooking_time__range": (15, 30)},
+            "30_60": {"cooking_time__range": (30, 60)},
+            "60": {"cooking_time__gt": 60},
+        }
+        
+        diff_map = {
+            "easy": 1, 
+            "medium": 2, 
+            "difficult": 3
+        }
+
+        calories_map = {
+            "300": {"calories__lt": 300},
+            "300_600": {"calories__range": (300, 600)},
+            "600_900": {"calories__range": (600, 900)},
+            "900": {"calories__gt": 900},
+        }
+
+        diet_map = {
+            "vegan": "vegano",
+            "keto": "keto",
+            "gluten_free": "Sin gluten",
+            "lactos_free": "Sin lactosa",
+        }
+
+        # 5. Aplicación dinámica de filtros
+        if (t := params.get('time')) in time_map:
+            queryset = queryset.filter(**time_map[t])
+            
+        if (d := params.get('difficulty')) in diff_map:
+            queryset = queryset.filter(difficulty=diff_map[d])
+            
+        if (c := params.get('calories')) in calories_map:
+            queryset = queryset.filter(**calories_map[c])
+            
+        if (diet := params.get('diet')) in diet_map:
+            queryset = queryset.filter(subcategories__name__iexact=diet_map[diet])
+
+        # 6. Anotación y Ordenación
+        queryset = queryset.annotate(total_favorites=Count("favorites", distinct=True))
+        
+        sort_by = params.get('sort', 'popular')
+        ordering = "-total_favorites" if sort_by == "recent" else "-created_at"
+    
+        return queryset.order_by(ordering)
 
     #Paginate recipes
     def get_paginate_by(self, queryset):
@@ -106,6 +137,10 @@ class RecipesDashboardView(ListView):
             "is_filtred": filtred_count < total_recipes,
             "actual_recipes": actual_recipes,
             "view_mode": self.request.GET.get('view', 'grid'),
+            "time_filter": self.request.GET.get('time'),
+            "difficulty_filter": self.request.GET.get('difficulty'),
+            "calories_filter": self.request.GET.get('calories'),
+            "diet_filter": self.request.GET.get('diet'),
         })
         
         return context
