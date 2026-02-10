@@ -16,10 +16,15 @@
                 method='GET'
                 action={% url "recipes:recipes" %}
                 class="bg-white dark:bg-dark-card p-2 rounded-full shadow-lift flex items-center border border-gray-100 dark:border-white/10 focus-within:border-primary/50 transition-colors">
+                <!-- 1. CAMPOS OCULTOS AUTOMÁTICOS (MIRAMOS QUE HAY EN LA URL)-->
+                {% for key, value in request.GET.items %}
+                    {% if key != 'q' and key != 'page' %}
+                        <input type="hidden" name="{{ key }}" value="{{ value }}">
+                    {% endif %}
+                {% endfor %}
                 <div class="pl-4 text-text-sub dark:text-gray-400">
                     <span class="material-symbols-outlined">search</span>
                 </div>
-                <input type="hidden" name="view" value="{{ view_mode|default:'grid' }}">
                 <input
                     type="text"
                     name="q"
