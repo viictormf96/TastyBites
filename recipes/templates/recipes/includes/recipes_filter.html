@@ -11,10 +11,10 @@
         <div class="relative group">
           <select id="time-sort" name="time" class="cursor-pointer px-6 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary rounded-full text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
             <option value="" class="dark:bg-slate-900">Tiempo</option>
-            <option value="15" class="dark:bg-slate-900"><15 min</option>
-            <option value="15_30" class="dark:bg-slate-900">15-30 min</option>
-            <option value="30_60" class="dark:bg-slate-900">30-60 min</option>
-            <option value="60" class="dark:bg-slate-900">+60 min</option>
+            <option value="15" class="dark:bg-slate-900" {% if time_filter == "15" %}selected{% endif %}><15 min</option>
+            <option value="15_30" class="dark:bg-slate-900" {% if time_filter == "15_30" %}selected{% endif %}>15-30 min</option>
+            <option value="30_60" class="dark:bg-slate-900" {% if time_filter == "30_60" %}selected{% endif %}>30-60 min</option>
+            <option value="60" class="dark:bg-slate-900" {% if time_filter == "60" %}selected{% endif %}>+60 min</option>
           </select>
         </div>
 
@@ -22,9 +22,10 @@
           <select id="difficulty-sort" name="difficulty"
             class="cursor-pointer px-7 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary rounded-full text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
             <option value="" class="dark:bg-slate-900">Dificultad</option>
-            <option value="easy" class="dark:bg-slate-900">Fácil</option>
-            <option value="medium" class="dark:bg-slate-900">Media</option>
-            <option value="difficult" class="dark:bg-slate-900">Difícil</option>
+            <option value="easy" class="dark:bg-slate-900" {% if difficulty_filter == "easy" %}selected{% endif %}>Fácil</option>
+            <option value="medium" class="dark:bg-slate-900" {% if difficulty_filter == "medium" %}selected{% endif %}>Media</option>
+            <option value="difficult" class="dark:bg-slate-900" {% if difficulty_filter == "difficult" %}selected{% endif %}>Difícil</option>
+
           </select>
         </div>
 
@@ -32,10 +33,10 @@
           <select id="calories-sort" name="calories"
             class="cursor-pointer px-7 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary rounded-full text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
             <option value="" class="dark:bg-slate-900">Calorías</option>
-            <option value="300" class="dark:bg-slate-900"><300 kcal</option>
-            <option value="300_600" class="dark:bg-slate-900">300-600 kcal</option>
-            <option value="600_900" class="dark:bg-slate-900">600-900 kcal</option>
-            <option value="900" class="dark:bg-slate-900">+900 kcal</option>
+            <option value="300" class="dark:bg-slate-900" {% if calories_filter == "300" %}selected{% endif %}><300 kcal</option>
+            <option value="300_600" class="dark:bg-slate-900" {% if calories_filter == "300_600" %}selected{% endif %}>300-600 kcal</option>
+            <option value="600_900" class="dark:bg-slate-900" {% if calories_filter == "600_900" %}selected{% endif %}>600-900 kcal</option>
+            <option value="900" class="dark:bg-slate-900" {% if calories_filter == "900" %}selected{% endif %}>+900 kcal</option>
           </select>
         </div>
 
@@ -43,10 +44,10 @@
           <select id="diet-sort" name="diet"
             class="cursor-pointer px-7 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary rounded-full text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
             <option value="" class="dark:bg-slate-900">Dieta</option>
-            <option value="vegan" class="dark:bg-slate-900">Vegano</option>
-            <option value="keto" class="dark:bg-slate-900">Keto</option>
-            <option value="gluten_free" class="dark:bg-slate-900">Sin Gluten</option>
-            <option value="lactos_free" class="dark:bg-slate-900">Sin Lactosa</option>
+            <option value="vegan" class="dark:bg-slate-900" {% if diet_filter == "vegan" %}selected{% endif %}>Vegano</option>
+            <option value="keto" class="dark:bg-slate-900" {% if diet_filter == "keto" %}selected{% endif %}>Keto</option>
+            <option value="gluten_free" class="dark:bg-slate-900" {% if diet_filter == "gluten_free" %}selected{% endif %}>Sin Gluten</option>
+            <option value="lactos_free" class="dark:bg-slate-900" {% if diet_filter == "lactos_free" %}selected{% endif %}>Sin Lactosa</option>
           </select>
         </div>
       </div>

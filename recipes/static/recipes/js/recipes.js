@@ -1,188 +1,87 @@
+// Mantenemos el nombre de la función original para la paginación
 function changePage(pageNumber) {
   const url = new URL(window.location.href);
-
   url.searchParams.set("page", pageNumber);
-
   window.location.href = url.toString();
 }
 
-const initRecipeFilters = () => {
-    // 1. Buscamos el select por ID. Asegúrate de que en recipes_filter.html 
-    const timeSortSelect = document.getElementById("time-sort");
-    const difficultySort = document.getElementById("difficulty-sort");
-    const caloriesSort = document.getElementById("calories-sort");
-    const dietSort = document.getElementById("diet-sort");
+/**
+ * Función genérica para actualizar parámetros en la URL.
+ * Mantiene la lógica de resetear a página 1 al filtrar.
+ */
+const updateRecipeParam = (key, value) => {
+  const url = new URL(window.location.href);
 
-    // 2. Sincronizar el estado del select con la URL actual al cargar la página
-    const urlParams = new URLSearchParams(window.location.search);
-    const currentTimeParam = urlParams.get("time");
-    const currentDifficultyParam = urlParams.get("difficulty");
-    const currentCaloriesParam = urlParams.get("calories");
-    const currentDietParam = urlParams.get("diet");
+  if (value) {
+    url.searchParams.set(key, value);
+  } else {
+    url.searchParams.delete(key);
+  }
 
-    if (currentTimeParam) {
-      timeSortSelect.value = currentTimeParam;
-    }
+  // Si estamos filtrando o cambiando vista, volvemos a la página 1
+  if (url.searchParams.has("page")) {
+    url.searchParams.set("page", "1");
+  }
 
-    if (currentDifficultyParam) {
-      difficultySort.value = currentDifficultyParam;
-    }
-
-    if (currentCaloriesParam) {
-      caloriesSort.value = currentCaloriesParam;
-    }
-
-    if (currentDietParam) {
-      dietSort.value = currentDietParam;
-    }
-
-    // 3. Escuchar el evento de cambio
-    timeSortSelect.addEventListener("change", function() {
-        const selectedValue = this.value;
-        const url = new URL(window.location.href);
-
-        // Si hay un valor seleccionado, lo ponemos en la URL. 
-        // Si es vacío (la opción por defecto), lo eliminamos.
-        if (selectedValue) {
-            url.searchParams.set("time", selectedValue);
-        } else {
-            url.searchParams.delete("time");
-        }
-
-        // Importante: Si filtras, debes volver a la página 1 para evitar errores 404
-        if (url.searchParams.has("page")) {
-            url.searchParams.set("page", "1");
-        }
-
-        // Redireccionar a la nueva URL
-        window.location.href = url.toString();
-    });
-
-    difficultySort.addEventListener("change", function() {
-        const selectedValue = this.value;
-        const url = new URL(window.location.href);
-
-        // Si hay un valor seleccionado, lo ponemos en la URL. 
-        // Si es vacío (la opción por defecto), lo eliminamos.
-        if (selectedValue) {
-            url.searchParams.set("difficulty", selectedValue);
-        } else {
-            url.searchParams.delete("difficulty");
-        }
-
-        // Importante: Si filtras, debes volver a la página 1 para evitar errores 404
-        if (url.searchParams.has("page")) {
-            url.searchParams.set("page", "1");
-        }
-
-        // Redireccionar a la nueva URL
-        window.location.href = url.toString();
-    });
-
-    caloriesSort.addEventListener("change", function() {
-        const selectedValue = this.value;
-        const url = new URL(window.location.href);
-
-        // Si hay un valor seleccionado, lo ponemos en la URL. 
-        // Si es vacío (la opción por defecto), lo eliminamos.
-        if (selectedValue) {
-            url.searchParams.set("calories", selectedValue);
-        } else {
-            url.searchParams.delete("calories");
-        }
-
-        // Importante: Si filtras, debes volver a la página 1 para evitar errores 404
-        if (url.searchParams.has("page")) {
-            url.searchParams.set("page", "1");
-        }
-
-        // Redireccionar a la nueva URL
-        window.location.href = url.toString();
-    });
-
-    dietSort.addEventListener("change", function() {
-        const selectedValue = this.value;
-        const url = new URL(window.location.href);
-
-        // Si hay un valor seleccionado, lo ponemos en la URL. 
-        // Si es vacío (la opción por defecto), lo eliminamos.
-        if (selectedValue) {
-            url.searchParams.set("diet", selectedValue);
-        } else {
-            url.searchParams.delete("diet");
-        }
-
-        // Importante: Si filtras, debes volver a la página 1 para evitar errores 404
-        if (url.searchParams.has("page")) {
-            url.searchParams.set("page", "1");
-        }
-
-        // Redireccionar a la nueva URL
-        window.location.href = url.toString();
-    });
+  window.location.href = url.toString();
 };
 
-// Ejecutamos la función cuando el DOM esté listo
-if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initRecipeFilters);
-} else {
-    initRecipeFilters();
-}
+const initRecipeFilters = () => {
+  // 1. Buscamos los elementos por sus IDs originales
+  const timeSortSelect = document.getElementById("time-sort");
+  const difficultySort = document.getElementById("difficulty-sort");
+  const caloriesSort = document.getElementById("calories-sort");
+  const dietSort = document.getElementById("diet-sort");
+  const selectSort = document.getElementById("sort-recipes");
 
-document.addEventListener("DOMContentLoaded", () => {
-  const select = document.getElementById("sort-recipes");
+  const urlParams = new URLSearchParams(window.location.search);
 
-  // 1. Detectar el cambio en el select
-  select.addEventListener("change", function () {
-    const value = this.value;
+  // 2. Mapeo de configuración: ID del elemento -> Nombre del parámetro en URL
+  const filters = [
+    { el: timeSortSelect, param: "time" },
+    { el: difficultySort, param: "difficulty" },
+    { el: caloriesSort, param: "calories" },
+    { el: dietSort, param: "diet" },
+    { el: selectSort, param: "sort" }
+  ];
 
-    // 2. Obtener la URL actual y manipular los parámetros
-    const url = new URL(window.location.href);
+  filters.forEach(({ el, param }) => {
+    if (!el) return;
 
-    // Seteamos el parámetro 'sort' con el valor del select
-    url.searchParams.set("sort", value);
-
-    // 3. Redirigir a la nueva URL (Esto dispara la vista en Django)
-    window.location.href = url.toString();
-  });
-
-  const ViewList = document.getElementById("view-list");
-  const ViewGrid = document.getElementById("view-grid");
-
-  const updateViewParam = (viewMode, param) => {
-    const url = new URL(window.location.href);
-    
-    url.searchParams.set(param, viewMode);
-
-    if (param == "view"){
-      url.searchParams.delete("page");
+    // Sincronizar el estado del select con la URL actual al cargar
+    const currentVal = urlParams.get(param);
+    if (currentVal) {
+      el.value = currentVal;
     }
 
-    // Redirigir para que Django procese la nueva vista
-    window.location.href = url.toString();
-  };
+    // Escuchar el evento de cambio de forma genérica
+    el.addEventListener("change", function() {
+      updateRecipeParam(param, this.value);
+    });
+  });
+
+  // 3. Manejo de vistas (Grid / List)
+  const ViewList = document.getElementById("view-list");
+  const ViewGrid = document.getElementById("view-grid");
 
   if (ViewGrid) {
     ViewGrid.addEventListener("click", (e) => {
       e.preventDefault();
-      updateViewParam("grid", "view");
+      updateRecipeParam("view", "grid");
     });
   }
 
   if (ViewList) {
     ViewList.addEventListener("click", (e) => {
       e.preventDefault();
-      updateViewParam("list", "view");
+      updateRecipeParam("view", "list");
     });
   }
+};
 
-
-  // 4. Mantener la opción seleccionada después de que la página recargue
-  const currentParams = new URLSearchParams(window.location.search);
-
-  const activeSort = currentParams.get("sort");
-
-  if (activeSort) {
-    select.value = activeSort;
-  }
-});
+// Ejecución segura del inicializador
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initRecipeFilters);
+} else {
+  initRecipeFilters();
+}
