@@ -4,40 +4,56 @@ from django.db.models import Count, Q
 from .models import Recipe, Category
 
 
-#Categories seeker
-def search_categories(request):
-    query = request.GET.get('q', '')
-    
-    if query:
-        categories = Category.objects.filter(name__icontains=query).annotate(
-            total_favorites = Count("recipe__favorites", distinct=True),
-            total_recipes = Count("recipe", distinct=True)
-        ).order_by("-total_recipes", "-total_favorites")
-        
-    else:
-        categories = Category.objects.all().annotate(
-            total_favorites = Count("recipe__favorites", distinct=True),
-            total_recipes = Count("recipe", distinct=True)
-        ).order_by("-total_recipes", "-total_favorites")
-    
-    context = {
-        'categories_list' : categories,
-        'query' : query,
-    }
-    return render(request, "categories/categories.html", context)
-
-# Categories list
+# Categories view
 class CategoriesDashboardView(ListView):
     model = Category
     context_object_name = "categories_list"
     template_name = "categories/categories.html"
 
     def get_queryset(self):
-        return super().get_queryset().annotate(
+
+        queryset = super().get_queryset()
+
+        search_query = self.request.GET.get('q')
+
+        if search_query:
+            queryset = queryset.filter(
+                Q(name__icontains=search_query)|
+                Q(description__icontains=search_query)
+            ).distinct()
+        
+        queryset = queryset.annotate(
             total_favorites = Count("recipe__favorites", distinct=True),
             total_recipes = Count("recipe", distinct=True)
         ).order_by("-total_recipes", "-total_favorites")
 
+        return queryset
+    
+    #Paginate Categories
+    def get_paginate_by(self, queryset):
+        view_mode = self.request.GET.get('view', 'grid')
+        if view_mode == 'list':
+            return 4  
+        return 8  
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        full_queryset = self.get_queryset()
+        total_categories = Category.objects.count()
+        actual_categories = context['categories_list']
+        filtred_count = actual_categories.count()
+
+        context.update({
+            "query" : self.request.GET.get('q', ''),
+            "actual_categories": actual_categories,
+            "filtred_count": filtred_count,
+            "view_mode": self.request.GET.get('view', 'grid'),
+            "total_categories": full_queryset.count(),
+            "is_filtred": total_categories > filtred_count,
+        })
+
+        return context
 
 #Recipes view
 class RecipesDashboardView(ListView):
