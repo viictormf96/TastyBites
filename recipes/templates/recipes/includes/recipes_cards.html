@@ -1,7 +1,8 @@
 <section class="flex-grow bg-soft-gray/30 pb-12 pt-6 bg-background-light dark:bg-dark-bg">
   <div class="max-w-7xl mx-auto px-6">
     <p class="text-zinc-500 dark:text-zinc-400 pb-8 pl-1">
-    Mostrando <strong>{{ actual_recipes|length }}</strong> {% if actual_recipes|length == 1 %}Categoría{% else %}categorías{% endif %}
+    Mostrando <strong>{{ actual_recipes|length }}</strong> {% if actual_recipes|length == 1 %}Receta{% else %}Recetas{% endif %}
+    {% if view_mode == "list" and is_paginated %} de <strong>{{ total_recipes }}</strong> {% endif %}
     </p>
     <div class="{% if view_mode == 'list' %} list-view {% endif %} grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500">
       

@@ -144,6 +144,7 @@ class RecipesDashboardView(ListView):
         #We send extra info to template
         context = super().get_context_data(**kwargs)
 
+        full_queryset = self.get_queryset()
         total_recipes = Recipe.objects.count()
         actual_recipes = context['recipes_list']
         filtred_count = actual_recipes.count()
@@ -152,6 +153,7 @@ class RecipesDashboardView(ListView):
             "query" : self.request.GET.get('q', ''),
             "is_filtred": filtred_count < total_recipes,
             "actual_recipes": actual_recipes,
+            "total_recipes": full_queryset.count(),
             "view_mode": self.request.GET.get('view', 'grid'),
             "time_filter": self.request.GET.get('time'),
             "difficulty_filter": self.request.GET.get('difficulty'),
