@@ -1,6 +1,11 @@
-<section class="flex-grow bg-soft-gray/30 py-12 bg-background-light dark:bg-dark-bg">
+<section class="flex-grow bg-soft-gray/30 pb-12 pt-6 bg-background-light dark:bg-dark-bg">
   <div class="max-w-7xl mx-auto px-6">
+    <p class="text-zinc-500 dark:text-zinc-400 pb-8 pl-1">
+    Mostrando <strong>{{ actual_recipes|length }}</strong> {% if actual_recipes|length == 1 %}Receta{% else %}Recetas{% endif %}
+    {% if view_mode == "list" and is_paginated %} de <strong>{{ total_recipes }}</strong> {% endif %}
+    </p>
     <div class="{% if view_mode == 'list' %} list-view {% endif %} grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500">
+      
       {% for recipe in recipes_list %}
       <article
         class="recipe-card animate-fade-in-up bg-white rounded-lg dark:bg-dark-card shadow-soft group border border-gray-10 dark:border-white/5 h-full flex flex-col transition-transform duration-300  hover:shadow-xl">
@@ -73,41 +78,43 @@
         </div>
       {% endfor %}
     </div>
-    {% if is_filtred and recipes_list|length > 0 and query %}
-      <div class="col-span-full py-10 text-center">
+    {% if is_filtred and recipes_list|length > 0 %}
+      {% if query or time_filter or difficulty_filter or calories_filter or diet_filter %}
+        <div class="col-span-full py-10 text-center">
           <a href="{% url 'recipes:recipes' %}" class="text-primary font-bold mt-4 inline-block">Ver todas las
             recetas</a>
         </div>
+      {% endif %}
     {% endif %}
     {% if is_paginated %}
       <div class="mt-16 flex justify-center items-center gap-2 reveal-on-scroll">
       {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number}}&view={{view_mode}}&q={{query}}"
+        <button onclick= "changePage({{page_obj.previous_page_number}})"
           class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors disabled:opacity-50">
           <span class="material-symbols-outlined text-sm">arrow_back_ios_new</span>
-        </a> 
+        </button> 
       {% endif %}
         
       {% for num in paginator.page_range  %}
         {% if page_obj.number == num %}
-          <a href="?page={{ num }}&view={{ view_mode }}&q={{ query }}" 
+          <button onclick="changePage({{ num }})" 
             class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold shadow-md">
             {{num}}
-          </a>
+          </button>
         {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-          <a href="?page={{ num }}&view={{ view_mode }}&q={{ query }}" 
+          <button onclick="changePage({{ num }})" 
             class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors">
             {{num}}
-          </a>
+          </button>
         {% endif %}
       
       {% endfor %}
 
       {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number}}&view={{view_mode}}&q={{query}}"
+        <button onclick= "changePage({{page_obj.next_page_number}})"
           class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors">
           <span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
-        </a>
+        </button>
       {% endif %}
     </div>
     {% endif %}

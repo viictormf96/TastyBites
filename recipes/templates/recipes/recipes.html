@@ -6,5 +6,9 @@
     {% include "recipes/includes/header_recipes.html" %}
     {% include "recipes/includes/recipes_filter.html" %}
     {% include "recipes/includes/recipes_cards.html" %}
-
 {% endblock content %}
+
+{% block extra_js %}
+    <script src="{% static 'recipes/js/recipes.js' %}"></script>
+{% endblock extra_js %}
+

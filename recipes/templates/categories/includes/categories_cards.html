@@ -3,24 +3,25 @@
         <div>
             <h2 class="text-3xl font-bold font-serif mb-2 text-center md:text-left">Explorar por Tipo</h2>
             <p class="text-zinc-500 dark:text-zinc-400">
-                Mostrando <strong>{{ categories_list|length }}</strong> {% if categories_list|length == 1 %}Categoría{% else %}categorías{% endif %}
+                Mostrando <strong>{{ actual_categories|length }}</strong> {% if actual_categories|length == 1 %}Categoría{% else %}categorías{% endif %} 
+                {% if view_mode == "list" and is_paginated %} de <strong>{{ total_categories }}</strong> {% endif %}
             </p>
         </div>
         <div
             class="flex gap-2 bg-zinc-100 dark:bg-zinc-900 p-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800">
             <button
-                class="p-2.5 rounded-lg text-zinc-400 transition-all duration-300 flex items-center justify-center hover:text-primary active-view-btn"
-                id="btn-grid">
+                class="{% if view_mode == 'grid' %} active-view-btn {% endif %} p-2.5 rounded-lg text-zinc-400 transition-all duration-300 flex items-center justify-center hover:text-primary"
+                id="view-grid">
                 <span class="material-symbols-outlined">grid_view</span>
             </button>
             <button
-                class="p-2.5 rounded-lg text-zinc-400 transition-all duration-300 flex items-center justify-center hover:text-primary"
-                id="btn-list">
+                class="{% if view_mode == 'list' %} active-view-btn {% endif %} p-2.5 rounded-lg text-zinc-400 transition-all duration-300 flex items-center justify-center hover:text-primary"
+                id="view-list">
                 <span class="material-symbols-outlined">format_list_bulleted</span>
             </button>
         </div>
     </div>
-    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 transition-all duration-500" id="recipe-container">
+    <div class="{% if view_mode == 'list' %} list-view {% endif %} max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 transition-all duration-500" id="recipe-container">
         {% for category in categories_list  %}
             <article class="card-recipe animate-fade-in-up group transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
                 <div class="relative h-64 overflow-hidden card-img-container transition-all duration-500 shrink-0">
@@ -54,5 +55,43 @@
                 <a href="{% url 'recipes:categories' %}" class="text-primary font-bold mt-4 inline-block">Ver todas las categorías</a>
             </div>
         {% endfor %}
+        {% if is_filtred and categories_list|length > 0 %}
+          {% if query %}
+            <div class="col-span-full py-10 text-center">
+              <a href="{% url 'recipes:categories' %}" class="text-primary font-bold mt-2 inline-block">Ver todas las
+                recetas</a>
+            </div>
+          {% endif %}
+        {% endif %}
+        {% if is_paginated %}
+          <div class="mt-16 flex justify-center items-center gap-2 reveal-on-scroll">
+          {% if page_obj.has_previous %}
+            <button onclick= "changePage({{page_obj.previous_page_number}})"
+              class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors disabled:opacity-50">
+              <span class="material-symbols-outlined text-sm">arrow_back_ios_new</span>
+            </button> 
+          {% endif %}
+        
+          {% for num in paginator.page_range  %}
+            {% if page_obj.number == num %}
+              <button onclick="changePage({{ num }})" 
+                class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold shadow-md">
+                {{num}}
+              </button>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+              <button onclick="changePage({{ num }})" 
+                class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors">
+                {{num}}
+              </button>
+            {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+            <button onclick= "changePage({{page_obj.next_page_number}})"
+              class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-text-sub hover:border-primary hover:text-primary transition-colors">
+              <span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
+            </button>
+          {% endif %}
+          </div>
+        {% endif %}
     </div>
 </section>
