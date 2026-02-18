@@ -1,10 +1,12 @@
 from django.db import models
 from accounts.models import CustomUser as User
+from django.utils.text import slugify
 
 # Category model
 class Category(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=300)
+    slug = models.SlugField(max_length=150, unique=True, blank=True, null=True, verbose_name="url")
     image = models.ImageField(upload_to="categories/")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -12,6 +14,14 @@ class Category(models.Model):
     class Meta:
         db_table = "categories"
     
+    def save(self, *args, **kwargs):
+        # Si el slug no existe (es nuevo o se borró), lo generamos
+        if not self.slug:
+            self.slug = slugify(self.titulo)
+        
+        # Llamamos al método save original para que guarde todo en la DB
+        super().save(*args, **kwargs)
+        
     def __str__(self):
         return self.name
     
@@ -39,6 +49,7 @@ class Recipe(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=300)
     cooking_time = models.IntegerField()
+    slug = models.SlugField(max_length=150, unique=True, blank=True, null=True, verbose_name="url")
     image = models.ImageField(upload_to="recipes/")
     difficulty = models.ForeignKey(Difficulty, on_delete=models.SET_NULL, null=True)
     servings = models.IntegerField(blank=True, null=True)
@@ -52,6 +63,14 @@ class Recipe(models.Model):
     class Meta:
         db_table = "recipes"
     
+    def save(self, *args, **kwargs):
+        # Si el slug no existe (es nuevo o se borró), lo generamos
+        if not self.slug:
+            self.slug = slugify(self.titulo)
+        
+        # Llamamos al método save original para que guarde todo en la DB
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.name
 
