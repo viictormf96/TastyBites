@@ -1,0 +1,77 @@
+<section class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-8 scroll-reveal reveal-active" style="animation-delay: 0.3s;">
+    <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors duration-300">
+        <h2 class="text-xl font-display font-bold mb-4 mt-2 text-slate-900 dark:text-white text-center md:text-left">
+            Explora Subcategorías
+        </h2>
+
+        <div class="flex overflow-x-auto gap-3 pb-3 custom-scrollbar snap-x snap-mandatory">
+
+            <button
+                class="flex-none snap-start text-sm px-6 py-3 rounded-full bg-primary text-white font-bold hover:bg-orange-600 transition-all active:scale-95 flex items-center gap-2 shadow-md shadow-primary/20">
+                <span class="material-symbols-outlined text-sm">grid_view</span> Todas
+            </button>
+
+            <button class="subcat-item">🎂 Tartas y Pasteles</button>
+            <button class="subcat-item">🍪 Galletas</button>
+            <button class="subcat-item">🍧 Helados</button>
+            <button class="subcat-item">🍮 Postres en Copa</button>
+            <button class="subcat-item">🍰 Tartaletas</button>
+            <button class="subcat-item">🍩 Donuts</button>
+            <button class="subcat-item">🍫 Chocolates</button>
+        </div>
+    </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-reveal reveal-active" style="animation-delay: 0.3s;">
+    <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col lg:flex-row gap-4">
+        <div class="flex-1 relative">
+            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-sub">search</span>
+            <input
+                class="w-full pl-12 pr-4 py-3 rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:ring-primary focus:border-primary"
+                placeholder="Buscar en postres..." type="text">
+        </div>
+        <div class="flex flex-wrap gap-4">
+            <select id="time-sort" name="time"
+                class="cursor-pointer rounded-xl bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
+                <option value="" class="dark:bg-slate-900">Tiempo</option>
+                <option value="15" class="dark:bg-slate-900" {% if time_filter=="15" %}selected{% endif %}>
+                    <15 min</option>
+                <option value="15_30" class="dark:bg-slate-900" {% if time_filter=="15_30" %}selected{% endif %}>15-30
+                    min</option>
+                <option value="30_60" class="dark:bg-slate-900" {% if time_filter=="30_60" %}selected{% endif %}>30-60
+                    min</option>
+                <option value="60" class="dark:bg-slate-900" {% if time_filter=="60" %}selected{% endif %}>+60 min
+                </option>
+            </select>
+
+            <select id="difficulty-sort" name="difficulty"
+                class="cursor-pointer rounded-xl bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
+                <option value="" class="dark:bg-slate-900">Dificultad</option>
+                <option value="easy" class="dark:bg-slate-900" {% if difficulty_filter=="easy" %}selected{% endif %}>
+                    Fácil</option>
+                <option value="medium" class="dark:bg-slate-900" {% if difficulty_filter=="medium" %}selected{% endif
+                    %}>Media</option>
+                <option value="difficult" class="dark:bg-slate-900" {% if difficulty_filter=="difficult" %}selected{%
+                    endif %}>Difícil</option>
+            </select>
+
+            <select id="calories-sort" name="calories"
+                class="cursor-pointer rounded-xl bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
+                <option value="" class="dark:bg-slate-900">Calorías</option>
+                <option value="300" class="dark:bg-slate-900" {% if calories_filter=="300" %}selected{% endif %}>
+                    <300 kcal</option>
+                <option value="300_600" class="dark:bg-slate-900" {% if calories_filter=="300_600" %}selected{% endif
+                    %}>300-600 kcal</option>
+                <option value="600_900" class="dark:bg-slate-900" {% if calories_filter=="600_900" %}selected{% endif
+                    %}>600-900 kcal</option>
+                <option value="900" class="dark:bg-slate-900" {% if calories_filter=="900" %}selected{% endif %}>+900
+                    kcal</option>
+            </select>
+
+            <button
+                class="bg-primary text-white px-6 rounded-xl font-bold hover:bg-orange-600 transition-standard flex items-center gap-2 text-sm ">
+                <span class="material-symbols-outlined">filter_list</span> Filtrar
+            </button>
+        </div>
+    </div>
+</section>

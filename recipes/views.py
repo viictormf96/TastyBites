@@ -4,6 +4,9 @@ from django.db.models import Count, Q
 from .models import Recipe, Category
 
 
+def category(request):
+    return render(request, "category/category.html")
+
 # Categories view
 class CategoriesDashboardView(ListView):
     model = Category

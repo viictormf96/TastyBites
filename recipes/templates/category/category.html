@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Tasty Bites - Category{% endblock%}
+{% block content %}
+
+    {% include "category/includes/header_category.html" %}
+    {% include "category/includes/category_filters.html" %}
+    {% include "category/includes/featured_recipe.html" %}
+    {% include "category/includes/category_recipes.html" %}
+
+{% endblock content %}
+
+{% block extra_js %}
+    
+{% endblock extra_js %}
+
