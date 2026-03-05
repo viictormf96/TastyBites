@@ -1,11 +1,44 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
-from django.db.models import Count, Q
+from django.db.models import Count, Q, Sum
 from .models import Recipe, Category
 
 
-def category(request):
-    return render(request, "category/category.html")
+class CategoryDashboardView(DetailView):
+    model = Category
+    context_object_name = "category"
+    template_name = "category/category.html"
+    
+    # Especificamos cómo encontrar la categoría en la URL
+    slug_url_kwarg = 'slug_category'
+    slug_field = 'slug'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+       
+        #Recipes List
+        recipes_list = self.object.recipes.select_related(
+            "user", "difficulty"
+        ).prefetch_related(
+            "subcategories"
+        ).annotate(
+            total_favorites = Count("favorites", distinct=True)
+        ).order_by(
+            "-total_favorites"
+        )
+
+        #Count del total de likes de todas las recetas de la categoria.
+        total_likes = recipes_list.aggregate(
+            total_general = Sum("total_favorites")
+        )
+        context.update({
+            "recipes_list" : recipes_list,
+            "recipes_fav_total" : total_likes["total_general"] or 0,
+            
+        })
+
+        return context
+
 
 # Categories view
 class CategoriesDashboardView(ListView):
