@@ -55,7 +55,7 @@ class Recipe(models.Model):
     servings = models.IntegerField(blank=True, null=True)
     calories = models.IntegerField(blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="recipes")
     subcategories = models.ManyToManyField(Subcategory)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
