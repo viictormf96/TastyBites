@@ -34,37 +34,33 @@
             <select id="time-sort" name="time"
                 class="cursor-pointer rounded-xl bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
                 <option value="" class="dark:bg-slate-900">Tiempo</option>
-                <option value="15" class="dark:bg-slate-900" {% if time_filter=="15" %}selected{% endif %}>
+                <option value="15" class="dark:bg-slate-900" {% if time_filter == "15" %}selected{% endif %}>
                     <15 min</option>
-                <option value="15_30" class="dark:bg-slate-900" {% if time_filter=="15_30" %}selected{% endif %}>15-30
+                <option value="15_30" class="dark:bg-slate-900" {% if time_filter == "15_30" %}selected{% endif %}>15-30
                     min</option>
-                <option value="30_60" class="dark:bg-slate-900" {% if time_filter=="30_60" %}selected{% endif %}>30-60
+                <option value="30_60" class="dark:bg-slate-900" {% if time_filter == "30_60" %}selected{% endif %}>30-60
                     min</option>
-                <option value="60" class="dark:bg-slate-900" {% if time_filter=="60" %}selected{% endif %}>+60 min
+                <option value="60" class="dark:bg-slate-900" {% if time_filter == "60" %}selected{% endif %}>+60 min
                 </option>
             </select>
 
             <select id="difficulty-sort" name="difficulty"
                 class="cursor-pointer rounded-xl bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
                 <option value="" class="dark:bg-slate-900">Dificultad</option>
-                <option value="easy" class="dark:bg-slate-900" {% if difficulty_filter=="easy" %}selected{% endif %}>
+                <option value="easy" class="dark:bg-slate-900" {% if difficulty_filter == "easy" %}selected{% endif %}>
                     Fácil</option>
-                <option value="medium" class="dark:bg-slate-900" {% if difficulty_filter=="medium" %}selected{% endif
-                    %}>Media</option>
-                <option value="difficult" class="dark:bg-slate-900" {% if difficulty_filter=="difficult" %}selected{%
-                    endif %}>Difícil</option>
+                <option value="medium" class="dark:bg-slate-900" {% if difficulty_filter == "medium" %}selected{% endif %}>Media</option>
+                <option value="difficult" class="dark:bg-slate-900" {% if difficulty_filter == "difficult" %}selected{% endif %}>Difícil</option>
             </select>
 
             <select id="calories-sort" name="calories"
                 class="cursor-pointer rounded-xl bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
                 <option value="" class="dark:bg-slate-900">Calorías</option>
-                <option value="300" class="dark:bg-slate-900" {% if calories_filter=="300" %}selected{% endif %}>
+                <option value="300" class="dark:bg-slate-900" {% if calories_filter == "300" %}selected{% endif %}>
                     <300 kcal</option>
-                <option value="300_600" class="dark:bg-slate-900" {% if calories_filter=="300_600" %}selected{% endif
-                    %}>300-600 kcal</option>
-                <option value="600_900" class="dark:bg-slate-900" {% if calories_filter=="600_900" %}selected{% endif
-                    %}>600-900 kcal</option>
-                <option value="900" class="dark:bg-slate-900" {% if calories_filter=="900" %}selected{% endif %}>+900
+                <option value="300_600" class="dark:bg-slate-900" {% if calories_filter == "300_600" %}selected{% endif %}>300-600 kcal</option>
+                <option value="600_900" class="dark:bg-slate-900" {% if calories_filter == "600_900" %}selected{% endif %}>600-900 kcal</option>
+                <option value="900" class="dark:bg-slate-900" {% if calories_filter == "900" %}selected{% endif %}>+900
                     kcal</option>
             </select>
 
