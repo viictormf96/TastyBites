@@ -2,7 +2,6 @@
 {% load static %}
 {% block title %} Tasty Bites - Category{% endblock%}
 {% block content %}
-
     {% include "category/includes/header_category.html" %}
     {% include "category/includes/category_filters.html" %}
     {% include "category/includes/featured_recipe.html" %}
@@ -11,6 +10,22 @@
 {% endblock content %}
 
 {% block extra_js %}
-    
+    <script>
+    // Escuchamos el evento 'submit' del formulario
+    document.getElementById('filter-form').addEventListener('submit', function (e) {
+        // Obtenemos todos los elementos que tienen un atributo 'name'
+        const inputs = this.querySelectorAll('[name]');
+        
+        inputs.forEach(input => {
+            // Si el valor está vacío, desactivamos el input temporalmente
+            if (!input.value || input.value.trim() === "") {
+                input.disabled = true;
+            }
+        });
+        
+        // El formulario se enviará ahora solo con los campos activos
+        return true; 
+    });
+</script>
 {% endblock extra_js %}
 

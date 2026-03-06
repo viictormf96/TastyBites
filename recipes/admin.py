@@ -10,8 +10,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Subcategory)
 class SubcategoryAdmin(admin.ModelAdmin):
-    list_display = ("name", "category")
-    search_fields = ("name", "category")
+    list_display = ("name",)
+    search_fields = ("name",)
 
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):

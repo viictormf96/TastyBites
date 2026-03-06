@@ -394,6 +394,6 @@
 
     /* Botón activo (por si quieres marcar uno mediante JS o clase fija) */
     .subcat-item-active {
-        @apply flex-none snap-start flex items-center gap-2 text-sm px-7 py-2.5 rounded-full bg-primary text-white font-bold hover:brightness-110 transition-all active:scale-95 shadow-lg shadow-primary/20;
+        @apply flex-none snap-start flex items-center gap-2 text-sm px-7 py-2.5 rounded-full bg-primary text-white font-bold hover:brightness-110 transition-all active:scale-95 ;
     }
 }

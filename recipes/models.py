@@ -29,10 +29,19 @@ class Category(models.Model):
 # Subcategory model
 class Subcategory(models.Model):
     name = models.CharField(max_length=100)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE) 
+    slug = models.SlugField(max_length=150, unique=True, blank=True, null=True, verbose_name="url")
+    category = models.ManyToManyField(Category, related_name="category")
 
     class Meta:
         db_table = "subcategories"
+    
+    def save(self, *args, **kwargs):
+        # Si el slug no existe (es nuevo o se borró), lo generamos
+        if not self.slug:
+            self.slug = slugify(self.titulo)
+        
+        # Llamamos al método save original para que guarde todo en la DB
+        super().save(*args, **kwargs)  
     
     def __str__(self):
         return self.name
@@ -69,7 +78,13 @@ class Recipe(models.Model):
             self.slug = slugify(self.titulo)
         
         # Llamamos al método save original para que guarde todo en la DB
-        super().save(*args, **kwargs)
+        super().save(*args, **kwargs)   
+
+        # Aseguramos que la subcategoria este en la categoria. 
+        if self.subcategories and self.category:    
+            # .add() es inteligente: si ya existe la relación, no hace nada.
+            # Si no existe, crea el vínculo en la tabla intermedia automáticamente.
+            self.subcategories.category.add(self.category)
 
     def __str__(self):
         return self.name

@@ -3,6 +3,65 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from django.db.models import Count, Q, Sum
 from .models import Recipe, Category
 
+#Funcion para filtrar recetas
+def recipes_serch_filter(query_set, search_query):
+    query_set = query_set.filter(
+        Q(name__icontains=search_query) |
+        Q(subcategories__name__icontains=search_query) |
+        Q(user__username__icontains=search_query) |
+        Q(user__first_name__icontains=search_query) |
+        Q(user__last_name__icontains=search_query) |
+        Q(category__name__icontains=search_query) |
+        Q(description__icontains=search_query) |
+        Q(ingredients__name__icontains=search_query)
+    ).distinct()
+
+    return query_set
+
+def recipes_filters(queryset, params):
+        # 4. Mapeo de Filtros
+        time_map = {
+            "15": {"cooking_time__lt": 15},
+            "15_30": {"cooking_time__range": (15, 30)},
+            "30_60": {"cooking_time__range": (30, 60)},
+            "60": {"cooking_time__gt": 60},
+        }
+        
+        diff_map = {
+            "easy": 1, 
+            "medium": 2, 
+            "difficult": 3
+        }
+
+        calories_map = {
+            "300": {"calories__lt": 300},
+            "300_600": {"calories__range": (300, 600)},
+            "600_900": {"calories__range": (600, 900)},
+            "900": {"calories__gt": 900},
+        }
+
+        diet_map = {
+            "vegan": "vegano",
+            "keto": "keto",
+            "gluten_free": "Sin gluten",
+            "lactos_free": "Sin lactosa",
+        }
+
+        # 5. Aplicación dinámica de filtros
+        if (t := params.get('time')) in time_map:
+            queryset = queryset.filter(**time_map[t])
+            
+        if (d := params.get('difficulty')) in diff_map:
+            queryset = queryset.filter(difficulty=diff_map[d])
+            
+        if (c := params.get('calories')) in calories_map:
+            queryset = queryset.filter(**calories_map[c])
+            
+        if (diet := params.get('diet')) in diet_map:
+            queryset = queryset.filter(subcategories__name__iexact=diet_map[diet])
+        
+        return queryset
+
 
 class CategoryDashboardView(DetailView):
     model = Category
@@ -27,14 +86,46 @@ class CategoryDashboardView(DetailView):
             "-total_favorites"
         )
 
+        #Obtenemos datos del formulario
+        params = self.request.GET
+        search_query = params.get('q', '')
+        subcategory_filter = params.get('sub', '')
+
+        # Filters
+        if search_query:
+            recipes_list = recipes_serch_filter(recipes_list, search_query)
+
+        if params.get('time') or params.get('difficulty') or params.get('calories'):
+            recipes_list = recipes_filters(recipes_list, params) 
+
+        if subcategory_filter:
+            recipes_list = recipes_list.filter(subcategories__slug__exact=subcategory_filter)
+
+        #Lista de subcategorias
+        subcategories_list = self.object.category.all()
+
+        #Anotación
+        recipes_list = recipes_list.annotate(total_favorites=Count("favorites", distinct=True))
+
         #Count del total de likes de todas las recetas de la categoria.
-        total_likes = recipes_list.aggregate(
+        totals= recipes_list.aggregate(
             total_general = Sum("total_favorites")
-        )
+        )        
+        
+        #Ordenación
+        sort_by = params.get('sort', 'popular')
+        ordering = "-total_favorites" if sort_by == "recent" else "-created_at"
+        recipes_list = recipes_list.order_by(ordering)
+
         context.update({
             "recipes_list" : recipes_list,
-            "recipes_fav_total" : total_likes["total_general"] or 0,
-            
+            "recipes_fav_total" : totals["total_general"] or 0,
+            "subcategories" : subcategories_list,
+            "query" : search_query,
+            "time_filter": self.request.GET.get('time'),
+            "difficulty_filter": self.request.GET.get('difficulty'),
+            "calories_filter": self.request.GET.get('calories'),
+            "current_sub": self.request.GET.get('sub'),
         })
 
         return context
@@ -109,58 +200,11 @@ class RecipesDashboardView(ListView):
         
         # 3. Búsqueda Global (Q Objects)
         if search_query:
-            queryset = queryset.filter(
-                Q(name__icontains=search_query) |
-                Q(subcategories__name__icontains=search_query) |
-                Q(user__username__icontains=search_query) |
-                Q(user__first_name__icontains=search_query) |
-                Q(user__last_name__icontains=search_query) |
-                Q(category__name__icontains=search_query) |
-                Q(description__icontains=search_query) |
-                Q(ingredients__name__icontains=search_query)
-            ).distinct()
+            queryset = recipes_serch_filter(queryset, search_query)
 
-        # 4. Mapeo de Filtros (Evita el espagueti de if/elif)
-        time_map = {
-            "15": {"cooking_time__lt": 15},
-            "15_30": {"cooking_time__range": (15, 30)},
-            "30_60": {"cooking_time__range": (30, 60)},
-            "60": {"cooking_time__gt": 60},
-        }
+        if params.get('time') or params.get('difficulty') or params.get('calories') or params.get('diet'):
+            queryset = recipes_filters(queryset, params) 
         
-        diff_map = {
-            "easy": 1, 
-            "medium": 2, 
-            "difficult": 3
-        }
-
-        calories_map = {
-            "300": {"calories__lt": 300},
-            "300_600": {"calories__range": (300, 600)},
-            "600_900": {"calories__range": (600, 900)},
-            "900": {"calories__gt": 900},
-        }
-
-        diet_map = {
-            "vegan": "vegano",
-            "keto": "keto",
-            "gluten_free": "Sin gluten",
-            "lactos_free": "Sin lactosa",
-        }
-
-        # 5. Aplicación dinámica de filtros
-        if (t := params.get('time')) in time_map:
-            queryset = queryset.filter(**time_map[t])
-            
-        if (d := params.get('difficulty')) in diff_map:
-            queryset = queryset.filter(difficulty=diff_map[d])
-            
-        if (c := params.get('calories')) in calories_map:
-            queryset = queryset.filter(**calories_map[c])
-            
-        if (diet := params.get('diet')) in diet_map:
-            queryset = queryset.filter(subcategories__name__iexact=diet_map[diet])
-
         # 6. Anotación y Ordenación
         queryset = queryset.annotate(total_favorites=Count("favorites", distinct=True))
         
