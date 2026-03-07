@@ -21,7 +21,7 @@ class IndexDashboardView(TemplateView):
 
         #Categories with Recipies count
         context["categories"] = Category.objects.annotate(
-            recipe_count = Count("recipe")
+            recipe_count = Count("recipes")
         ).order_by(
             "-recipe_count",
             "name"

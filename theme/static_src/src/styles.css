@@ -353,3 +353,47 @@
     width: auto;
     margin: 0;
 }
+
+@layer components {
+    /* Contenedor de scroll personalizado */
+    .custom-scroll {
+        scrollbar-width: thin;
+        /* Evitamos clases de tailwind inexistentes para Firefox */
+        scrollbar-color: #e2e8f0 transparent;
+    }
+
+    .dark .custom-scroll {
+        scrollbar-color: #334155 transparent;
+    }
+
+    /* Estilizamos la barra para Chrome, Safari y Edge */
+    .custom-scroll::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .custom-scroll::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .custom-scroll::-webkit-scrollbar-thumb {
+        @apply bg-slate-200 dark:bg-slate-700 rounded-full;
+    }
+
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+        @apply bg-slate-300 dark:bg-slate-600;
+    }
+
+    /* Clase para los botones de subcategoría */
+    .subcat-item {
+        @apply flex-none snap-start whitespace-nowrap text-sm px-6 py-2.5 rounded-full border-2 font-semibold transition-all duration-300;
+        /* Estilos Modo Claro */
+        @apply bg-white border-slate-100 text-slate-600 hover:border-primary hover:text-primary;
+        /* Estilos Modo Oscuro */
+        @apply dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:border-primary dark:hover:text-primary;
+    }
+
+    /* Botón activo (por si quieres marcar uno mediante JS o clase fija) */
+    .subcat-item-active {
+        @apply flex-none snap-start flex items-center gap-2 text-sm px-7 py-2.5 rounded-full bg-primary text-white font-bold hover:brightness-110 transition-all active:scale-95 ;
+    }
+}

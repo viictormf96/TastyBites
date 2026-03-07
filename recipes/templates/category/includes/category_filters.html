@@ -1,0 +1,86 @@
+{% load recipes_extras %}
+<section class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-8 scroll-reveal reveal-active" style="animation-delay: 0.3s;">
+    <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors duration-300">
+        <h2 class="text-xl font-display font-bold mb-4 mt-2 text-slate-900 dark:text-white text-center md:text-left">
+            Explora Subcategorías
+        </h2>
+
+        <div class="flex overflow-x-auto gap-3 pb-3 custom-scrollbar snap-x snap-mandatory">
+            <a href="?{% url_replace sub=''%}"
+                class="{% if not current_sub %} subcat-item-active {% else %} subcat-item {% endif %}">
+                <span class="material-symbols-outlined text-sm">grid_view</span> Todas
+            </a>
+            {% for subcategory in subcategories  %}
+                <a href="?{% url_replace sub=subcategory.slug %}" class="{% if current_sub == subcategory.slug %} subcat-item-active {% else %} subcat-item {% endif %}">{{subcategory.name}}</a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-reveal reveal-active" style="animation-delay: 0.3s;">
+    <form class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col lg:flex-row gap-4"
+        method='GET'
+        action="{% url "recipes:category" category.slug%}"
+        id="filter-form">
+
+         <!-- MANTENER LA SUBCATEGORÍA ACTIVA -->
+        {% if current_sub %}
+            <input type="hidden" name="sub" value="{{ current_sub }}">
+        {% endif %}
+        <!-- 1. CAMPOS OCULTOS AUTOMÁTICOS (MIRAMOS QUE HAY EN LA URL)-->
+        <div class="flex-1 relative">
+            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-sub">search</span>
+            <input 
+                class="w-full pl-12 pr-4 py-3 rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:ring-primary focus:border-primary"
+                placeholder="Buscar en postres..." 
+                type="text"
+                name="q"
+                value="{{query|default:""}}"/>
+        </div>
+        <div class="flex flex-wrap gap-4">
+            <select name="time"
+                class="cursor-pointer rounded-xl bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
+                <option value="" class="dark:bg-slate-900">Tiempo</option>
+                <option value="15" class="dark:bg-slate-900" {% if time_filter == "15" %}selected{% endif %}>
+                    <15 min</option>
+                <option value="15_30" class="dark:bg-slate-900" {% if time_filter == "15_30" %}selected{% endif %}>15-30
+                    min</option>
+                <option value="30_60" class="dark:bg-slate-900" {% if time_filter == "30_60" %}selected{% endif %}>30-60
+                    min</option>
+                <option value="60" class="dark:bg-slate-900" {% if time_filter == "60" %}selected{% endif %}>+60 min
+                </option>
+            </select>
+
+            <select name="difficulty"
+                class="cursor-pointer rounded-xl bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
+                <option value="" class="dark:bg-slate-900">Dificultad</option>
+                <option value="easy" class="dark:bg-slate-900" {% if difficulty_filter == "easy" %}selected{% endif %}>
+                    Fácil</option>
+                <option value="medium" class="dark:bg-slate-900" {% if difficulty_filter == "medium" %}selected{% endif %}>Media</option>
+                <option value="difficult" class="dark:bg-slate-900" {% if difficulty_filter == "difficult" %}selected{% endif %}>Difícil</option>
+            </select>
+
+            <select name="calories"
+                class="cursor-pointer rounded-xl bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary text-sm font-medium border border-gray-200 dark:border-slate-700 transition-all flex gap-1 shadow-sm">
+                <option value="" class="dark:bg-slate-900">Calorías</option>
+                <option value="300" class="dark:bg-slate-900" {% if calories_filter == "300" %}selected{% endif %}>
+                    <300 kcal</option>
+                <option value="300_600" class="dark:bg-slate-900" {% if calories_filter == "300_600" %}selected{% endif %}>300-600 kcal</option>
+                <option value="600_900" class="dark:bg-slate-900" {% if calories_filter == "600_900" %}selected{% endif %}>600-900 kcal</option>
+                <option value="900" class="dark:bg-slate-900" {% if calories_filter == "900" %}selected{% endif %}>+900
+                    kcal</option>
+            </select>
+
+            <button type="submit"
+                class="bg-primary text-white px-6 rounded-xl font-bold hover:bg-orange-600 transition-standard flex items-center gap-2 text-sm ">
+                <span class="material-symbols-outlined">filter_list</span> Filtrar
+            </button>
+            <!-- Botón Limpiar -->
+            <a href="?{% url_replace time='' difficulty='' calories='' q=''%}"
+            class="bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-4 rounded-xl font-semibold hover:bg-slate-200 dark:hover:bg-slate-600 transition-all flex items-center gap-2 text-sm shadow-sm border border-slate-200 dark:border-slate-600">
+                <span class="material-symbols-outlined text-lg">backspace</span>
+                Limpiar
+            </a>
+        </div>
+    </form>
+</section>
