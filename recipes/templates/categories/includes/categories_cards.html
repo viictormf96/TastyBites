@@ -44,7 +44,7 @@
                     </p>
                     <div class="flex items-center justify-between card-stats w-full mt-auto">
                         <span class="text-xs font-bold text-zinc-400 uppercase tracking-widest">{{category.total_recipes}} {% if category.total_recipes == 1 %}RECETA{% else %}RECETAS{% endif %}</span>
-                        <button class="btn-action">Explorar</button>
+                        <a href="{% url "recipes:category" category.slug %}" class="btn-action">Explorar</a>
                     </div>
                 </div>
             </article>
