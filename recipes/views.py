@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from django.db.models import Count, Q, Sum
 from .models import Recipe, Category
+from django.shortcuts import get_object_or_404
 
 #Funcion para filtrar recetas
 def recipes_serch_filter(query_set, search_query):
@@ -63,28 +64,28 @@ def recipes_filters(queryset, params):
         return queryset
 
 
-class CategoryDashboardView(DetailView):
-    model = Category
-    context_object_name = "category"
+class CategoryDashboardView(ListView):
+    model = Recipe
+    context_object_name = "recipes_list"
     template_name = "category/category.html"
     
-    # Especificamos cómo encontrar la categoría en la URL
-    slug_url_kwarg = 'slug_category'
-    slug_field = 'slug'
+    def get_queryset(self):
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-       
-        #Recipes List
-        recipes_list = self.object.recipes.select_related(
+        self.category = get_object_or_404(Category, slug=self.kwargs['slug_category'])
+
+        category_recipes = Recipe.objects.filter(category = self.category).select_related(
             "user", "difficulty"
         ).prefetch_related(
             "subcategories"
         ).annotate(
-            total_favorites = Count("favorites", distinct=True)
-        ).order_by(
-            "-total_favorites"
+            total_favorites=Count("favorites", distinct=True)
         )
+        #Total favoritos
+        self.total_fav = category_recipes.aggregate(
+            total_general = Sum("total_favorites")
+        ) 
+
+        self.total_recipes = category_recipes.count()
 
         #Obtenemos datos del formulario
         params = self.request.GET
@@ -93,35 +94,44 @@ class CategoryDashboardView(DetailView):
 
         # Filters
         if search_query:
-            recipes_list = recipes_serch_filter(recipes_list, search_query)
+            category_recipes = recipes_serch_filter(category_recipes, search_query)
 
         if params.get('time') or params.get('difficulty') or params.get('calories'):
-            recipes_list = recipes_filters(recipes_list, params) 
+            category_recipes = recipes_filters(category_recipes, params) 
 
         if subcategory_filter:
-            recipes_list = recipes_list.filter(subcategories__slug__exact=subcategory_filter)
+            category_recipes = category_recipes.filter(subcategories__slug__exact=subcategory_filter)
 
-        #Lista de subcategorias
-        subcategories_list = self.object.category.all()
-
-        #Anotación
-        recipes_list = recipes_list.annotate(total_favorites=Count("favorites", distinct=True))
-
-        #Count del total de likes de todas las recetas de la categoria.
-        totals= recipes_list.aggregate(
-            total_general = Sum("total_favorites")
-        )        
-        
         #Ordenación
         sort_by = params.get('sort', 'popular')
-        ordering = "-total_favorites" if sort_by == "recent" else "-created_at"
-        recipes_list = recipes_list.order_by(ordering)
+        ordering = "-total_favorites" if sort_by == "popular" else "-created_at"
+        
+        return category_recipes.order_by(ordering)
+
+    #Paginate recipes
+    def get_paginate_by(self, queryset):
+        view_mode = self.request.GET.get('view', 'grid')
+        if view_mode == 'list':
+            return 4  # Modo lista: 4 elementos
+        return 6  
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        #Lista de subcategorias(category es el related_name puesto en subcategory)
+        subcategories_list =self.category.category.all()
+        actual_recipes = context['recipes_list']
+        filtred_count = actual_recipes.count()
 
         context.update({
-            "recipes_list" : recipes_list,
-            "recipes_fav_total" : totals["total_general"] or 0,
+            "category" : self.category,
+            "actual_recipes": actual_recipes,
+            "recipes_totals" : self.total_recipes,
+            "recipes_fav_total" : self.total_fav["total_general"] or 0,
             "subcategories" : subcategories_list,
-            "query" : search_query,
+            "query" :  self.request.GET.get('q', ''),
+            "is_filtred": filtred_count < self.total_recipes,
+            "view_mode": self.request.GET.get('view', 'grid'),
             "time_filter": self.request.GET.get('time'),
             "difficulty_filter": self.request.GET.get('difficulty'),
             "calories_filter": self.request.GET.get('calories'),
@@ -150,8 +160,8 @@ class CategoriesDashboardView(ListView):
             ).distinct()
         
         queryset = queryset.annotate(
-            total_favorites = Count("recipe__favorites", distinct=True),
-            total_recipes = Count("recipe", distinct=True)
+            total_favorites = Count("recipes__favorites", distinct=True),
+            total_recipes = Count("recipes", distinct=True)
         ).order_by("-total_recipes", "-total_favorites")
 
         return queryset
@@ -209,7 +219,7 @@ class RecipesDashboardView(ListView):
         queryset = queryset.annotate(total_favorites=Count("favorites", distinct=True))
         
         sort_by = params.get('sort', 'popular')
-        ordering = "-total_favorites" if sort_by == "recent" else "-created_at"
+        ordering = "-total_favorites" if sort_by == "popular" else "-created_at"
     
         return queryset.order_by(ordering)
 

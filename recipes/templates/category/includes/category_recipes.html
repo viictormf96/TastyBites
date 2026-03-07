@@ -1,21 +1,22 @@
+{% load recipes_extras %}
 <section
     class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between border-b border-slate-100 dark:border-slate-800 mb-8 scroll-reveal reveal-active"
     style="animation-delay: 0.5s;">
-    <p class="font-medium text-text-sub">Mostrando <span class="font-bold text-primary">987</span> recetas de postres
+    <p class="font-medium text-text-sub">Mostrando <span class="font-bold text-primary">{{recipes_list|length}}</span> {% if actual_recipes|length == 1 %}receta{% else %}recetas{% endif %}
     </p>
     <div class="flex items-center gap-4">
 
         <div class="flex items-center gap-6">
             <div
                 class="flex gap-2 bg-zinc-100 dark:bg-zinc-900 p-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800">
-                <button id="view-grid"
+                <a href="?{% url_replace view='grid' %}"
                     class="{% if view_mode == 'grid' %} active-view-btn {% endif %} p-2.5 rounded-lg text-zinc-400 transition-all duration-300 flex items-center justify-center hover:text-primary">
                     <span class="material-symbols-outlined">grid_view</span>
-                </button>
-                <button id="view-list"
+                </a>
+                <a href="?{% url_replace view='list' %}"
                     class="{% if view_mode == 'list' %} active-view-btn {% endif %} p-2.5 rounded-lg text-zinc-400 transition-all duration-300 flex items-center justify-center hover:text-primary">
                     <span class="material-symbols-outlined">format_list_bulleted</span>
-                </button>
+                </a>
             </div>
             <div class="h-10 w-px bg-gray-200 dark:bg-zinc-700"></div>
             <div class="flex items-center gap-2">
@@ -106,7 +107,7 @@
             <div class="col-span-full py-20 text-center">
                 <span class="material-symbols-outlined text-6xl text-zinc-300 mb-4">search_off</span>
                 <p class="text-xl text-zinc-500">No encontramos resultados para "{{ query }}"</p>
-                <a href="{% url 'recipes:recipes' %}" class="text-primary font-bold mt-4 inline-block">Ver todas las
+                <a href="{% url "recipes:category" category.slug%}" class="text-primary font-bold mt-4 inline-block">Ver todas las
                     recetas</a>
             </div>
             {% endfor %}
@@ -114,7 +115,7 @@
         {% if is_filtred and recipes_list|length > 0 %}
         {% if query or time_filter or difficulty_filter or calories_filter or diet_filter %}
         <div class="col-span-full py-10 text-center">
-            <a href="{% url 'recipes:recipes' %}" class="text-primary font-bold mt-4 inline-block">Ver todas las
+            <a href="{% url "recipes:category" category.slug%}" class="text-primary font-bold mt-4 inline-block">Ver todas las
                 recetas</a>
         </div>
         {% endif %}
