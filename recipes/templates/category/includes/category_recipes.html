@@ -30,7 +30,7 @@
         </div>
 </section>
 
-<section class="flex-grow bg-soft-gray/30 pb-12 pt-6 bg-background-light dark:bg-dark-bg">
+<section class="flex-grow pb-12 pt-6">
     <div class="max-w-7xl mx-auto px-6">
 
         <div
@@ -42,8 +42,7 @@
                 <div class="relative h-64 overflow-hidden rounded-t-lg">
                     <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                         style="background-image: url('{{recipe.image.url}}');"></div>
-                    <div
-                        class="absolute top-4 left-4 bg-primary text-white px-2 py-1 rounded text-xs font-bold uppercase tracking-wide">
+                    <div class="absolute top-4 left-4 bg-primary text-white px-2 py-1 rounded text-xs font-bold uppercase tracking-wide">
                         {{recipe.difficulty.name}}
                     </div>
                     <button
@@ -91,8 +90,7 @@
                         {% endfor %}
                         {% with total_subs=recipe.subcategories.count %}
                         {% if total_subs > 3 %}
-                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-text-sub">+{{
-                            total_subs|add:"-2"}}</span>
+                        <span class="px-2 py-1 bg-gray-100 rounded text-xs text-text-sub">+{{total_subs|add:"-2"}}</span>
                         {% endif %}
                         {% endwith %}
                     </div>

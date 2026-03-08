@@ -1,5 +1,5 @@
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 scroll-reveal reveal-active" style="animation-delay: 0.4s">
-    <div class="bg-indigo-900 dark:bg-indigo-950 rounded-3xl p-8 md:p-12 overflow-hidden relative group">
+<section class=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 scroll-reveal reveal-active" style="animation-delay: 0.4s">
+    <div class="bg-indigo-900 dark:bg-indigo-950 rounded-3xl p-8 md:p-12 overflow-hidden relative group ">
         <div class="absolute top-0 right-0 w-1/3 h-full bg-indigo-800 opacity-20 transform skew-x-12 translate-x-20">
         </div>
         <div class="relative z-10 flex flex-col md:flex-row items-center gap-12">
@@ -9,28 +9,23 @@
                     Receta Destacada del Mes
                 </div>
                 <h2 class="text-4xl md:text-5xl font-display font-bold text-white">
-                    Tarta de Chocolate Decadente
+                    {{featured_recipe.name}}
                 </h2>
                 <p class="text-indigo-100 text-lg opacity-90 max-w-lg leading-relaxed">
-                    Un postre irresistible que combina capas de bizcocho de chocolate
-                    húmedo con ganache de chocolate belga y frutos rojos frescos.
+                    {{featured_recipe.description}}
                 </p>
                 <div class="flex items-center gap-6 text-indigo-200">
                     <div class="flex items-center gap-2">
                         <span class="material-symbols-outlined text-orange-400">schedule</span>
-                        90 min
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-orange-400">bar_chart</span>
-                        Intermedio
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-orange-400">star</span>
-                        450
+                        {{featured_recipe.cooking_time}}
                     </div>
                     <div class="flex items-center gap-2">
                         <span class="material-symbols-outlined text-orange-400">local_fire_department</span>
-                        450 kcal
+                        {{featured_recipe.calories}}
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-orange-400">star</span>
+                        {{featured_recipe.total_favorites}}
                     </div>
                 </div>
                 <button
@@ -39,10 +34,23 @@
                     <span class="material-symbols-outlined">arrow_forward</span>
                 </button>
             </div>
-            <div class="flex-1">
-                <img alt="Tarta de chocolate"
-                    class="rounded-2xl shadow-2xl w-full h-[350px] object-cover ring-8 ring-white/10"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKgT3HyVmzNTGWd9hhNsHWwCyqkRoQBTWORLDvQcD0VQ0UfpAnZ9VGq0-py2h1scUNGey0cfXx1UDTUNEqmLjLH1TrhqGf7qgVJSz6Q3uuTqPlIQgGH9qUUNcyhhW6E8Y8SpfHeaU9r78ZHAWKZf2RqplzO3nveIrdr49hiLu6n438vId76VYwqKSII1uYstWhKrVp9jTtIkxy_RiQSsDpjEkhi08E0bQpGJ0lkvjxRTu2oiUDErSd-1M-udLdcsqFhaqS-QUOKJM" />
+           <div class="flex-1 w-full relative">
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl h-[350px] md:h-full min-h-[420px] ring-8 ring-white/10 group/img">
+        
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                        style="background-image: url('{{featured_recipe.image.url}}');">
+                    </div>
+
+                    <div class="absolute top-4 left-4 z-20 bg-primary/90 backdrop-blur-sm text-white px-2 py-1 rounded text-xs font-bold uppercase tracking-wide">
+                        {{featured_recipe.difficulty.name}}
+                    </div>
+
+                    <button class="absolute top-4 right-4 z-20 bg-white/90 dark:bg-slate-900/80 backdrop-blur-md p-2.5 rounded-full text-gray-400 hover:text-red-500 transition-all hover:scale-110 shadow-xl active:scale-95 border border-white/20">
+                        <span class="material-symbols-outlined block text-[22px]">favorite</span>
+                    </button>
+        
+                <div class="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/50 to-transparent"></div>
+                </div>
             </div>
         </div>
     </div>

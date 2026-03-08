@@ -1,13 +1,17 @@
 {% load recipes_extras %}
 <section class="relative w-full bg-warm-cream dark:bg-dark-bg/50 overflow-hidden">
+    <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+    <div
+        class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-orange-200/20 dark:bg-orange-900/10 rounded-full blur-3xl">
+    </div>
     <div class="pt-8 pb-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav class="flex items-center text-sm text-slate-500 gap-2">
             <span class="material-symbols-outlined text-sm">home</span>
-            <a class="" href="#">Inicio</a>
+            <a class="" href="{% url "core:index" %}">Inicio</a>
             <span class="material-symbols-outlined text-sm">chevron_right</span>
-            <a class="" href="#">Categorías</a>
+            <a class="" href="{% url "recipes:categories" %}">Categorías</a>
             <span class="material-symbols-outlined text-sm">chevron_right</span>
-            <span class="font-semibold text-slate-800 dark:text-white">Postres</span>
+            <span class="font-semibold text-slate-800 dark:text-white">{{category.name}}</span>
         </nav>
     </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-fade-in-up">
