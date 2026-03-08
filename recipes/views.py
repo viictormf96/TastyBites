@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from django.db.models import Count, Q, Sum
-from .models import Recipe, Category
+from django.utils import timezone
+from datetime import timedelta
 from django.shortcuts import get_object_or_404
+from .models import Recipe, Category
+
 
 #Funcion para filtrar recetas
 def recipes_serch_filter(query_set, search_query):
@@ -63,6 +66,22 @@ def recipes_filters(queryset, params):
         
         return queryset
 
+def featured_recipe(recipes):
+    now = timezone.now()
+    last_moth = now - timedelta(days=30)
+
+    recipe = recipes.annotate(
+        total_fav_lastmoth = Count(
+            'favorites',
+            filter=Q(favorites__created_at__gte=last_moth),
+            distinct=True
+        )
+    ).order_by("-total_fav_lastmoth", "-total_favorites").first()
+
+    if recipe and getattr(recipe, 'total_fav_lastmonth', 0) > 0:
+        return recipe
+    
+    return recipes.order_by("-total_favorites").first()
 
 class CategoryDashboardView(ListView):
     model = Recipe
@@ -80,12 +99,13 @@ class CategoryDashboardView(ListView):
         ).annotate(
             total_favorites=Count("favorites", distinct=True)
         )
+
         #Total favoritos
         self.total_fav = category_recipes.aggregate(
             total_general = Sum("total_favorites")
         ) 
 
-        self.total_recipes = category_recipes.count()
+        self.total_recipes = category_recipes
 
         #Obtenemos datos del formulario
         params = self.request.GET
@@ -122,15 +142,18 @@ class CategoryDashboardView(ListView):
         subcategories_list =self.category.category.all()
         actual_recipes = context['recipes_list']
         filtred_count = actual_recipes.count()
+        total_recipes = self.total_recipes.count()
+        recipe_fav_lastmoth = featured_recipe(self.total_recipes)
 
         context.update({
             "category" : self.category,
             "actual_recipes": actual_recipes,
-            "recipes_totals" : self.total_recipes,
+            "recipes_totals" : total_recipes,
             "recipes_fav_total" : self.total_fav["total_general"] or 0,
+            "featured_recipe" : recipe_fav_lastmoth,
             "subcategories" : subcategories_list,
             "query" :  self.request.GET.get('q', ''),
-            "is_filtred": filtred_count < self.total_recipes,
+            "is_filtred": filtred_count < total_recipes,
             "view_mode": self.request.GET.get('view', 'grid'),
             "time_filter": self.request.GET.get('time'),
             "difficulty_filter": self.request.GET.get('difficulty'),
