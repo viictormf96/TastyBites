@@ -83,6 +83,7 @@ def featured_recipe(recipes):
     
     return recipes.order_by("-total_favorites").first()
 
+# Category view
 class CategoryDashboardView(ListView):
     model = Recipe
     context_object_name = "recipes_list"
@@ -162,7 +163,6 @@ class CategoryDashboardView(ListView):
         })
 
         return context
-
 
 # Categories view
 class CategoriesDashboardView(ListView):
@@ -275,5 +275,10 @@ class RecipesDashboardView(ListView):
         })
         
         return context
-    
 
+#Recipe view
+
+class RecipeDashboardView(ListView):
+    model = Recipe
+    context_object_name = "recipe"
+    template_name = "recipe/recipe.html"
