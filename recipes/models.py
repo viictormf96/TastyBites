@@ -91,11 +91,12 @@ class Recipe(models.Model):
 
 # Recipe Instructions model
 class Instruction(models.Model):
+    title = models.CharField(max_length=200)
     step_number = models.IntegerField()
     description = models.TextField()
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name="instruction")
     class Meta:
-        unique_together = ('recipe', 'step_number')
+        unique_together = ('recipe', 'step_number', 'title')
         db_table = "instructions"
     
     def __str__(self):

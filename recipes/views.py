@@ -285,3 +285,15 @@ class RecipeDashboardView(DetailView):
 
     slug_field = "slug"
     slug_url_kwarg= "slug_recipe"
+    
+    def get_queryset(self):
+        
+        return Recipe.objects.prefetch_related("instruction", "ingredients")
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        recipe = self.get_object()
+        context["instructions"] = recipe.instruction.all()
+        context["ingredients"] = recipe.ingredients.all()
+        return context
+    

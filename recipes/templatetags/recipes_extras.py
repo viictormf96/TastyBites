@@ -1,6 +1,20 @@
 from django import template
+from django.utils.safestring import mark_safe
 
 register = template.Library()
+
+@register.filter
+def highlight_last_word(value):
+    words = value.split()
+    if len(words) > 1:
+        # Guardamos todas menos la última
+        first_part = " ".join(words[:-1])
+        # La última palabra
+        last_word = words[-1]
+        # Retornamos el HTML con la clase para el color naranja
+        return mark_safe(f'{first_part} </br><span class="text-primary italic">{last_word}</span>')
+    
+    return value
 
 @register.filter(name='format_k') # Forzamos el nombre por seguridad
 def format_k(value):
