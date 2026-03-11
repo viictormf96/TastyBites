@@ -39,7 +39,7 @@
               <img alt="Chef avatar" class="w-8 h-8 rounded-full object-cover border border-white dark:border-white/10 shadow-sm" src="{{recipe.user.profile_picture.url}}" />
               <span class="text-xs font-medium text-text-sub dark:text-gray-500">Chef {{recipe.user.first_name}} {{recipe.user.last_name|slice:":1"}}.</span>
             </div>
-            <a class="recipe-card-btn" href="#">Ver receta</a>
+            <a class="recipe-card-btn" href="{% url "recipes:recipe" recipe.slug %}">Ver receta</a>
           </div>
         </div>
       </article>
