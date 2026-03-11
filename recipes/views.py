@@ -278,7 +278,10 @@ class RecipesDashboardView(ListView):
 
 #Recipe view
 
-class RecipeDashboardView(ListView):
+class RecipeDashboardView(DetailView):
     model = Recipe
     context_object_name = "recipe"
     template_name = "recipe/recipe.html"
+
+    slug_field = "slug"
+    slug_url_kwarg= "slug_recipe"
