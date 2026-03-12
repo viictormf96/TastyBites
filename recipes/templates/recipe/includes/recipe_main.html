@@ -1,4 +1,4 @@
-<section class="bg-background-light bg-soft-gray/30  dark:bg-background-dark py-20 px-6">
+<section class="bg-background-light bg-soft-gray/30  dark:bg-background-dark py-20 px-6 animate-fade-in-up">
     <div class="max-w-7xl mx-auto">
         <div class="grid lg:grid-cols-3 gap-16">
             <!-- Left Column: Instructions -->
@@ -8,11 +8,11 @@
                         <span
                             class="bg-primary/10 text-primary w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold font-display"><span
                                 class="material-symbols-outlined text-2xl">restaurant</span></span>
-                        Instructions
+                        Instrucciones
                     </h3>
                     <div class="space-y-8">
-                        <div class="flex gap-6 group">
-                            {% for instruction in instructions %}
+                         {% for instruction in instructions %}
+                            <div class="flex gap-6 group">
                                 <div class="flex-shrink-0 mt-1">
                                 <input
                                     class="w-6 h-6 rounded-md border-slate-300 text-primary focus:ring-primary transition-all cursor-pointer"
@@ -24,15 +24,15 @@
                                     {{instruction.description}}
                                     </p>
                                 </div>
-                            {% endfor %}
-                        </div>
+                            </div>
+                         {% endfor %}
                     </div>
                 </div>
             </div>
             <!-- Right Column: Sidebar Ingredients -->
             <div class="lg:col-span-1 ">
                 <div class="bg-white shadow-xl dark:bg-slate-800/50 rounded-3xl p-8 sticky top-28">
-                    <h3 class="font-serif text-2xl text-slate-900 dark:text-white mb-6">Ingredients</h3>
+                    <h3 class="font-serif text-2xl text-slate-900 dark:text-white mb-6">Ingredientes</h3>
                     <ul class="space-y-4">
                         {% for ingredient in ingredients %}
                             <li class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-700">
