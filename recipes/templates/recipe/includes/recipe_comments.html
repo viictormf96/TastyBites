@@ -1,0 +1,62 @@
+{% load recipes_extras %}
+<section
+    class="bg-background-light bg-soft-gray/30 dark:bg-slate-900/30 px-6 animate-reveal py-24 border-t border-gray-100">
+    <div class="mx-auto space-y-12 max-w-7xl">
+        <div class="flex items-center justify-between">
+            <h3 class="font-serif text-3xl text-slate-900 dark:text-white mb-3 flex items-center gap-4">
+                <span
+                    class="bg-primary/10 text-primary w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold font-display"><span
+                        class="material-symbols-outlined text-2xl">forum</span></span>
+                Comentarios ({{comments|length}})
+            </h3>
+
+        </div>
+        <!-- Add Comment Input -->
+        <div class="glass p-8 rounded-2xl border border-slate-100 shadow-md flex gap-4">
+            <div class="size-12 rounded-full bg-white overflow-hidden flex-shrink-0">
+                <img class="w-full h-full object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0BMcRvDn2IM42KmcXbgzq9UWNvPd1EL7_Xmyu-6Cy9unVsqdm514T7vdUp6WNS-WBpQ5Hsux0ONAxdB9XVGnaQ8SMBFxIuU1GJZNdy9DXZlH6HWvHdz85WCey8_zsqzVBO7nxdEmyhHc4LgQk7t5hjZE2BuWU8xv8lTYvz0cC9l9ZgKvErpGDYfyJTy5zyc3yB-WWnVavzhaAzpQfLab1uJX74Z6kTmeVXRC2yP1PM3qFp3Ca4kgteT3TCx5fO4jugM_5cvAlAX8" />
+            </div>
+            <div class="flex-grow space-y-4">
+                <textarea
+                    class="w-full bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-xl p-4 text-sm focus:ring-primary focus:border-primary"
+                    style="resize: none;" placeholder="Agrega un comentario..." rows="3"></textarea>
+                <div class="flex justify-end">
+                    <button class="btn-action px-8 py-2 rounded-full font-bold text-sm shadow-sm">Añadir
+                        Comentario</button>
+                </div>
+            </div>
+        </div>
+        <!-- Comment List -->
+        <div class="space-y-6">
+            {% for comment in comments %}
+                <div class="flex gap-4 bg-white dark:bg-slate-800/50 rounded-2xl border border-slate-100  dark:border-slate-700/50 shadow-md animate-reveal p-8">
+                    <div class="size-12 rounded-full overflow-hidden bg-slate-200 flex-shrink-0">
+                        <img class="w-full h-full object-cover" src="{{comment.user.profile_picture.url}}"/>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-3">
+                            <p class="font-bold text-slate-900 dark:text-white">Chef {{comment.user.first_name}} {{comment.user.last_name}}</p>
+                            <span class="text-xs text-slate-400">{{comment.updated_at|smart_time}}</span>
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                            {{comment.content}}
+                        </p>
+                        <div class="flex items-center gap-4 text-sm">
+                            <button class="text-slate-400 hover:text-primary">Editar</button>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="flex flex-col items-center justify-center py-7 px-6 text-center animate-reveal">
+                    <div class="flex flex-col items-center justify-center py-12 px-6 text-center">
+                        <span class="material-symbols-outlined text-slate-300 dark:text-slate-600 text-4xl mb-3">chat_bubble</span>
+                            <p class="text-slate-500 dark:text-slate-400 font-medium mb-4">
+                                No hay comentarios todavía. ¡Sé el primero en compartir tu opinión!
+                            </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

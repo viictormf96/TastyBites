@@ -26,7 +26,7 @@ class DifficultyAdmin(admin.ModelAdmin):
 
 @admin.register(Instruction)
 class InstructionAdmin(admin.ModelAdmin):
-    list_display = ("recipe", "step_number")
+    list_display = ("recipe", "step_number", "title")
     search_fields = ("recipe",)
 
 @admin.register(Ingredient)

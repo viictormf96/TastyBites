@@ -278,7 +278,23 @@ class RecipesDashboardView(ListView):
 
 #Recipe view
 
-class RecipeDashboardView(ListView):
+class RecipeDashboardView(DetailView):
     model = Recipe
     context_object_name = "recipe"
     template_name = "recipe/recipe.html"
+
+    slug_field = "slug"
+    slug_url_kwarg= "slug_recipe"
+    
+    def get_queryset(self):
+        
+        return Recipe.objects.prefetch_related("instruction", "ingredients", "comments")
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        recipe = self.get_object()
+        context["instructions"] = recipe.instruction.all()
+        context["ingredients"] = recipe.ingredients.all()
+        context["comments"] = recipe.comments.all()
+        return context
+    

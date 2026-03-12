@@ -63,7 +63,7 @@
             {% endwith %}
           </div>
           <a class="recipe-card-btn w-full mt-auto block text-center bg-charcoal hover:bg-primary text-white py-2.5 rounded-lg text-sm font-bold transition-colors"
-            href="#">
+            href="{% url "recipes:recipe" recipe.slug %}">
             Ver Receta
           </a>
         </div>
