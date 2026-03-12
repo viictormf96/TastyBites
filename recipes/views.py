@@ -288,12 +288,13 @@ class RecipeDashboardView(DetailView):
     
     def get_queryset(self):
         
-        return Recipe.objects.prefetch_related("instruction", "ingredients")
+        return Recipe.objects.prefetch_related("instruction", "ingredients", "comments")
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         recipe = self.get_object()
         context["instructions"] = recipe.instruction.all()
         context["ingredients"] = recipe.ingredients.all()
+        context["comments"] = recipe.comments.all()
         return context
     
